@@ -9,7 +9,7 @@ const navItems = [
   { name: "Workshops", href: "#workshops" },
   { name: "Venue", href: "#venue" },
   { name: "Tickets", href: "#tickets" },
-  { name: "Previous editions", href: "#previous-editions" },
+  { name: "Previous edition", href: "#previous-edition" },
   { name: "FAQ", href: "#faq" },
 ];
 
@@ -58,7 +58,7 @@ const Header = React.forwardRef<HTMLElement, HeaderProps>(
         className={cn(
           "sticky top-0 z-50 w-full transition-all duration-300 ease-in-out",
           activeTheme === "dark"
-            ? "bg-primary text-primary-foreground"
+            ? "bg-primary text-white"
             : "text-primary bg-white",
           isScrolled
             ? activeTheme === "dark"

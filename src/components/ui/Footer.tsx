@@ -54,7 +54,7 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
       >
         <ContentWrapper>
           <div className="mx-auto flex w-full max-w-[1360px] items-center justify-between py-20">
-            <div className="text-primary-foreground flex w-full items-center justify-between gap-8">
+            <div className="flex w-full items-center justify-between gap-8 text-white">
               <div className="flex flex-col items-start gap-2">
                 <h2 className="text-md font-bold">Software Mansion S.A.</h2>
                 <h3 className="text-sm font-normal">
