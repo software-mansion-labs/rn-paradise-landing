@@ -1,0 +1,58 @@
+---
+import "../styles/global.css";
+import { Font } from "astro:assets";
+// import { Header } from "@/components/Header";
+// import { Footer } from "@/components/Footer";
+
+interface Props {
+  title: string;
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="RN Paradise Landing Page" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>React Native Paradise</title>
+    <meta name="description" content="" />
+
+    <Font cssVariable="--font-aeonik" preload />
+
+    <!-- Google Tag Manager -->
+    <script
+      is:inline
+      set:html={`  
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != "dataLayer" ? "&l=" + l : "";
+          j.async = true;
+          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, "script", "dataLayer", "GTM-PMLFF7CX");
+      `}
+    />
+    <!-- End Google Tag Manager -->
+  </head>
+  <body class="font-primary">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-PMLFF7CX"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- <Header client:load /> -->
+    <slot />
+    <!-- <Footer client:load /> -->
+  </body>
+</html>
