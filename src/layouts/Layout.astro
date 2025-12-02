@@ -1,8 +1,8 @@
 ---
 import "../styles/global.css";
 import { Font } from "astro:assets";
-// import { Header } from "@/components/Header";
-// import { Footer } from "@/components/Footer";
+import { Header } from "@/components/ui/Header";
+import { Footer } from "@/components/ui/Footer";
 
 interface Props {
   title: string;
@@ -68,8 +68,8 @@ react native paradise"
     >
     <!-- End Google Tag Manager (noscript) -->
 
-    <!-- <Header client:load /> -->
+    <Header client:load />
     <slot />
-    <!-- <Footer client:load /> -->
+    <Footer client:load />
   </body>
 </html>
