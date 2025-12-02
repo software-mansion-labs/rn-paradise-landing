@@ -1,0 +1,34 @@
+---
+import ContentWrapper from "@/components/ContentWrapper";
+import { Accordion } from "@/components/ui/AccordionWrapper";
+
+// TODO: load from CMS
+const faqData = [
+  {
+    question: "How big is the workshop group?",
+    answer:
+      "We want to make sure everyone gets the best possible learning experience, so we plan to keep each group to around 10 participants.",
+  },
+  {
+    question: "What is the skill level required to attend the workshop?",
+    answer: "Answer 2",
+  },
+  {
+    question: "What languages will the workshops be held in?",
+    answer: "Answer 3",
+  },
+];
+---
+
+<section
+  id="faq"
+  class="relative flex w-full scroll-m-5 flex-col items-center justify-center overflow-hidden bg-white py-36"
+>
+  <ContentWrapper
+    className="flex w-full flex-col items-center justify-center gap-10 sm:gap-14 md:gap-16"
+  >
+    <h2 class="text-primary text-center text-xl/9 font-medium">FAQ</h2>
+
+    <Accordion data={faqData} client:idle />
+  </ContentWrapper>
+</section>
