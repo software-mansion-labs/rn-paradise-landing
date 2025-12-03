@@ -1,23 +1,20 @@
 ---
 import ContentWrapper from "@/components/ContentWrapper";
 import { Accordion } from "@/components/ui/AccordionWrapper";
+import { getCollection } from "astro:content";
 
-// TODO: load from CMS
-const faqData = [
-  {
-    question: "How big is the workshop group?",
-    answer:
-      "We want to make sure everyone gets the best possible learning experience, so we plan to keep each group to around 10 participants.",
-  },
-  {
-    question: "What is the skill level required to attend the workshop?",
-    answer: "Answer 2",
-  },
-  {
-    question: "What languages will the workshops be held in?",
-    answer: "Answer 3",
-  },
-];
+let faqData: { question: string; answer: string }[] = [];
+
+try {
+  // @ts-expect-error - Content types will be generated when dev server runs
+  const faqEntries = await getCollection("faq");
+  faqData = faqEntries.map((entry: any) => ({
+    question: entry.data.question,
+    answer: entry.data.answer,
+  }));
+} catch (error) {
+  console.warn("FAQ content collection not found, using fallback data");
+}
 ---
 
 <section

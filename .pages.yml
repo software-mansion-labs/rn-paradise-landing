@@ -1,0 +1,188 @@
+collections:
+  - name: general
+    label: General Information
+    folder: src/content/general
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: EditionNumber
+        name: editionNumber
+        widget: string
+        required: true
+      - label: EditionYear
+        name: editionYear
+        widget: string
+        required: true
+      - label: BuyTicketUrl
+        name: buyTicketUrl
+        widget: string
+        required: true
+
+  - name: hero
+    label: Hero Section
+    folder: src/content/hero
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: EventDate
+        name: eventDate
+        widget: string
+        required: true
+      - label: EventLocation
+        name: eventLocation
+        widget: string
+        required: true
+      - label: EventLocation2
+        name: eventLocation2
+        widget: string
+        required: true
+      - label: PolaroidCard Images
+        name: polaroidCardImages
+        widget: list
+        field:
+          label: Image
+          name: image
+          widget: image
+        required: true
+
+  - name: team
+    label: Team Members
+    folder: src/content/team
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: Name
+        name: name
+        widget: string
+        required: true
+      - label: Role
+        name: role
+        widget: string
+        required: true
+      - label: Bio
+        name: bio
+        widget: text
+      - label: Image
+        name: image
+        widget: image
+        required: true
+      - label: Social Links
+        name: social
+        widget: object
+        fields:
+          - label: Twitter
+            name: twitter
+            widget: string
+            required: false
+          - label: GitHub
+            name: github
+            widget: string
+            required: false
+
+  - name: venue
+    label: Venue Information
+    folder: src/content/venue
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: Description
+        name: description
+        widget: text
+        required: true
+      - label: EventLocation
+        name: eventLocation
+        widget: string
+        required: true
+      - label: PolaroidCard Images
+        name: polaroidCardImages
+        widget: list
+        field:
+          label: Image
+          name: image
+          widget: image
+        required: true
+      - label: Carousel Images
+        name: carouselImages
+        widget: list
+        field:
+          label: Image
+          name: image
+          widget: image
+        required: true
+
+  - name: tickets
+    label: Ticket Information
+    folder: src/content/tickets
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        required: true
+      - label: Features
+        name: features
+        widget: list
+        field:
+          label: Feature
+          name: feature
+          widget: string
+      - label: Link
+        name: link
+        widget: string
+        required: false
+
+  - name: faq
+    label: FAQ
+    folder: src/content/faq
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: Question
+        name: question
+        widget: string
+        required: true
+      - label: Answer
+        name: answer
+        widget: text
+        required: true
+
+  - name: previousEditions
+    label: Previous Editions
+    folder: src/content/faq
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: Question
+        name: question
+        widget: string
+        required: true
+      - label: Answer
+        name: answer
+        widget: text
+        required: true
+      - label: PolaroidCard Images
+        name: polaroidCardImages
+        widget: list
+        field:
+          label: Image
+          name: image
+          widget: image
+        required: true
+      - label: Carousel Images
+        name: carouselImages
+        widget: list
+        field:
+          label: Image
+          name: image
+          widget: image
+        required: true
+      - label: backgroundVideo
+        name: backgroundVideo
+        widget: file
+        allowed_extensions:
+          - mp4
+        required: true
+
+media_folder: public/images
+public_folder: /images
