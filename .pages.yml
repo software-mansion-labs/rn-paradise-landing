@@ -1,188 +1,162 @@
-collections:
+media:
+  input: public/images
+  output: /images
+
+content:
   - name: general
     label: General Information
-    folder: src/content/general
-    create: true
-    slug: "{{slug}}"
+    type: collection
+    path: src/content/general
     fields:
-      - label: EditionNumber
-        name: editionNumber
-        widget: string
+      - name: editionNumber
+        label: EditionNumber
+        type: string
         required: true
-      - label: EditionYear
-        name: editionYear
-        widget: string
+      - name: editionYear
+        label: EditionYear
+        type: string
         required: true
-      - label: BuyTicketUrl
-        name: buyTicketUrl
-        widget: string
+      - name: buyTicketUrl
+        label: BuyTicketUrl
+        type: string
         required: true
 
   - name: hero
     label: Hero Section
-    folder: src/content/hero
-    create: true
-    slug: "{{slug}}"
+    type: collection
+    path: src/content/hero
     fields:
-      - label: EventDate
-        name: eventDate
-        widget: string
+      - name: eventDate
+        label: EventDate
+        type: string
         required: true
-      - label: EventLocation
-        name: eventLocation
-        widget: string
+      - name: eventLocation
+        label: EventLocation
+        type: string
         required: true
-      - label: EventLocation2
-        name: eventLocation2
-        widget: string
+      - name: eventLocation2
+        label: EventLocation2
+        type: string
         required: true
-      - label: PolaroidCard Images
-        name: polaroidCardImages
-        widget: list
-        field:
-          label: Image
-          name: image
-          widget: image
+      - name: polaroidCardImages
+        label: PolaroidCard Images
+        type: image
+        list: true
         required: true
 
   - name: team
     label: Team Members
-    folder: src/content/team
-    create: true
-    slug: "{{slug}}"
+    type: collection
+    path: src/content/team
     fields:
-      - label: Name
-        name: name
-        widget: string
+      - name: name
+        label: Name
+        type: string
         required: true
-      - label: Role
-        name: role
-        widget: string
+      - name: role
+        label: Role
+        type: string
         required: true
-      - label: Bio
-        name: bio
-        widget: text
-      - label: Image
-        name: image
-        widget: image
+      - name: bio
+        label: Bio
+        type: text
+      - name: image
+        label: Image
+        type: image
         required: true
-      - label: Social Links
-        name: social
-        widget: object
+      - name: social
+        label: Social Links
+        type: object
         fields:
-          - label: Twitter
-            name: twitter
-            widget: string
-            required: false
-          - label: GitHub
-            name: github
-            widget: string
-            required: false
+          - name: twitter
+            label: Twitter
+            type: string
+          - name: github
+            label: GitHub
+            type: string
 
   - name: venue
     label: Venue Information
-    folder: src/content/venue
-    create: true
-    slug: "{{slug}}"
+    type: collection
+    path: src/content/venue
     fields:
-      - label: Description
-        name: description
-        widget: text
+      - name: description
+        label: Description
+        type: text
         required: true
-      - label: EventLocation
-        name: eventLocation
-        widget: string
+      - name: eventLocation
+        label: EventLocation
+        type: string
         required: true
-      - label: PolaroidCard Images
-        name: polaroidCardImages
-        widget: list
-        field:
-          label: Image
-          name: image
-          widget: image
+      - name: polaroidCardImages
+        label: PolaroidCard Images
+        type: image
+        list: true
         required: true
-      - label: Carousel Images
-        name: carouselImages
-        widget: list
-        field:
-          label: Image
-          name: image
-          widget: image
+      - name: carouselImages
+        label: Carousel Images
+        type: image
+        list: true
         required: true
 
   - name: tickets
     label: Ticket Information
-    folder: src/content/tickets
-    create: true
-    slug: "{{slug}}"
+    type: collection
+    path: src/content/tickets
     fields:
-      - label: Title
-        name: title
-        widget: string
+      - name: title
+        label: Title
+        type: string
         required: true
-      - label: Features
-        name: features
-        widget: list
-        field:
-          label: Feature
-          name: feature
-          widget: string
-      - label: Link
-        name: link
-        widget: string
-        required: false
+      - name: features
+        label: Features
+        type: string
+        list: true
+      - name: link
+        label: Link
+        type: string
 
   - name: faq
     label: FAQ
-    folder: src/content/faq
-    create: true
-    slug: "{{slug}}"
+    type: collection
+    path: src/content/faq
     fields:
-      - label: Question
-        name: question
-        widget: string
+      - name: question
+        label: Question
+        type: string
         required: true
-      - label: Answer
-        name: answer
-        widget: text
+      - name: answer
+        label: Answer
+        type: text
         required: true
 
   - name: previousEditions
     label: Previous Editions
-    folder: src/content/faq
-    create: true
-    slug: "{{slug}}"
+    type: collection
+    path: src/content/previousEditions
     fields:
-      - label: Question
-        name: question
-        widget: string
+      - name: question
+        label: Question
+        type: string
         required: true
-      - label: Answer
-        name: answer
-        widget: text
+      - name: answer
+        label: Answer
+        type: text
         required: true
-      - label: PolaroidCard Images
-        name: polaroidCardImages
-        widget: list
-        field:
-          label: Image
-          name: image
-          widget: image
+      - name: polaroidCardImages
+        label: PolaroidCard Images
+        type: image
+        list: true
         required: true
-      - label: Carousel Images
-        name: carouselImages
-        widget: list
-        field:
-          label: Image
-          name: image
-          widget: image
+      - name: carouselImages
+        label: Carousel Images
+        type: image
+        list: true
         required: true
-      - label: backgroundVideo
-        name: backgroundVideo
-        widget: file
-        allowed_extensions:
-          - mp4
+      - name: backgroundVideo
+        label: backgroundVideo
+        type: file
+        options:
+          extensions:
+            - mp4
         required: true
-
-media_folder: public/images
-public_folder: /images
