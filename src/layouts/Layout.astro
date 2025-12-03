@@ -1,6 +1,8 @@
 ---
-import "../styles/global.css";
+import "@/styles/global.css";
 import { Font } from "astro:assets";
+import { PUBLIC_RECAPTCHA_SITE_KEY } from "astro:env/server";
+import { Captcha } from "@/utils/recaptcha.tsx";
 import { Header } from "@/components/ui/Header";
 import { Footer } from "@/components/ui/Footer";
 
@@ -71,5 +73,7 @@ react native paradise"
     <Header client:load />
     <slot />
     <Footer client:load />
+
+    <Captcha siteKey={PUBLIC_RECAPTCHA_SITE_KEY} client:load />
   </body>
 </html>

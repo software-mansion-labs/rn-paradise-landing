@@ -1,6 +1,8 @@
 ---
 import ContentWrapper from "@/components/ContentWrapper";
-import { Button } from "@/components/ui/button";
+import ContactForm from "@/components/ContactForm";
+
+const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || "";
 ---
 
 <section
@@ -14,87 +16,6 @@ import { Button } from "@/components/ui/button";
       Have more questions? Contact us here!
     </h2>
 
-    <form
-      class="flex w-full flex-col gap-6 md:flex-row md:gap-8"
-      method="POST"
-      action="/api/contact"
-    >
-      <div class="flex w-full flex-col gap-6 md:w-1/2">
-        <div class="flex flex-col gap-2">
-          <label for="email" class="text-primary text-sm font-medium">
-            Email <span class="text-secondary">(required)</span>
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            placeholder="Placeholder"
-            class="text-primary placeholder:text-tertiary border-gray-300 bg-white px-4 py-3 text-sm placeholder:text-sm focus:border-transparent focus:outline-none"
-          />
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="message" class="text-primary text-sm font-medium">
-            Message <span class="text-secondary">(required)</span>
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            required
-            rows="5"
-            placeholder="Placeholder"
-            class="text-primary placeholder:text-tertiary resize-none border-gray-300 bg-white px-4 py-3 text-sm placeholder:text-sm focus:border-transparent focus:outline-none"
-          ></textarea>
-        </div>
-      </div>
-
-      <div class="flex w-full flex-col gap-6 md:w-1/2">
-        <div class="flex flex-col gap-2">
-          <label for="name" class="text-primary text-sm font-medium">
-            Your name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Placeholder"
-            class="text-primary placeholder:text-tertiary border-gray-300 bg-white px-4 py-3 text-sm placeholder:text-sm focus:border-transparent focus:outline-none"
-          />
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="company" class="text-primary text-sm font-medium">
-            Company name
-          </label>
-          <input
-            type="text"
-            id="company"
-            name="company"
-            placeholder="Placeholder"
-            class="text-primary placeholder:text-tertiary border-gray-300 bg-white px-4 py-3 text-sm placeholder:text-sm focus:border-transparent focus:outline-none"
-          />
-        </div>
-
-        <div class="flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
-          <div class="flex shrink-0 items-center gap-2">
-            <div class="g-recaptcha" data-sitekey="your-recaptcha-site-key">
-            </div>
-          </div>
-
-          <Button
-            type="submit"
-            variant="default"
-            size="default"
-            class="w-full md:w-auto md:min-w-0 md:flex-1"
-          >
-            Submit
-          </Button>
-        </div>
-      </div>
-    </form>
+    <ContactForm siteKey={siteKey} client:load />
   </ContentWrapper>
-
-  <!-- TODO: Add usage of recaptcha v3 -->
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </section>

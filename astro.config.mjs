@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 
@@ -13,6 +13,14 @@ export default defineConfig({
 
   site: "https://paradise.swmansion.com",
   base: "/",
+  env: {
+    schema: {
+      PUBLIC_RECAPTCHA_SITE_KEY: envField.string({
+        access: "public",
+        context: "server",
+      }),
+    },
+  },
   experimental: {
     fonts: [
       {
