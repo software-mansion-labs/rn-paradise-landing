@@ -53,8 +53,8 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
         {...props}
       >
         <ContentWrapper>
-          <div className="mx-auto flex w-full max-w-[1360px] items-center justify-between py-20">
-            <div className="flex w-full items-center justify-between gap-8 text-white">
+          <div className="mx-auto flex w-full max-w-[1360px] items-center justify-between py-12 md:py-20">
+            <div className="flex w-full items-center justify-between gap-8 text-white max-md:flex-col max-md:items-center max-md:gap-10">
               <div className="flex flex-col items-start gap-2">
                 <h2 className="text-md font-bold">Software Mansion S.A.</h2>
                 <h3 className="text-sm font-normal">
@@ -66,7 +66,7 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
                 </h3>
               </div>
 
-              <div className="flex flex-col items-center gap-14">
+              <div className="flex flex-col items-center gap-8 md:gap-14">
                 <div className="flex items-center gap-1">
                   {socials.map(({ icon, href }) => (
                     <a
@@ -95,12 +95,12 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
                 href="https://swmansion.com/"
                 target="_blank"
                 rel="noopener"
-                className="flex-shrink-0"
+                className="flex-shrink-0 max-md:order-first"
               >
                 <img
                   src="/assets/logo-swm-top-left.svg"
                   alt="Software Mansion"
-                  className="h-28 w-48"
+                  className="h-20 w-36 md:h-28 md:w-48"
                 />
               </a>
             </div>

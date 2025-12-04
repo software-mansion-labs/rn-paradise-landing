@@ -9,7 +9,7 @@ const ContentWrapper = React.forwardRef<HTMLDivElement, ContentWrapperProps>(
       <div
         ref={ref}
         className={cn(
-          "mx-auto flex w-full max-w-[552px] items-center justify-center max-sm:px-8 sm:w-[552px] sm:max-w-[552px] md:w-[936px] md:max-w-[936px] lg:w-[1360px] lg:max-w-[1360px]",
+          "mx-auto flex w-full max-w-[552px] items-center justify-center max-sm:px-8 sm:w-[552px] sm:max-w-[552px] md:w-[960px] md:max-w-[960px] lg:w-[1360px] lg:max-w-[1360px]",
           className,
         )}
         {...props}

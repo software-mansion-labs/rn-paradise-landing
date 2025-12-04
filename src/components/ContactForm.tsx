@@ -105,7 +105,7 @@ export default function ContactForm({ siteKey }: ContactFormProps) {
           </div>
         </div>
 
-        <div className="flex w-full flex-col gap-6 md:w-1/2">
+        <div className="flex w-full flex-col gap-6 md:w-1/2 md:justify-between">
           <div className="flex flex-col gap-2">
             <label htmlFor="name" className="text-primary text-sm font-medium">
               Your name
@@ -137,7 +137,7 @@ export default function ContactForm({ siteKey }: ContactFormProps) {
             />
           </div>
 
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
+          <div className="mt-auto flex flex-col gap-4 md:flex-row md:items-center md:gap-3">
             <p className="text-tertiary text-2xs w-full md:w-1/2">
               This site is protected by reCAPTCHA and the Google{" "}
               <a
