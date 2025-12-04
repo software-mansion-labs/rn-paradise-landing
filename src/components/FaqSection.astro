@@ -6,7 +6,6 @@ import { getCollection } from "astro:content";
 let faqData: { question: string; answer: string }[] = [];
 
 try {
-  // @ts-expect-error - Content types will be generated when dev server runs
   const faqEntries = await getCollection("faq");
   faqData = faqEntries.map((entry: any) => ({
     question: entry.data.question,

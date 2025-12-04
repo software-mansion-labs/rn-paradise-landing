@@ -1,0 +1,39 @@
+{
+  "$ref": "#/definitions/venue",
+  "definitions": {
+    "venue": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "eventLocation": {
+          "type": "string"
+        },
+        "polaroidCardImages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "carouselImages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "description",
+        "eventLocation",
+        "polaroidCardImages",
+        "carouselImages"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
