@@ -1,0 +1,39 @@
+---
+import ContentWrapper from "@/components/ContentWrapper";
+---
+
+<section
+  class="relative flex w-full flex-col items-center justify-center overflow-hidden bg-black"
+  style="min-height: 100vh;"
+  aria-label="Hero section with background video and event description"
+>
+  <div class="absolute inset-0 z-0 h-full w-full">
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      class="h-full w-full object-cover"
+      aria-hidden="true"
+    >
+      <source src="/assets/background-video.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <div class="absolute inset-0 z-[1] bg-black/60"></div>
+
+  <ContentWrapper
+    className="relative z-20 flex min-h-screen w-full flex-col items-center justify-center px-6"
+  >
+    <div class="flex max-w-3xl flex-col items-center justify-center gap-6">
+      <h2 class="text-yellow text-center text-3xl font-medium md:text-5xl">
+        We make unforgettable experiences.
+      </h2>
+
+      <p class="text-yellow text-center text-lg font-normal md:text-xl">
+        We've spent years creating App.js Conf and RTC.On, events that bring
+        together hundreds of developers each year.
+      </p>
+    </div>
+  </ContentWrapper>
+</section>
