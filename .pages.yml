@@ -132,7 +132,7 @@ content:
 
   - name: previousEditions
     label: Previous Editions
-    type: collection
+    type: file
     path: src/content/previousEditions
     fields:
       - name: polaroidCardImages
@@ -148,8 +148,8 @@ content:
 
   - name: unforgettableExperience
     label: Unforgettable Experience
-    type: collection
-    path: src/content/unforgettableExperience
+    type: file
+    path: src/content/unforgettableExperienceBackgroundVideo.mp4
     fields:
       - name: backgroundVideo
         label: Background Video
