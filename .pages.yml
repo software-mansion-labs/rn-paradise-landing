@@ -132,8 +132,8 @@ content:
 
   - name: previousEditions
     label: Previous Editions
-    type: collection
-    path: src/content/previousEditions
+    type: file
+    path: src/content/previousEditions/previousEditions.yaml
     fields:
       - name: polaroidCardImages
         label: PolaroidCard Images
