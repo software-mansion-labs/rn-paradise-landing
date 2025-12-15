@@ -8,7 +8,7 @@ media:
     label: Videos
     input: public/videos
     output: /videos
-    extensions: [mp4]
+    categories: [video]
 
 content:
   - name: general
@@ -162,5 +162,5 @@ content:
       - name: backgroundVideo
         label: Background Video
         type: file
-        extensions: [mp4]
+        categories: [video]
         required: true
