@@ -65,10 +65,14 @@ const faqCollection = defineCollection({
 const previousEditionsCollection = defineCollection({
   type: "content",
   schema: z.object({
-    question: z.string(),
-    answer: z.string(),
     polaroidCardImages: z.array(z.string()),
     carouselImages: z.array(z.string()),
+  }),
+});
+
+const unforgettableExperienceCollection = defineCollection({
+  type: "content",
+  schema: z.object({
     backgroundVideo: z.string(),
   }),
 });
@@ -81,4 +85,5 @@ export const collections = {
   tickets: ticketsCollection,
   faq: faqCollection,
   previousEditions: previousEditionsCollection,
+  unforgettableExperience: unforgettableExperienceCollection,
 };

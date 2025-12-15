@@ -4,12 +4,6 @@
     "previousEditions": {
       "type": "object",
       "properties": {
-        "question": {
-          "type": "string"
-        },
-        "answer": {
-          "type": "string"
-        },
         "polaroidCardImages": {
           "type": "array",
           "items": {
@@ -22,19 +16,13 @@
             "type": "string"
           }
         },
-        "backgroundVideo": {
-          "type": "string"
-        },
         "$schema": {
           "type": "string"
         }
       },
       "required": [
-        "question",
-        "answer",
         "polaroidCardImages",
-        "carouselImages",
-        "backgroundVideo"
+        "carouselImages"
       ],
       "additionalProperties": false
     }

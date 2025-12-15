@@ -135,14 +135,6 @@ content:
     type: collection
     path: src/content/previousEditions
     fields:
-      - name: question
-        label: Question
-        type: string
-        required: true
-      - name: answer
-        label: Answer
-        type: text
-        required: true
       - name: polaroidCardImages
         label: PolaroidCard Images
         type: image
@@ -153,10 +145,14 @@ content:
         type: image
         list: true
         required: true
+
+  - name: unforgettableExperience
+    label: Unforgettable Experience
+    type: collection
+    path: src/content/unforgettableExperience
+    fields:
       - name: backgroundVideo
-        label: backgroundVideo
-        type: file
-        options:
-          extensions:
-            - mp4
+        label: Background Video
+        type: video
+        allowedExtensions: [mp4]
         required: true
