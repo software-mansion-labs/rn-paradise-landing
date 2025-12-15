@@ -139,12 +139,10 @@ content:
         label: PolaroidCard Images
         type: image
         list: true
-        required: true
       - name: carouselImages
         label: Carousel Images
         type: image
         list: true
-        required: true
 
   - name: unforgettableExperience
     label: Unforgettable Experience
