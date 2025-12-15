@@ -153,6 +153,6 @@ content:
     fields:
       - name: backgroundVideo
         label: Background Video
-        type: video
-        allowedExtensions: [mp4]
+        type: file
+        extensions: [mp4]
         required: true
