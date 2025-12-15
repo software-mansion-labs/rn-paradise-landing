@@ -77,8 +77,8 @@ content:
 
   - name: venue
     label: Venue Information
-    type: collection
-    path: src/content/venue
+    type: file
+    path: src/content/venue/venue.yaml
     fields:
       - name: description
         label: Description
@@ -92,12 +92,10 @@ content:
         label: PolaroidCard Images
         type: image
         list: true
-        required: true
       - name: carouselImages
         label: Carousel Images
         type: image
         list: true
-        required: true
 
   - name: tickets
     label: Ticket Information

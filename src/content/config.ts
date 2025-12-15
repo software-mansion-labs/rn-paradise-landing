@@ -36,7 +36,7 @@ const teamCollection = defineCollection({
 });
 
 const venueCollection = defineCollection({
-  type: "content",
+  type: "data",
   schema: z.object({
     description: z.string(),
     eventLocation: z.string(),
@@ -63,7 +63,7 @@ const faqCollection = defineCollection({
 });
 
 const previousEditionsCollection = defineCollection({
-  type: "content",
+  type: "data",
   schema: z.object({
     polaroidCardImages: z.array(z.string()),
     carouselImages: z.array(z.string()),

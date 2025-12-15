@@ -194,9 +194,7 @@ declare module 'astro:content' {
 }>;
 "previousEditions": Record<string, {
   id: string;
-  render(): Render[".md"];
-  slug: string;
-  body: string;
+  body?: string;
   collection: "previousEditions";
   data: InferEntrySchema<"previousEditions">;
   rendered?: RenderedContent;
@@ -234,9 +232,7 @@ declare module 'astro:content' {
 }>;
 "venue": Record<string, {
   id: string;
-  render(): Render[".md"];
-  slug: string;
-  body: string;
+  body?: string;
   collection: "venue";
   data: InferEntrySchema<"venue">;
   rendered?: RenderedContent;
