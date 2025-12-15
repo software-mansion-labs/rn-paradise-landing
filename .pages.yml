@@ -147,7 +147,12 @@ content:
         required: true
 
   - name: unforgettableExperience
-    label: Unforgettable Experience Background Video
-    type: file
-    path: src/content/unforgettableExperienceBackgroundVideo.mp4
-    categories: [video]
+    label: Unforgettable Experience
+    type: collection
+    path: src/content/unforgettableExperience
+    fields:
+      - name: backgroundVideo
+        label: Background Video
+        type: file
+        categories: [video]
+        required: true
