@@ -1,5 +1,14 @@
 ---
 import ContentWrapper from "@/components/ContentWrapper";
+import { getCollection } from "astro:content";
+
+const unforgettableExperienceEntries = await getCollection(
+  "unforgettableExperience"
+);
+const unforgettableExperience = unforgettableExperienceEntries[0];
+const backgroundVideo =
+  unforgettableExperience?.data.backgroundVideo ||
+  "/assets/background-video.mp4";
 ---
 
 <section
@@ -16,7 +25,7 @@ import ContentWrapper from "@/components/ContentWrapper";
       class="h-full w-full object-cover"
       aria-hidden="true"
     >
-      <source src="/assets/background-video.mp4" type="video/mp4" />
+      <source src={backgroundVideo} type="video/mp4" />
     </video>
   </div>
 
