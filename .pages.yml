@@ -1,6 +1,14 @@
 media:
-  input: public/images
-  output: /images
+  - name: images
+    label: Images
+    input: public/images
+    output: /images
+    extensions: [png, webp]
+  - name: videos
+    label: Videos
+    input: public/videos
+    output: /videos
+    extensions: [mp4]
 
 content:
   - name: general
