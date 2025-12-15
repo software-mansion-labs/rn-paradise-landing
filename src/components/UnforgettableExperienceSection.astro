@@ -6,9 +6,7 @@ const unforgettableExperienceEntries = await getCollection(
   "unforgettableExperience"
 );
 const unforgettableExperience = unforgettableExperienceEntries[0];
-const backgroundVideo =
-  unforgettableExperience?.data.backgroundVideo ||
-  "/assets/background-video.mp4";
+const backgroundVideo = unforgettableExperience?.data.backgroundVideo;
 ---
 
 <section

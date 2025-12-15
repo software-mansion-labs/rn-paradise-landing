@@ -222,9 +222,7 @@ declare module 'astro:content' {
 }>;
 "unforgettableExperience": Record<string, {
   id: string;
-  render(): Render[".md"];
-  slug: string;
-  body: string;
+  body?: string;
   collection: "unforgettableExperience";
   data: InferEntrySchema<"unforgettableExperience">;
   rendered?: RenderedContent;

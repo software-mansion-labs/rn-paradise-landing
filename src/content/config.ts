@@ -71,7 +71,7 @@ const previousEditionsCollection = defineCollection({
 });
 
 const unforgettableExperienceCollection = defineCollection({
-  type: "content",
+  type: "data",
   schema: z.object({
     backgroundVideo: z.string(),
   }),

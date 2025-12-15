@@ -144,11 +144,10 @@ content:
 
   - name: unforgettableExperience
     label: Unforgettable Experience
-    type: collection
-    path: src/content/unforgettableExperience
+    type: file
+    path: src/content/unforgettableExperience/unforgettableExperience.yaml
     fields:
       - name: backgroundVideo
         label: Background Video
         type: file
         categories: [video]
-        required: true
