@@ -1,5 +1,14 @@
 ---
 import ContentWrapper from "@/components/ContentWrapper";
+import PolaroidPile from "@/components/PolaroidPile";
+import { Carousel } from "@/components/ui/CarouselWrapper";
+import { getCollection } from "astro:content";
+
+const previousEditions = await getCollection("previousEditions");
+const previousEdition = previousEditions[0];
+
+const polaroidImages = previousEdition?.data.polaroidCardImages ?? [];
+const carouselImages: string[] = previousEdition?.data.carouselImages ?? [];
 ---
 
 <section
@@ -7,10 +16,40 @@ import ContentWrapper from "@/components/ContentWrapper";
   class="bg-yellow relative flex w-full scroll-m-5 flex-col items-center justify-center overflow-hidden pt-36 pb-40"
 >
   <ContentWrapper
-    className="flex w-full flex-col items-center justify-center gap-10 sm:gap-14 md:gap-16"
+    className="flex w-full flex-col items-center justify-center gap-10 sm:gap-12 md:gap-12"
   >
-    <h2 class="text-primary text-center text-xl/9 font-medium">
+    <h2 class="text-primary text-center text-2xl/9 font-medium">
       Previous edition
     </h2>
+
+    <div
+      class="flex w-full max-w-[1000px] flex-col items-center justify-between gap-8 md:flex-row md:items-center md:gap-12"
+    >
+      <p class="text-primary text-md flex-1 text-left font-normal md:max-w-md">
+        Our first edition took place on Tenerife: a week of practical workshops,
+        good food, and great company. Guided by our open source team,
+        participants explored Expo Router, Native Modules, JSI, Hermes,
+        Reanimated, and much more.
+      </p>
+
+      <div class="flex-shrink-0">
+        <PolaroidPile
+          images={polaroidImages}
+          stackCount={5}
+          caption="React Native Paradise '25"
+          size={1}
+          client:load
+        />
+      </div>
+
+      <p class="text-primary text-md flex-1 text-left font-normal md:max-w-md">
+        And because it's called Paradise for a reason, there was more than just
+        code: a volcano hike, surfing, and long evenings with fellow developers
+        made it an experience to remember.
+      </p>
+    </div>
+
+    <div class="w-full"></div>
+    <Carousel data={{ images: carouselImages }} client:load />
   </ContentWrapper>
 </section>
