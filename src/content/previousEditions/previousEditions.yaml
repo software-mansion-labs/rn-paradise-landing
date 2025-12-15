@@ -1,2 +1,4 @@
-polaroidCardImages: []
-carouselImages: []
+polaroidCardImages:
+  - /media/previous-section-img-main.png
+carouselImages:
+  - /media/previous-section-carousel-8.png
