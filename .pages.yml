@@ -80,8 +80,16 @@ content:
     type: file
     path: src/content/venue/venue.yaml
     fields:
-      - name: description
-        label: Description
+      - name: description_paragraph1
+        label: Description Paragraph 1
+        type: text
+        required: true
+      - name: description_paragraph2
+        label: Description Paragraph 2
+        type: text
+        required: true
+      - name: description_paragraph3
+        label: Description Paragraph 3
         type: text
         required: true
       - name: eventLocation

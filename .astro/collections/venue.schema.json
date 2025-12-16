@@ -4,7 +4,13 @@
     "venue": {
       "type": "object",
       "properties": {
-        "description": {
+        "description_paragraph1": {
+          "type": "string"
+        },
+        "description_paragraph2": {
+          "type": "string"
+        },
+        "description_paragraph3": {
           "type": "string"
         },
         "eventLocation": {
@@ -27,7 +33,9 @@
         }
       },
       "required": [
-        "description",
+        "description_paragraph1",
+        "description_paragraph2",
+        "description_paragraph3",
         "eventLocation",
         "polaroidCardImages",
         "carouselImages"

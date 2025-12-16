@@ -38,7 +38,9 @@ const teamCollection = defineCollection({
 const venueCollection = defineCollection({
   type: "data",
   schema: z.object({
-    description: z.string(),
+    description_paragraph1: z.string(),
+    description_paragraph2: z.string(),
+    description_paragraph3: z.string(),
     eventLocation: z.string(),
     polaroidCardImages: z.array(z.string()),
     carouselImages: z.array(z.string()),

@@ -1,14 +1,69 @@
 ---
 import ContentWrapper from "@/components/ContentWrapper";
+import PolaroidPile from "@/components/PolaroidPile";
+import { Carousel } from "@/components/ui/CarouselWrapper";
+import { getCollection } from "astro:content";
+
+const venue = await getCollection("venue");
+const venueData = venue[0]?.data;
+
+const polaroidImages = venueData?.polaroidCardImages ?? [];
+const carouselImages: string[] = venueData?.carouselImages ?? [];
+
+const venueIcons = [
+  "/assets/venue-icons/BedDouble.svg",
+  "/assets/venue-icons/Sofa.svg",
+  "/assets/venue-icons/Bath.svg",
+  "/assets/venue-icons/Soup.svg",
+  "/assets/venue-icons/Radio.svg",
+];
 ---
 
 <section
   id="venue"
-  class="bg-yellow relative flex w-full scroll-m-5 flex-col items-center justify-center overflow-hidden pt-36 pb-40"
+  class="bg-yellow relative flex w-full scroll-m-5 flex-col items-center justify-center overflow-hidden pt-18 pb-20 sm:pt-24 sm:pb-24 md:pt-28 md:pb-28 lg:pt-36 lg:pb-40"
 >
   <ContentWrapper
     className="flex w-full flex-col items-center justify-center gap-10 sm:gap-14 md:gap-16"
   >
-    <h2 class="text-primary text-center text-xl/9 font-medium">Venue</h2>
+    <h2 class="text-primary text-center text-2xl/9 font-medium">Venue</h2>
+
+    <div
+      class="flex w-full max-w-[1000px] flex-col items-center justify-between gap-8 md:flex-row md:items-center md:gap-12"
+    >
+      <div class="relative flex-shrink-0 -rotate-3">
+        <PolaroidPile
+          images={polaroidImages}
+          stackCount={2}
+          caption="React Native Paradise '25"
+          size={1}
+          client:load
+        />
+      </div>
+      <div class="flex flex-col gap-4">
+        <p class="text-primary text-md text-left leading-[150%] md:max-w-md">
+          {venueData?.description_paragraph1}
+        </p>
+        <p class="text-primary text-md text-left leading-[150%] md:max-w-md">
+          {venueData?.description_paragraph2}
+        </p>
+        <p
+          class="text-primary text-md text-left leading-[150%] font-bold md:max-w-md"
+        >
+          {venueData?.description_paragraph3}
+        </p>
+        <div class="mt-3 flex items-center gap-3 max-md:justify-center">
+          {
+            venueIcons.map((icon) => (
+              <img src={icon} alt={icon} class="h-5 w-5" />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full max-md:-mt-20">
+      <Carousel data={{ images: carouselImages }} client:load />
+    </div>
   </ContentWrapper>
 </section>
