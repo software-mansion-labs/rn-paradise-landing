@@ -41,7 +41,7 @@ export default defineConfig({
           {
             src: ["./public/fonts/aeonik/aeonik-medium.otf"],
             style: "normal",
-            weight: 600,
+            weight: 500,
           },
         ],
       },
