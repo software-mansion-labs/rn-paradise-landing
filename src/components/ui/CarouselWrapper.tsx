@@ -15,13 +15,15 @@ interface CarouselProps {
 
 function ImageItem({ image, index }: { image: string; index: number }) {
   return (
-    <CarouselItem className="md:basis-2/5 lg:basis-1/4">
-      <div className="relative h-80 w-full overflow-hidden">
-        <img
-          src={image}
-          alt={`Image ${index + 1}`}
-          className="absolute bottom-0 left-0 h-[26rem] w-full cursor-pointer object-cover transition-all duration-[650ms] ease-[cubic-bezier(.785,.135,.15,.86)] [clip-path:inset(45%_0%_0%_0%)] hover:scale-105 hover:[clip-path:inset(0%_0%_0%_0%)]"
-        />
+    <CarouselItem className="basis-1/1 sm:basis-3/5 md:basis-2/6 lg:basis-1/4">
+      <div className="relative h-[26rem] w-full">
+        <div className="group absolute bottom-0 h-[20rem] w-full overflow-hidden transition-[height] duration-[650ms] ease-[cubic-bezier(.785,.135,.15,.86)] md:hover:h-[26rem]">
+          <img
+            src={image}
+            alt={`Image ${index + 1}`}
+            className="absolute bottom-0 h-[24rem] w-full cursor-pointer object-cover object-bottom transition-transform duration-[650ms] ease-[cubic-bezier(.785,.135,.15,.86)] md:group-hover:scale-105"
+          />
+        </div>
       </div>
     </CarouselItem>
   );
@@ -37,7 +39,7 @@ export function Carousel({ data }: CarouselProps) {
         AutoScroll({
           playOnInit: true,
           startDelay: 0,
-          speed: 1,
+          speed: 0.5,
           stopOnInteraction: false,
           //   stopOnMouseEnter: true,
         }),
