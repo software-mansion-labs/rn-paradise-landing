@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface PolaroidPileProps {
@@ -7,6 +7,7 @@ interface PolaroidPileProps {
   caption?: string;
   className?: string;
   size?: number;
+  rotationDirection?: "left" | "right";
 }
 
 export default function PolaroidPile({
@@ -15,8 +16,10 @@ export default function PolaroidPile({
   caption,
   className,
   size = 1.15,
+  rotationDirection = "left",
 }: PolaroidPileProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(size);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -53,7 +56,21 @@ export default function PolaroidPile({
   }, []);
 
   const mainImage = images[0] || "";
-  const stackImages = images.slice(1, stackCount) || [];
+  const availableStackImages = images.slice(1);
+  const neededStackCount = stackCount - 1;
+
+  let stackImages: string[];
+  if (availableStackImages.length >= neededStackCount) {
+    stackImages = availableStackImages.slice(0, neededStackCount);
+  } else {
+    const lastImage =
+      availableStackImages[availableStackImages.length - 1] || mainImage || "";
+    const fillCount = neededStackCount - availableStackImages.length;
+    stackImages = [
+      ...availableStackImages,
+      ...Array(fillCount).fill(lastImage),
+    ];
+  }
 
   const PolaroidCard = ({
     image,
@@ -68,7 +85,7 @@ export default function PolaroidPile({
   }) => (
     <div
       className={cn(
-        "relative h-full w-115",
+        "relative h-full w-70 sm:w-75 md:w-115",
         isMain && "transition-transform duration-300 hover:scale-105",
       )}
       style={{ zIndex }}
@@ -91,7 +108,7 @@ export default function PolaroidPile({
         />
       )}
       {caption && isMain && (
-        <p className="text-primary absolute bottom-[5%] left-1/2 min-w-[220px] -translate-x-1/2 px-4 text-center text-sm font-medium whitespace-nowrap">
+        <p className="text-primary text-2xs absolute bottom-[4%] left-1/2 min-w-[220px] -translate-x-1/2 px-4 text-center font-medium whitespace-nowrap sm:text-sm md:bottom-[5%]">
           {caption}
         </p>
       )}
@@ -104,16 +121,18 @@ export default function PolaroidPile({
         ref={containerRef}
         className="relative h-full w-full"
         style={{
-          transform: `perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) scale(${size})`,
+          transform: `perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) scale(${scale})`,
           transformOrigin: "center",
         }}
       >
         {/* Stacked polaroids behind */}
         {stackImages.map((image, index) => {
-          const rotation = (index + 1) * 3 - 6;
+          const rotationMultiplier = rotationDirection === "right" ? 1 : -1;
+          const baseRotation = (index + 1) * 2 - 6;
+          const rotation = baseRotation * rotationMultiplier;
           const translateX = (index + 1) * 2 - 4;
           const translateY = (index + 1) * 2 - 4;
-          const zIndex = stackCount - index;
+          const zIndex = stackCount - 1 - index;
 
           return (
             <div
@@ -122,7 +141,6 @@ export default function PolaroidPile({
               style={{
                 transform: `translate(${translateX}px, ${translateY}px) rotate(${rotation}deg)`,
                 zIndex,
-                opacity: 0.7 - index * 0.1,
               }}
             >
               <PolaroidCard image={image} index={index} zIndex={zIndex} />
@@ -132,7 +150,7 @@ export default function PolaroidPile({
 
         {/* Main polaroid on top */}
         <div className="relative">
-          <PolaroidCard image={mainImage} isMain zIndex={50} />
+          <PolaroidCard image={mainImage} isMain zIndex={stackCount} />
         </div>
       </div>
     </div>

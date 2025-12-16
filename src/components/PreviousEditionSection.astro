@@ -13,43 +13,49 @@ const carouselImages: string[] = previousEdition?.data.carouselImages ?? [];
 
 <section
   id="previous-edition"
-  class="bg-yellow relative flex w-full scroll-m-5 flex-col items-center justify-center overflow-hidden pt-36 pb-40"
+  class="bg-yellow relative flex w-full scroll-m-5 flex-col items-center justify-center overflow-hidden pt-18 pb-20 sm:pt-24 sm:pb-24 md:pt-28 md:pb-28 lg:pt-36 lg:pb-40"
 >
   <ContentWrapper
-    className="flex w-full flex-col items-center justify-center gap-10 sm:gap-12 md:gap-12"
+    className="flex w-full flex-col items-center justify-center gap-10 sm:gap-8 md:gap-16"
   >
     <h2 class="text-primary text-center text-2xl/9 font-medium">
       Previous edition
     </h2>
 
     <div
-      class="flex w-full max-w-[1000px] flex-col items-center justify-between gap-8 md:flex-row md:items-center md:gap-12"
+      class="flex w-full max-w-[1000px] flex-col items-center justify-center gap-4 sm:mt-5 md:mt-6 md:flex-row md:items-center md:justify-between md:gap-12 lg:mt-12"
     >
-      <p class="text-primary text-md flex-1 text-left font-normal md:max-w-md">
+      <p
+        class="text-primary text-md order-2 flex-1 text-left font-normal md:order-1 md:max-w-md"
+      >
         Our first edition took place on Tenerife: a week of practical workshops,
         good food, and great company. Guided by our open source team,
         participants explored Expo Router, Native Modules, JSI, Hermes,
         Reanimated, and much more.
       </p>
 
-      <div class="flex-shrink-0">
+      <div class="order-1 flex-shrink-0 max-md:mb-8 md:order-2">
         <PolaroidPile
           images={polaroidImages}
-          stackCount={5}
+          stackCount={2}
           caption="React Native Paradise '25"
           size={1}
+          rotationDirection="right"
           client:load
         />
       </div>
 
-      <p class="text-primary text-md flex-1 text-left font-normal md:max-w-md">
+      <p
+        class="text-primary text-md order-3 flex-1 text-left font-normal md:order-3 md:max-w-md"
+      >
         And because it's called Paradise for a reason, there was more than just
         code: a volcano hike, surfing, and long evenings with fellow developers
         made it an experience to remember.
       </p>
     </div>
 
-    <div class="w-full"></div>
-    <Carousel data={{ images: carouselImages }} client:load />
+    <div class="w-full max-md:-mt-20">
+      <Carousel data={{ images: carouselImages }} client:load />
+    </div>
   </ContentWrapper>
 </section>
