@@ -1,7 +1,7 @@
 import { defineCollection, z } from "astro:content";
 
 const generalCollection = defineCollection({
-  type: "content",
+  type: "data",
   schema: z.object({
     editionNumber: z.string(),
     editionYear: z.string(),
@@ -10,7 +10,7 @@ const generalCollection = defineCollection({
 });
 
 const heroCollection = defineCollection({
-  type: "content",
+  type: "data",
   schema: z.object({
     eventDate: z.string(),
     eventLocation: z.string(),

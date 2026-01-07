@@ -5,8 +5,8 @@ media:
 content:
   - name: general
     label: General Information
-    type: collection
-    path: src/content/general
+    type: file
+    path: src/content/general/general.yaml
     fields:
       - name: editionNumber
         label: EditionNumber
@@ -23,8 +23,8 @@ content:
 
   - name: hero
     label: Hero Section
-    type: collection
-    path: src/content/hero
+    type: file
+    path: src/content/hero/hero.yaml
     fields:
       - name: eventDate
         label: EventDate
