@@ -159,3 +159,13 @@ content:
         label: Background Video
         type: file
         categories: [video]
+
+  - name: contact
+    label: Contact Information
+    type: file
+    path: src/content/contact/contact.yaml
+    fields:
+      - name: discordUrl
+        label: Discord URL
+        type: string
+        required: true
