@@ -47,7 +47,7 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
         id="footer"
         ref={ref}
         className={cn(
-          "bg-dark-blue relative bottom-0 w-full overflow-hidden",
+          "bg-dark-cold relative bottom-0 w-full overflow-hidden",
           className,
         )}
         {...props}
