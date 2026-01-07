@@ -6,11 +6,12 @@ import type { CaptchaRef } from "@/utils/recaptcha";
 
 interface ContactFormProps {
   siteKey: string;
+  discordUrl: string;
 }
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
-export default function ContactForm({ siteKey }: ContactFormProps) {
+export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const captchaRef = useRef<CaptchaRef>(null);
@@ -78,7 +79,7 @@ export default function ContactForm({ siteKey }: ContactFormProps) {
             <p className="text-primary text-sm font-normal">
               Or join our{" "}
               <a
-                href=""
+                href={discordUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline underline-offset-2"

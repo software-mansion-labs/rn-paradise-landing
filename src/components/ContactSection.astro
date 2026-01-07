@@ -1,8 +1,11 @@
 ---
 import ContentWrapper from "@/components/ContentWrapper";
 import ContactForm from "@/components/ContactForm";
+import { getEntry } from "astro:content";
 
 const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || "";
+const contactData = await getEntry("contact", "contact");
+const discordUrl = contactData?.data.discordUrl || "";
 ---
 
 <section
@@ -12,6 +15,6 @@ const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || "";
   <ContentWrapper
     className="flex w-full flex-col items-center justify-center gap-10 sm:gap-14 md:gap-16"
   >
-    <ContactForm siteKey={siteKey} client:load />
+    <ContactForm siteKey={siteKey} discordUrl={discordUrl} client:load />
   </ContentWrapper>
 </section>

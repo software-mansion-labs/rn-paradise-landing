@@ -79,6 +79,13 @@ const unforgettableExperienceCollection = defineCollection({
   }),
 });
 
+const contactCollection = defineCollection({
+  type: "data",
+  schema: z.object({
+    discordUrl: z.string(),
+  }),
+});
+
 export const collections = {
   general: generalCollection,
   hero: heroCollection,
@@ -88,4 +95,5 @@ export const collections = {
   faq: faqCollection,
   previousEditions: previousEditionsCollection,
   unforgettableExperience: unforgettableExperienceCollection,
+  contact: contactCollection,
 };
