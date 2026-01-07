@@ -19,6 +19,9 @@
         "image": {
           "type": "string"
         },
+        "order": {
+          "type": "number"
+        },
         "social": {
           "type": "object",
           "properties": {

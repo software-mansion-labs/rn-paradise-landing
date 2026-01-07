@@ -14,14 +14,18 @@ let members: {
 
 try {
   const teamMembers = await getCollection("team");
-  members = teamMembers.map((entry: any) => ({
-    name: entry.data.name,
-    role: entry.data.role,
-    company: entry.data.company,
-    image: entry.data.image,
-    bio: entry.data.bio,
-    social: entry.data.social,
-  }));
+  members = teamMembers
+    .map((entry: any) => ({
+      name: entry.data.name,
+      role: entry.data.role,
+      company: entry.data.company,
+      image: entry.data.image,
+      bio: entry.data.bio,
+      social: entry.data.social,
+      order: entry.data.order ?? 999,
+    }))
+    .sort((a, b) => a.order - b.order)
+    .map(({ order, ...rest }) => rest);
 } catch (error) {
   console.warn("Team content collection not found");
 }

@@ -27,6 +27,7 @@ const teamCollection = defineCollection({
     company: z.string().optional(),
     bio: z.string().optional(),
     image: z.string(),
+    order: z.number().optional(),
     social: z
       .object({
         twitter: z.string().optional(),
@@ -62,6 +63,7 @@ const faqCollection = defineCollection({
   schema: z.object({
     question: z.string(),
     answer: z.string(),
+    order: z.number().optional(),
   }),
 });
 

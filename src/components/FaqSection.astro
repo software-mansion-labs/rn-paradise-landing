@@ -7,10 +7,14 @@ let faqData: { question: string; answer: string }[] = [];
 
 try {
   const faqEntries = await getCollection("faq");
-  faqData = faqEntries.map((entry: any) => ({
-    question: entry.data.question,
-    answer: entry.data.answer,
-  }));
+  faqData = faqEntries
+    .map((entry: any) => ({
+      question: entry.data.question,
+      answer: entry.data.answer,
+      order: entry.data.order ?? 999,
+    }))
+    .sort((a, b) => a.order - b.order)
+    .map(({ order, ...rest }) => rest);
 } catch (error) {
   console.warn("FAQ content collection not found");
 }

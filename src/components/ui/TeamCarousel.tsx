@@ -29,7 +29,7 @@ export default function TeamCarousel({ members }: TeamCarouselProps) {
       className="relative mx-auto w-full max-w-[1000px]"
       opts={{
         loop: true,
-        align: "center",
+        align: "start",
       }}
     >
       <CarouselContent className="-ml-4">

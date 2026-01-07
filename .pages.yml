@@ -67,6 +67,9 @@ content:
         label: Image
         type: image
         required: true
+      - name: order
+        label: Order
+        type: number
       - name: social
         label: Social Links
         type: object
@@ -138,6 +141,9 @@ content:
         label: Answer
         type: text
         required: true
+      - name: order
+        label: Order
+        type: number
 
   - name: previousEditions
     label: Previous Editions

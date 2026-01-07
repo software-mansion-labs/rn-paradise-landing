@@ -1,12 +1,11 @@
 ---
 name: Krzysztof Piaskowy
-role: Open-source developer,Software Mansion
+role: Open-source developer
 bio: Krzysztof is a React Native open-source developer at Software Mansion. He
-  contributes to the React Native core and other projects that exist in the
-  ecosystem like Hermes, react-native-wgpu, and react-native-gesture-handler.
-  His colleagues often joke that he is the Godfather of Reanimated. Personally,
-  he is a robotics lover and passionate about embedded programming.
+contributes to the React Native core and other projects that exist in the
+ecosystem like Hermes, react-native-wgp
 image: /media/krzysztof-piaskowy.png
+order: 1
 social:
   twitter: https://x.com/piaskowyk
   github: https://github.com/piaskowyk
