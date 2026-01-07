@@ -84,6 +84,8 @@
 
   --color-yellow: var(--color-brand-yellow-20);
   --color-sea-blue: var(--color-brand-sea-blue-20);
+
+  --color-badge-yellow: #ffe572;
 }
 
 @layer base {

@@ -1,6 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
+const getOrdinalIndicator = (num: number): string => {
+  const lastDigit = num % 10;
+  const lastTwoDigits = num % 100;
+
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 13) {
+    return `${num}th`;
+  }
+
+  switch (lastDigit) {
+    case 1:
+      return `${num}st`;
+    case 2:
+      return `${num}nd`;
+    case 3:
+      return `${num}rd`;
+    default:
+      return `${num}th`;
+  }
+};
+
 interface PolaroidPileProps {
   images: string[];
   stackCount?: number;
@@ -8,6 +28,7 @@ interface PolaroidPileProps {
   className?: string;
   size?: number;
   rotationDirection?: "left" | "right";
+  editionNumber?: string;
 }
 
 export default function PolaroidPile({
@@ -17,6 +38,7 @@ export default function PolaroidPile({
   className,
   size = 1.15,
   rotationDirection = "left",
+  editionNumber,
 }: PolaroidPileProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mainCardRef = useRef<HTMLDivElement>(null);
@@ -88,13 +110,14 @@ export default function PolaroidPile({
   const PolaroidCard = ({
     image,
     isMain = false,
-    index = 0,
     zIndex = 50,
+    editionNumber,
   }: {
     image?: string;
     isMain?: boolean;
     index?: number;
     zIndex?: number;
+    editionNumber?: string;
   }) => (
     <div
       className={cn(
@@ -124,6 +147,17 @@ export default function PolaroidPile({
         <p className="text-primary text-2xs absolute bottom-[4%] left-1/2 min-w-[220px] -translate-x-1/2 px-4 text-center font-medium whitespace-nowrap sm:text-sm md:bottom-[5%]">
           {caption}
         </p>
+      )}
+      {/* Edition Number Badge*/}
+      {editionNumber && isMain && (
+        <div className="bg-badge-yellow absolute top-[-7%] left-[-14%] z-50 flex h-20 w-20 rotate-[10deg] items-center justify-center rounded-full shadow-md sm:h-24 sm:w-24 md:h-28 md:w-28">
+          <div className="flex flex-col items-center justify-center gap-0">
+            <span className="text-primary text-xl leading-none">
+              {getOrdinalIndicator(parseInt(editionNumber) - 1)}
+            </span>
+            <span className="text-primary text-xs leading-none">edition</span>
+          </div>
+        </div>
       )}
     </div>
   );
@@ -171,7 +205,12 @@ export default function PolaroidPile({
             zIndex: stackCount + 1,
           }}
         >
-          <PolaroidCard image={mainImage} isMain zIndex={stackCount} />
+          <PolaroidCard
+            image={mainImage}
+            isMain
+            zIndex={stackCount}
+            editionNumber={editionNumber}
+          />
         </div>
       </div>
     </div>

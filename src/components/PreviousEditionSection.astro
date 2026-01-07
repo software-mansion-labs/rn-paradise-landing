@@ -2,13 +2,17 @@
 import ContentWrapper from "@/components/ContentWrapper";
 import PolaroidPile from "@/components/PolaroidPile";
 import { Carousel } from "@/components/ui/CarouselWrapper";
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 
 const previousEditions = await getCollection("previousEditions");
 const previousEdition = previousEditions[0];
 
+const generalEntry = await getEntry("general", "general");
+const generalData = generalEntry?.data;
+
 const polaroidImages = previousEdition?.data.polaroidCardImages ?? [];
 const carouselImages: string[] = previousEdition?.data.carouselImages ?? [];
+const editionNumber = generalData?.editionNumber;
 ---
 
 <section
@@ -41,6 +45,7 @@ const carouselImages: string[] = previousEdition?.data.carouselImages ?? [];
           caption="React Native Paradise '25"
           size={1}
           rotationDirection="right"
+          editionNumber={editionNumber}
           client:load
         />
       </div>
