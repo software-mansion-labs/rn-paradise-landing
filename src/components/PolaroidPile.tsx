@@ -19,31 +19,43 @@ export default function PolaroidPile({
   rotationDirection = "left",
 }: PolaroidPileProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const mainCardRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(size);
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    const mainCard = mainCardRef.current;
+    if (!container || !mainCard) return;
+
+    let rafId: number | null = null;
+    let targetX = 0;
+    let targetY = 0;
+
+    const update = () => {
+      mainCard.style.setProperty("--rotate-x", `${targetY}deg`);
+      mainCard.style.setProperty("--rotate-y", `${targetX}deg`);
+      rafId = null;
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
+
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateX = ((y - centerY) / centerY) * 5;
-      const rotateY = ((centerX - x) / centerX) * 5;
+      targetX = ((centerX - x) / centerX) * 5;
+      targetY = ((y - centerY) / centerY) * 5;
 
-      container.style.setProperty("--rotate-x", `${rotateX}deg`);
-      container.style.setProperty("--rotate-y", `${rotateY}deg`);
+      if (!rafId) {
+        rafId = requestAnimationFrame(update);
+      }
     };
 
     const handleMouseLeave = () => {
-      if (container) {
-        container.style.setProperty("--rotate-x", "0deg");
-        container.style.setProperty("--rotate-y", "0deg");
-      }
+      mainCard.style.setProperty("--rotate-x", "0deg");
+      mainCard.style.setProperty("--rotate-y", "0deg");
     };
 
     container.addEventListener("mousemove", handleMouseMove);
@@ -52,6 +64,7 @@ export default function PolaroidPile({
     return () => {
       container.removeEventListener("mousemove", handleMouseMove);
       container.removeEventListener("mouseleave", handleMouseLeave);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 
@@ -121,7 +134,7 @@ export default function PolaroidPile({
         ref={containerRef}
         className="relative h-full w-full"
         style={{
-          transform: `perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) scale(${scale})`,
+          transform: `scale(${scale})`,
           transformOrigin: "center",
         }}
       >
@@ -132,12 +145,12 @@ export default function PolaroidPile({
           const rotation = baseRotation * rotationMultiplier;
           const translateX = (index + 1) * 2 - 4;
           const translateY = (index + 1) * 2 - 4;
-          const zIndex = stackCount - 1 - index;
+          const zIndex = index + 1;
 
           return (
             <div
               key={`stack-${index}`}
-              className="absolute inset-0 transition-all duration-500 ease-out"
+              className="pointer-events-none absolute inset-0 transition-all duration-500 ease-out"
               style={{
                 transform: `translate(${translateX}px, ${translateY}px) rotate(${rotation}deg)`,
                 zIndex,
@@ -149,7 +162,15 @@ export default function PolaroidPile({
         })}
 
         {/* Main polaroid on top */}
-        <div className="relative">
+        <div
+          ref={mainCardRef}
+          className="relative will-change-transform"
+          style={{
+            transform: `perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg))`,
+            transformOrigin: "center",
+            zIndex: stackCount + 1,
+          }}
+        >
           <PolaroidCard image={mainImage} isMain zIndex={stackCount} />
         </div>
       </div>
