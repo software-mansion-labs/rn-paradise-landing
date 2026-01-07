@@ -40,6 +40,8 @@
 
   /* Base */
   --color-white: #ffffff;
+  --color-dark-cold: #0d0f26;
+  --color-dark-warm: #26251f;
 
   /* Slate */
   --color-slate-50: #f8fafc;
@@ -56,7 +58,7 @@
   --color-slate-950: #020617;
 
   /* Gray */
-  --color-gray-50: #f6f6f6;
+  --color-gray-50: #f9f9f9;
   --color-gray-100: #e7e7e7;
   --color-gray-200: #d1d1d1;
   --color-gray-300: #b0b0b0;
@@ -68,11 +70,15 @@
   --color-gray-900: #282828;
   --color-gray-950: #1f1f1f;
 
+  --color-gray-border: #d9dde8;
+
   /* Colors */
-  --color-primary: var(--color-swm-brand-100);
+  /* --color-primary: var(--color-swm-brand-100); */
+  --color-primary: var(--color-dark-warm);
   --color-primary-hover: var(--color-swm-brand-80);
-  --color-secondary: var(--color-swm-brand-60);
-  --color-secondary-hover: var(--color-swm-brand-40);
+  /* --color-secondary: var(--color-swm-brand-60); */
+  --color-secondary: var(--color-swm-brand-100);
+  --color-secondary-hover: var(--color-swm-brand-80);
 
   --color-tertiary: var(--color-swm-brand-40);
 

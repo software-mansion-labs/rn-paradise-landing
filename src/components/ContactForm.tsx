@@ -68,22 +68,25 @@ export default function ContactForm({ siteKey }: ContactFormProps) {
       <Captcha ref={captchaRef} siteKey={siteKey} />
       <form
         onSubmit={handleSubmit}
-        className="flex w-full flex-col gap-6 md:flex-row md:gap-8"
+        className="flex w-full flex-col gap-6 bg-white px-14 py-12 shadow-md md:flex-row md:gap-8"
       >
-        <div className="flex w-full flex-col gap-6 md:w-1/2">
+        <div className="border-gray-border flex w-full flex-col gap-6 border-r pr-0 md:w-1/2 md:pr-8">
           <div className="flex flex-col gap-2">
-            <label htmlFor="email" className="text-primary text-sm font-medium">
-              Email <span className="text-secondary">(required)</span>
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              placeholder="Placeholder"
-              disabled={formState === "submitting"}
-              className="text-primary placeholder:text-tertiary border-gray-300 bg-white px-4 py-3 text-sm placeholder:text-sm focus:border-transparent focus:outline-none disabled:opacity-50"
-            />
+            <h2 className="text-primary text-xl/9 font-medium">
+              Have more questions? <br /> Contact us here!
+            </h2>
+            <p className="text-primary text-sm font-normal">
+              Or join our{" "}
+              <a
+                href=""
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2"
+              >
+                Discord channel
+              </a>
+              .
+            </p>
           </div>
 
           <div className="flex flex-col gap-2">
@@ -91,54 +94,85 @@ export default function ContactForm({ siteKey }: ContactFormProps) {
               htmlFor="message"
               className="text-primary text-sm font-medium"
             >
-              Message <span className="text-secondary">(required)</span>
+              Message <span className="text-primary/80">(required)</span>
             </label>
             <textarea
               id="message"
               name="message"
               required
-              rows={5}
-              placeholder="Placeholder"
+              rows={13}
+              placeholder="Message"
               disabled={formState === "submitting"}
-              className="text-primary placeholder:text-tertiary resize-none border-gray-300 bg-white px-4 py-3 text-sm placeholder:text-sm focus:border-transparent focus:outline-none disabled:opacity-50"
+              className="text-primary border-gray-border resize-none border bg-gray-50 px-4 py-3 text-sm placeholder:text-sm placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
             />
           </div>
         </div>
 
-        <div className="flex w-full flex-col gap-6 md:w-1/2 md:justify-between">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="name" className="text-primary text-sm font-medium">
-              Your name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Placeholder"
-              disabled={formState === "submitting"}
-              className="text-primary placeholder:text-tertiary border-gray-300 bg-white px-4 py-3 text-sm placeholder:text-sm focus:border-transparent focus:outline-none disabled:opacity-50"
+        <div className="flex w-full flex-col gap-8 pl-0 md:w-1/2 md:justify-between md:pl-8">
+          <div className="flex justify-end">
+            <img
+              src="/assets/logo-znaczek.png"
+              alt="React Native Paradise Logo"
+              className="h-20 w-auto md:h-32"
             />
           </div>
 
-          <div className="flex flex-col gap-2">
-            <label
-              htmlFor="company"
-              className="text-primary text-sm font-medium"
-            >
-              Company name
-            </label>
-            <input
-              type="text"
-              id="company"
-              name="company"
-              placeholder="Placeholder"
-              disabled={formState === "submitting"}
-              className="text-primary placeholder:text-tertiary border-gray-300 bg-white px-4 py-3 text-sm placeholder:text-sm focus:border-transparent focus:outline-none disabled:opacity-50"
-            />
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="email"
+                className="text-primary text-sm font-medium"
+              >
+                Email <span className="text-primary/80">(required)</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="Email"
+                disabled={formState === "submitting"}
+                className="text-primary border-gray-border border bg-gray-50 px-4 py-3 text-sm placeholder:text-sm placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="name"
+                className="text-primary text-sm font-medium"
+              >
+                Your name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Name"
+                disabled={formState === "submitting"}
+                className="text-primary border-gray-border border bg-gray-50 px-4 py-3 text-sm placeholder:text-sm placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="company"
+                className="text-primary text-sm font-medium"
+              >
+                Company name
+              </label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                placeholder="Company name"
+                disabled={formState === "submitting"}
+                className="text-primary border-gray-border border bg-gray-50 px-4 py-3 text-sm placeholder:text-sm placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
+              />
+            </div>
           </div>
 
           <div className="mt-auto flex flex-col gap-4 md:flex-row md:items-center md:gap-3">
-            <p className="text-tertiary text-2xs w-full md:w-1/2">
+            <p className="text-primary/80 text-2xs w-full md:w-1/2">
               This site is protected by reCAPTCHA and the Google{" "}
               <a
                 href="https://policies.google.com/privacy"
@@ -165,7 +199,7 @@ export default function ContactForm({ siteKey }: ContactFormProps) {
               variant="default"
               size="default"
               disabled={formState === "submitting"}
-              className="w-full md:w-1/2"
+              className="bg-secondary w-full md:w-1/2"
             >
               {formState === "submitting" ? "Sending..." : "Submit"}
             </Button>
