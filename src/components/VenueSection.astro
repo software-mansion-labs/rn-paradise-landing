@@ -7,6 +7,8 @@ import { getCollection } from "astro:content";
 const venue = await getCollection("venue");
 const venueData = venue[0]?.data;
 
+const eventLocation = venueData?.eventLocation ?? "";
+
 const polaroidImages = venueData?.polaroidCardImages ?? [];
 const carouselImages: string[] = venueData?.carouselImages ?? [];
 
@@ -35,7 +37,7 @@ const venueIcons = [
         <PolaroidPile
           images={polaroidImages}
           stackCount={2}
-          caption="React Native Paradise '25"
+          caption={eventLocation}
           size={1}
           client:load
         />
