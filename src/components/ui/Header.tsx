@@ -8,7 +8,7 @@ const navItems = [
   { name: "About", href: "#about" },
   { name: "Workshops", href: "#workshops" },
   { name: "Venue", href: "#venue" },
-  { name: "Tickets", href: "#tickets" },
+  { name: "Pricing", href: "#pricing" },
   { name: "Previous edition", href: "#previous-edition" },
   { name: "FAQ", href: "#faq" },
 ];
@@ -20,37 +20,6 @@ const Header = React.forwardRef<HTMLElement, HeaderProps>(
 
     const localHeaderRef = useRef<HTMLElement>(null);
     useImperativeHandle(ref, () => localHeaderRef.current!);
-
-    // useEffect(() => {
-    //   const handleScroll = () => {
-    //     const scrollY = window.scrollY;
-    //     setIsScrolled(scrollY > 10);
-
-    //     const headerHeight = localHeaderRef.current?.offsetHeight || 0;
-    //     const triggerPoint = scrollY + headerHeight / 2;
-
-    //     let currentTheme = "dark";
-    //     for (let i = sectionThemes.length - 1; i >= 0; i--) {
-    //       const section = sectionThemes[i];
-    //       const element = document.getElementById(section.id);
-
-    //       if (element) {
-    //         if (triggerPoint >= element.offsetTop) {
-    //           currentTheme = section.theme;
-    //           break;
-    //         }
-    //       }
-    //     }
-    //     setActiveTheme(currentTheme);
-    //   };
-
-    //   handleScroll();
-    //   window.addEventListener("scroll", handleScroll);
-
-    //   return () => {
-    //     window.removeEventListener("scroll", handleScroll);
-    //   };
-    // }, []);
 
     return (
       <header
@@ -69,8 +38,8 @@ const Header = React.forwardRef<HTMLElement, HeaderProps>(
         )}
         {...props}
       >
-        <div className="mx-auto flex h-20 w-full max-w-[1360px] items-center justify-between px-7 sm:px-8">
-          <a href="#hero" className="flex items-center gap-2 pt-15">
+        <div className="mx-auto flex h-16 w-full max-w-[1360px] items-center justify-between px-7 sm:px-8">
+          <a href="#hero" className="flex items-center gap-2 pt-10">
             <img
               src="/assets/logo-swm-white.svg"
               alt="Software Mansion"
@@ -105,9 +74,7 @@ const Header = React.forwardRef<HTMLElement, HeaderProps>(
 
           <div className="flex items-center gap-5 sm:gap-10">
             <a
-              href=""
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#pricing"
               className={cn(
                 "font-aeonik text-md font-normal underline underline-offset-2",
                 activeTheme === "dark"
@@ -115,7 +82,7 @@ const Header = React.forwardRef<HTMLElement, HeaderProps>(
                   : "hover:text-primary/70",
               )}
             >
-              Buy the ticket
+              Book now
             </a>
           </div>
         </div>
