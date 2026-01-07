@@ -1,5 +1,30 @@
 ---
 import ContentWrapper from "@/components/ContentWrapper";
+import TeamCarousel from "@/components/ui/TeamCarousel";
+import { getCollection } from "astro:content";
+
+let members: {
+  name: string;
+  role: string;
+  company?: string;
+  image: string;
+  bio?: string;
+  social?: { twitter?: string; github?: string };
+}[] = [];
+
+try {
+  const teamMembers = await getCollection("team");
+  members = teamMembers.map((entry: any) => ({
+    name: entry.data.name,
+    role: entry.data.role,
+    company: entry.data.company,
+    image: entry.data.image,
+    bio: entry.data.bio,
+    social: entry.data.social,
+  }));
+} catch (error) {
+  console.warn("Team content collection not found");
+}
 ---
 
 <section
@@ -9,8 +34,16 @@ import ContentWrapper from "@/components/ContentWrapper";
   <ContentWrapper
     className="flex w-full flex-col items-center justify-center gap-10 sm:gap-14 md:gap-16"
   >
-    <h2 class="text-primary text-center text-xl/9 font-medium">
-      Meet the team
+    <h2 class="text-primary text-center text-2xl/9 font-medium">
+      Our instructors
     </h2>
+
+    {
+      members.length > 0 && (
+        <div class="w-full">
+          <TeamCarousel members={members} client:load />
+        </div>
+      )
+    }
   </ContentWrapper>
 </section>

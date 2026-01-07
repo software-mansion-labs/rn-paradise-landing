@@ -57,6 +57,9 @@ content:
         label: Role
         type: string
         required: true
+      - name: company
+        label: Company
+        type: string
       - name: bio
         label: Bio
         type: text
