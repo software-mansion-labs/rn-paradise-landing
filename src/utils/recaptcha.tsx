@@ -46,6 +46,19 @@ export const Captcha = forwardRef<CaptchaRef, CaptchaProps>(
     );
 
     useEffect(() => {
+      const waitForRecaptcha = () => {
+        if (
+          window.grecaptcha &&
+          typeof window.grecaptcha.ready === "function"
+        ) {
+          window.grecaptcha.ready(() => {
+            isReadyRef.current = true;
+          });
+        } else {
+          setTimeout(waitForRecaptcha, 100);
+        }
+      };
+
       if (document.getElementById("grecaptcha-script") === null) {
         const script = document.createElement("script");
         script.id = "grecaptcha-script";
@@ -54,16 +67,16 @@ export const Captcha = forwardRef<CaptchaRef, CaptchaProps>(
         script.src = `https://www.google.com/recaptcha/enterprise.js?render=${siteKey}`;
 
         script.onload = () => {
-          window.grecaptcha?.ready(() => {
-            isReadyRef.current = true;
-          });
+          waitForRecaptcha();
+        };
+
+        script.onerror = () => {
+          console.error("Failed to load reCAPTCHA script");
         };
 
         document.body.appendChild(script);
       } else {
-        window.grecaptcha?.ready(() => {
-          isReadyRef.current = true;
-        });
+        waitForRecaptcha();
       }
 
       return () => {
