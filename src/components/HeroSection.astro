@@ -1,14 +1,129 @@
 ---
 import ContentWrapper from "@/components/ContentWrapper";
+import { getEntry } from "astro:content";
+import EditionBadge from "@/components/EditionBadge";
+import { Button } from "@/components/ui/button";
+
+const heroData = await getEntry("hero", "hero");
+const generalData = await getEntry("general", "general");
+
+const eventDate = heroData?.data.eventDate || "";
+const eventLocation = heroData?.data.eventLocation || "";
+const editionNumber = generalData?.data.editionNumber || "";
 ---
 
 <section
   id="hero"
-  class="bg-sea-blue relative flex w-full scroll-m-5 flex-col items-center justify-center overflow-hidden pt-36 pb-40"
+  class="relative flex w-full scroll-m-5 flex-col items-center justify-center overflow-visible pb-32"
 >
-  <ContentWrapper
-    className="flex w-full flex-col items-center justify-center gap-10 sm:gap-14 md:gap-16"
+  {/* Background */}
+  <div
+    class="hero-bg absolute inset-0"
+    style="background-image: url('/assets/hero-bg.jpg'); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; height: calc(100% + 128px);"
   >
-    <h2 class="text-primary text-center text-xl/9 font-medium">HERO</h2>
-  </ContentWrapper>
+  </div>
+
+  {/* Hero content */}
+  <div
+    class="relative z-10 flex w-full flex-col items-center justify-center pt-34 pb-40"
+  >
+    <ContentWrapper
+      className="flex w-full flex-col items-center justify-center"
+    >
+      <p class="text-primary/80 mb-4 text-center text-sm sm:text-base">
+        Software Mansion Presents:
+      </p>
+
+      <div class="relative">
+        <h1
+          class="text-primary relative z-2 text-center text-4xl font-medium sm:text-5xl md:text-6xl lg:text-7xl"
+        >
+          <span class="block text-white">React Native</span>
+          <span
+            class="text-primary font-cookie block -translate-x-4 -translate-y-7 text-[104px] font-normal whitespace-nowrap italic"
+            >Paradise</span
+          >
+        </h1>
+        {
+          editionNumber && (
+            <EditionBadge
+              editionNumber={editionNumber}
+              className="bottom-7 -right-11 z-1"
+              variant="default"
+              size="sm"
+            />
+          )
+        }
+      </div>
+
+      <div
+        class="-mt-2 flex max-w-[80%] flex-col items-center justify-center gap-12 sm:max-w-[80%] md:max-w-[45%] lg:max-w-[30%]"
+      >
+        <div class="flex flex-col items-center justify-center gap-4">
+          <p
+            class="text-primary/80 text-center text-sm leading-relaxed sm:text-base md:max-w-2xl"
+          >
+            Join our advanced React Native workshops with core contributors – in
+            the best learning environment possible.
+          </p>
+
+          <div class="flex flex-col items-center gap-2.5 sm:flex-row sm:gap-4">
+            {
+              eventDate && (
+                <div class="text-primary/80 flex items-center gap-2 text-sm">
+                  <img
+                    src={"/assets/Calendar.svg"}
+                    alt={"calendar"}
+                    class="h-5 w-5"
+                  />
+                  <span>{eventDate}</span>
+                </div>
+              )
+            }
+            {
+              eventLocation && (
+                <div class="text-primary/80 flex items-center gap-2 text-sm">
+                  <img
+                    src={"/assets/MapPin.svg"}
+                    alt={"map pin"}
+                    class="h-5 w-5"
+                  />
+                  <span>{eventLocation}</span>
+                </div>
+              )
+            }
+          </div>
+        </div>
+
+        <Button variant="secondary" size="lg">
+          <a href="#pricing">Book now</a>
+        </Button>
+      </div>
+
+      <div class="mt-15 flex flex-col items-center">
+        <img
+          src={"/assets/HeroArrow.svg"}
+          alt={"arrow"}
+          class="h-full w-full"
+        />
+      </div>
+    </ContentWrapper>
+  </div>
+</section>
+
+<section
+  id="what-can-you-expect"
+  class="relative -mt-32 flex w-full scroll-m-5 flex-col items-center justify-center overflow-visible bg-transparent"
+>
+  <div
+    class="bg-yellow relative z-10 w-full rounded-t-[64px] py-18 sm:py-24 md:py-28 lg:py-36"
+  >
+    <ContentWrapper
+      className="flex w-full flex-col items-center justify-center"
+    >
+      <h2 class="text-primary text-center text-2xl/9 font-medium">
+        What can you expect?
+      </h2>
+    </ContentWrapper>
+  </div>
 </section>

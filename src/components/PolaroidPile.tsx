@@ -1,25 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-
-const getOrdinalIndicator = (num: number): string => {
-  const lastDigit = num % 10;
-  const lastTwoDigits = num % 100;
-
-  if (lastTwoDigits >= 11 && lastTwoDigits <= 13) {
-    return `${num}th`;
-  }
-
-  switch (lastDigit) {
-    case 1:
-      return `${num}st`;
-    case 2:
-      return `${num}nd`;
-    case 3:
-      return `${num}rd`;
-    default:
-      return `${num}th`;
-  }
-};
+import EditionBadge from "@/components/EditionBadge";
 
 interface PolaroidPileProps {
   images: string[];
@@ -150,14 +131,12 @@ export default function PolaroidPile({
       )}
       {/* Edition Number Badge*/}
       {editionNumber && isMain && (
-        <div className="bg-badge-yellow absolute top-[-7%] left-[-14%] z-50 flex h-20 w-20 rotate-[10deg] items-center justify-center rounded-full shadow-md sm:h-24 sm:w-24 md:h-28 md:w-28">
-          <div className="flex flex-col items-center justify-center gap-0">
-            <span className="text-primary text-xl leading-none">
-              {getOrdinalIndicator(parseInt(editionNumber) - 1)}
-            </span>
-            <span className="text-primary text-xs leading-none">edition</span>
-          </div>
-        </div>
+        <EditionBadge
+          editionNumber={editionNumber}
+          className="top-[-7%] left-[-14%] z-50"
+          size="md"
+          variant="secondary"
+        />
       )}
     </div>
   );

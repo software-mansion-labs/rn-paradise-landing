@@ -45,6 +45,18 @@ export default defineConfig({
           },
         ],
       },
+      {
+        cssVariable: "--font-cookie",
+        name: "Cookie",
+        provider: "local",
+        variants: [
+          {
+            src: ["./public/fonts/cookie/cookie-regular.ttf"],
+            style: "normal",
+            weight: 400,
+          },
+        ],
+      },
     ],
   },
 });

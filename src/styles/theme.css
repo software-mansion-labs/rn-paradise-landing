@@ -6,6 +6,7 @@
   --breakpoint-2xl: initial;
 
   --font-primary: var(--font-aeonik), "sans-serif";
+  --font-cookie: "Cookie", cursive;
 
   --text-2xs: 14px;
   --text-2xs--line-height: 18px;
@@ -37,6 +38,9 @@
   /* Brand Accents */
   --color-brand-sea-blue-20: #e1f3fa;
   --color-brand-yellow-20: #fffae1;
+  /* #F6F2E5
+  #FCFAF1
+  #FFFAF0 */
 
   /* Base */
   --color-white: #ffffff;
