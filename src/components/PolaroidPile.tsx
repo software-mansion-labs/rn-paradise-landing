@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import EditionBadge from "@/components/EditionBadge";
+import PolaroidCard from "@/components/PolaroidCard";
 
 interface PolaroidPileProps {
   images: string[];
@@ -88,59 +89,6 @@ export default function PolaroidPile({
     ];
   }
 
-  const PolaroidCard = ({
-    image,
-    isMain = false,
-    zIndex = 50,
-    editionNumber,
-  }: {
-    image?: string;
-    isMain?: boolean;
-    index?: number;
-    zIndex?: number;
-    editionNumber?: string;
-  }) => (
-    <div
-      className={cn(
-        "relative h-full w-70 sm:w-75 md:w-115",
-        isMain && "transition-transform duration-300 hover:scale-105",
-      )}
-      style={{ zIndex }}
-    >
-      <img
-        src="/assets/polaroid-frame.svg"
-        alt="Polaroid Frame"
-        className={cn(
-          "h-full w-full object-contain",
-          isMain ? "drop-shadow-2xl" : "drop-shadow-lg",
-        )}
-        aria-hidden={!isMain}
-      />
-      {image && (
-        <img
-          src={image}
-          alt={isMain ? "Previous edition photo" : ""}
-          className="absolute top-[3.5%] left-[3.5%] h-[83%] w-[93%] object-cover"
-          aria-hidden={!isMain}
-        />
-      )}
-      {caption && isMain && (
-        <p className="text-primary text-2xs absolute bottom-[4%] left-1/2 min-w-[220px] -translate-x-1/2 px-4 text-center font-medium whitespace-nowrap sm:text-sm md:bottom-[5%]">
-          {caption}
-        </p>
-      )}
-      {/* Edition Number Badge*/}
-      {editionNumber && isMain && (
-        <EditionBadge
-          editionNumber={editionNumber}
-          className="top-[-7%] left-[-14%] z-50"
-          size="md"
-          variant="secondary"
-        />
-      )}
-    </div>
-  );
-
   return (
     <div className={cn("relative w-full max-w-xl md:max-w-2xl", className)}>
       <div
@@ -169,7 +117,7 @@ export default function PolaroidPile({
                 zIndex,
               }}
             >
-              <PolaroidCard image={image} index={index} zIndex={zIndex} />
+              <PolaroidCard image={image} isMain={false} zIndex={zIndex} />
             </div>
           );
         })}
@@ -184,12 +132,23 @@ export default function PolaroidPile({
             zIndex: stackCount + 1,
           }}
         >
-          <PolaroidCard
-            image={mainImage}
-            isMain
-            zIndex={stackCount}
-            editionNumber={editionNumber}
-          />
+          <div className="relative">
+            <PolaroidCard
+              image={mainImage}
+              caption={caption}
+              isMain={true}
+              zIndex={stackCount}
+            />
+            {/* Edition Number Badge*/}
+            {editionNumber && (
+              <EditionBadge
+                editionNumber={editionNumber}
+                className="absolute top-[-7%] left-[-14%] z-50"
+                size="md"
+                variant="secondary"
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>
