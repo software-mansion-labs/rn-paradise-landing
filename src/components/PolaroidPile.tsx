@@ -10,7 +10,7 @@ interface PolaroidPileProps {
   className?: string;
   size?: number;
   rotationDirection?: "left" | "right";
-  editionNumber?: string;
+  editionNumber?: number;
 }
 
 export default function PolaroidPile({

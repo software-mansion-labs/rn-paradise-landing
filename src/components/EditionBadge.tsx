@@ -21,7 +21,7 @@ const getOrdinalIndicator = (num: number): string => {
 };
 
 interface EditionBadgeProps {
-  editionNumber: string;
+  editionNumber: number;
   variant?: "default" | "secondary";
   size?: "sm" | "md" | "lg";
   className?: string;
@@ -72,7 +72,7 @@ export default function EditionBadge({
     >
       <div className="flex flex-col items-center justify-center gap-0">
         <span className={cn(textSizeClasses[size].number)}>
-          {getOrdinalIndicator(parseInt(editionNumber))}
+          {getOrdinalIndicator(editionNumber)}
         </span>
         <span className={cn(textSizeClasses[size].label)}>edition</span>
       </div>

@@ -9,7 +9,7 @@ const generalData = await getEntry("general", "general");
 
 const eventDate = heroData?.data.eventDate || "";
 const eventLocation = heroData?.data.eventLocation || "";
-const editionNumber = generalData?.data.editionNumber || "";
+const editionNumber = parseInt(generalData?.data.editionNumber || "2");
 
 const featureCardIcons = [
   "assets/hero-icons/ReactNative.svg",

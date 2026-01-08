@@ -12,7 +12,7 @@ const generalData = generalEntry?.data;
 
 const polaroidImages = previousEdition?.data.polaroidCardImages ?? [];
 const carouselImages: string[] = previousEdition?.data.carouselImages ?? [];
-const editionNumber = generalData?.editionNumber;
+const editionNumber = parseInt(generalData?.editionNumber ?? "2");
 ---
 
 <section
@@ -45,7 +45,7 @@ const editionNumber = generalData?.editionNumber;
           caption="React Native Paradise '25"
           size={1}
           rotationDirection="right"
-          editionNumber={editionNumber}
+          editionNumber={editionNumber - 1}
           client:load
         />
       </div>
