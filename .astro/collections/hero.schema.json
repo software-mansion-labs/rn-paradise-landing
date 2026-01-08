@@ -10,9 +10,6 @@
         "eventLocation": {
           "type": "string"
         },
-        "eventLocation2": {
-          "type": "string"
-        },
         "polaroidCardImages": {
           "type": "array",
           "items": {
@@ -26,7 +23,6 @@
       "required": [
         "eventDate",
         "eventLocation",
-        "eventLocation2",
         "polaroidCardImages"
       ],
       "additionalProperties": false

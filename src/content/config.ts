@@ -5,7 +5,6 @@ const generalCollection = defineCollection({
   schema: z.object({
     editionNumber: z.string(),
     editionYear: z.string(),
-    buyTicketUrl: z.string(),
   }),
 });
 
@@ -14,7 +13,6 @@ const heroCollection = defineCollection({
   schema: z.object({
     eventDate: z.string(),
     eventLocation: z.string(),
-    eventLocation2: z.string(),
     polaroidCardImages: z.array(z.string()),
   }),
 });

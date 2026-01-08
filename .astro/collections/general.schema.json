@@ -10,17 +10,13 @@
         "editionYear": {
           "type": "string"
         },
-        "buyTicketUrl": {
-          "type": "string"
-        },
         "$schema": {
           "type": "string"
         }
       },
       "required": [
         "editionNumber",
-        "editionYear",
-        "buyTicketUrl"
+        "editionYear"
       ],
       "additionalProperties": false
     }

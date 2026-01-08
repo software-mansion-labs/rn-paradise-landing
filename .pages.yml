@@ -16,10 +16,6 @@ content:
         label: EditionYear
         type: string
         required: true
-      - name: buyTicketUrl
-        label: BuyTicketUrl
-        type: string
-        required: true
 
   - name: hero
     label: Hero Section
@@ -32,10 +28,6 @@ content:
         required: true
       - name: eventLocation
         label: EventLocation
-        type: string
-        required: true
-      - name: eventLocation2
-        label: EventLocation2
         type: string
         required: true
       - name: polaroidCardImages
