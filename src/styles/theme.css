@@ -38,9 +38,6 @@
   /* Brand Accents */
   --color-brand-sea-blue-20: #e1f3fa;
   --color-brand-yellow-20: #fffae1;
-  /* #F6F2E5
-  #FCFAF1
-  #FFFAF0 */
 
   /* Base */
   --color-white: #ffffff;
@@ -86,7 +83,8 @@
 
   --color-tertiary: var(--color-swm-brand-40);
 
-  --color-yellow: var(--color-brand-yellow-20);
+  /* --color-yellow: var(--color-brand-yellow-20); */
+  --color-yellow: #fcfaf1;
   --color-sea-blue: var(--color-brand-sea-blue-20);
 
   --color-badge-yellow: #ffe572;
