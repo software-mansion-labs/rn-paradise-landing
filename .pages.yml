@@ -35,6 +35,34 @@ content:
         type: image
         list: true
         required: true
+      - name: featureCards
+        label: Feature Cards
+        type: object
+        list: true
+        fields:
+          - name: text
+            label: Text
+            type: text
+            required: true
+          - name: order
+            label: Order
+            type: number
+      - name: polaroidGallery
+        label: Polaroid Gallery
+        type: object
+        list: true
+        fields:
+          - name: image
+            label: Image
+            type: image
+            required: true
+          - name: caption
+            label: Caption
+            type: string
+            required: true
+          - name: order
+            label: Order
+            type: number
 
   - name: team
     label: Team Members

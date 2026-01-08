@@ -1,0 +1,102 @@
+---
+import ContentWrapper from "@/components/ContentWrapper";
+import { getEntry } from "astro:content";
+import PolaroidCard from "@/components/PolaroidCard";
+import { parseToHtml } from "@/utils/textParser";
+
+const heroData = await getEntry("hero", "hero");
+
+const featureCardIcons = [
+  "assets/hero-icons/ReactNative.svg",
+  "assets/hero-icons/People.svg",
+  "assets/hero-icons/House.svg",
+];
+
+const featureCards = (heroData?.data.featureCards || [])
+  .map((card: any) => ({
+    text: card.text || "",
+    order: typeof card.order === "number" ? card.order : 999,
+  }))
+  .sort((a: any, b: any) => a.order - b.order)
+  .map(({ order, ...rest }: any, index: number) => ({
+    ...rest,
+    icon: featureCardIcons[index] || featureCardIcons[0],
+  }));
+
+const polaroidGalleryRotations = [-10, -0, 12, -5];
+
+const polaroidGallery = (heroData?.data.polaroidGallery || [])
+  .map((item: any) => ({
+    image: item.image || "",
+    caption: item.caption || "",
+    order: typeof item.order === "number" ? item.order : 999,
+  }))
+  .sort((a: any, b: any) => a.order - b.order)
+  .map(({ order, ...rest }: any) => rest);
+---
+
+<section
+  id="what-can-you-expect"
+  class="relative -mt-32 flex w-full scroll-m-5 flex-col items-center justify-center overflow-visible bg-transparent"
+>
+  <div
+    class="relative z-10 w-full rounded-t-[64px] bg-[#F6F2E5] pt-18 pb-12 sm:pt-24 sm:pb-18 md:pt-28 md:pb-32 lg:pt-32 lg:pb-40"
+  >
+    <ContentWrapper
+      className="flex w-full flex-col items-center justify-center"
+    >
+      <h2 class="text-primary mb-20 text-center text-2xl/9 font-medium">
+        What can you expect?
+      </h2>
+
+      {/* Feature Cards */}
+      <div class="mb-12 grid w-full grid-cols-1 gap-4 md:grid-cols-3 md:gap-4">
+        {
+          featureCards.map((card, index) => (
+            <div class="flex flex-col items-start gap-4 rounded-lg bg-white px-10 pt-6 pb-10 shadow-sm">
+              <div class="bg-badge-yellow flex h-14 w-14 items-center justify-center rounded-full text-2xl">
+                <img src={card.icon} alt={"calendar"} class="h-6 w-6" />
+              </div>
+              <p
+                class="text-primary self-center text-sm leading-relaxed"
+                set:html={parseToHtml(card.text)}
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      {/* Polaroid Gallery */}
+      <div class="relative flex w-full items-center justify-center">
+        <div
+          class="relative mx-auto flex max-w-[1200px] items-center justify-center"
+        >
+          {
+            polaroidGallery.map((polaroid, index) => {
+              const translateY = index % 2 === 0 ? -10 : 10;
+              const zIndex = polaroidGallery.length - index;
+
+              const scale = 0.66;
+              return (
+                <div
+                  class="relative -mx-20 -my-10"
+                  style={`transform: rotate(${polaroidGalleryRotations[index]}deg) translateY(${translateY}px) scale(${scale}); z-index: ${zIndex}; transform-origin: center center;`}
+                >
+                  <PolaroidCard
+                    image={
+                      polaroid.image || "/media/previous-section-carousel-2.png"
+                    }
+                    caption={polaroid.caption}
+                    isMain={true}
+                    zIndex={zIndex}
+                    client:load
+                  />
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+    </ContentWrapper>
+  </div>
+</section>

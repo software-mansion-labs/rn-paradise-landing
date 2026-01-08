@@ -14,6 +14,19 @@ const heroCollection = defineCollection({
     eventDate: z.string(),
     eventLocation: z.string(),
     polaroidCardImages: z.array(z.string()),
+    featureCards: z.array(
+      z.object({
+        text: z.string(),
+        order: z.number().optional(),
+      }),
+    ),
+    polaroidGallery: z.array(
+      z.object({
+        image: z.string(),
+        caption: z.string(),
+        order: z.number().optional(),
+      }),
+    ),
   }),
 });
 

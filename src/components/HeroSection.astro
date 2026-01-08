@@ -10,6 +10,12 @@ const generalData = await getEntry("general", "general");
 const eventDate = heroData?.data.eventDate || "";
 const eventLocation = heroData?.data.eventLocation || "";
 const editionNumber = generalData?.data.editionNumber || "";
+
+const featureCardIcons = [
+  "assets/hero-icons/ReactNative.svg",
+  "assets/hero-icons/People.svg",
+  "assets/hero-icons/House.svg",
+];
 ---
 
 <section
@@ -107,23 +113,6 @@ const editionNumber = generalData?.data.editionNumber || "";
           class="h-full w-full"
         />
       </div>
-    </ContentWrapper>
-  </div>
-</section>
-
-<section
-  id="what-can-you-expect"
-  class="relative -mt-32 flex w-full scroll-m-5 flex-col items-center justify-center overflow-visible bg-transparent"
->
-  <div
-    class="bg-yellow relative z-10 w-full rounded-t-[64px] py-18 sm:py-24 md:py-28 lg:py-36"
-  >
-    <ContentWrapper
-      className="flex w-full flex-col items-center justify-center"
-    >
-      <h2 class="text-primary text-center text-2xl/9 font-medium">
-        What can you expect?
-      </h2>
     </ContentWrapper>
   </div>
 </section>
