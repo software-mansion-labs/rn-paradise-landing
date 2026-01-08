@@ -240,6 +240,14 @@ declare module 'astro:content' {
   rendered?: RenderedContent;
   filePath?: string;
 }>;
+"whatCanYouExpect": Record<string, {
+  id: string;
+  body?: string;
+  collection: "whatCanYouExpect";
+  data: InferEntrySchema<"whatCanYouExpect">;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
 
 	};
 

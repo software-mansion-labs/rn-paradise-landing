@@ -30,11 +30,12 @@ content:
         label: EventLocation
         type: string
         required: true
-      - name: polaroidCardImages
-        label: PolaroidCard Images
-        type: image
-        list: true
-        required: true
+
+  - name: whatCanYouExpect
+    label: What Can You Expect Section
+    type: file
+    path: src/content/whatCanYouExpect/whatCanYouExpect.yaml
+    fields:
       - name: featureCards
         label: Feature Cards
         type: object

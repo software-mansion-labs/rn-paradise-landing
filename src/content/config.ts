@@ -13,7 +13,12 @@ const heroCollection = defineCollection({
   schema: z.object({
     eventDate: z.string(),
     eventLocation: z.string(),
-    polaroidCardImages: z.array(z.string()),
+  }),
+});
+
+const whatCanYouExpectCollection = defineCollection({
+  type: "data",
+  schema: z.object({
     featureCards: z.array(
       z.object({
         text: z.string(),
@@ -103,6 +108,7 @@ const contactCollection = defineCollection({
 export const collections = {
   general: generalCollection,
   hero: heroCollection,
+  whatCanYouExpect: whatCanYouExpectCollection,
   team: teamCollection,
   venue: venueCollection,
   tickets: ticketsCollection,

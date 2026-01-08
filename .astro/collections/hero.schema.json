@@ -10,62 +10,13 @@
         "eventLocation": {
           "type": "string"
         },
-        "polaroidCardImages": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "featureCards": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string"
-              },
-              "order": {
-                "type": "number"
-              }
-            },
-            "required": [
-              "text"
-            ],
-            "additionalProperties": false
-          }
-        },
-        "polaroidGallery": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "image": {
-                "type": "string"
-              },
-              "caption": {
-                "type": "string"
-              },
-              "order": {
-                "type": "number"
-              }
-            },
-            "required": [
-              "image",
-              "caption"
-            ],
-            "additionalProperties": false
-          }
-        },
         "$schema": {
           "type": "string"
         }
       },
       "required": [
         "eventDate",
-        "eventLocation",
-        "polaroidCardImages",
-        "featureCards",
-        "polaroidGallery"
+        "eventLocation"
       ],
       "additionalProperties": false
     }
