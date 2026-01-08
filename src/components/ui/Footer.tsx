@@ -7,35 +7,35 @@ export interface FooterProps extends React.HTMLAttributes<HTMLElement> {}
 
 const socials = [
   {
-    icon: "twitter",
+    icon: "assets/socials/twitter.svg",
     href: "https://twitter.com/swmansion",
   },
   {
-    icon: "facebook",
+    icon: "assets/socials/facebook.svg",
     href: "https://www.facebook.com/SoftwareMansion/",
   },
   {
-    icon: "github",
+    icon: "assets/socials/github.svg",
     href: "https://github.com/software-mansion",
   },
   {
-    icon: "instagram",
+    icon: "assets/socials/instagram.svg",
     href: "https://www.instagram.com/swmansion/",
   },
   {
-    icon: "youtube",
+    icon: "assets/socials/youtube.svg",
     href: "https://www.youtube.com/c/SoftwareMansion",
   },
   {
-    icon: "linkedin",
+    icon: "assets/socials/linkedin.svg",
     href: "https://www.linkedin.com/company/software-mansion/",
   },
   {
-    icon: "dribble",
+    icon: "assets/socials/dribble.svg",
     href: "https://dribbble.com/softwaremansion",
   },
   {
-    icon: "discord",
+    icon: "assets/socials/discord.svg",
     href: "https://discord.com/invite/2gjSqPQc9Q",
   },
 ];
@@ -77,7 +77,7 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
                       className="flex h-6 w-6 transform items-center justify-center rounded-full transition-all duration-300 ease-in-out hover:scale-120 hover:opacity-60 md:h-9 md:w-9"
                     >
                       <img
-                        src={`/assets/${icon}.svg`}
+                        src={icon}
                         className="h-3 w-3 md:h-6 md:w-6"
                         alt={`${icon} icon`}
                         width="16"

@@ -112,7 +112,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
         <div className="flex w-full flex-col gap-8 pl-0 md:w-1/2 md:justify-between md:pl-8">
           <div className="flex justify-end">
             <img
-              src="/assets/logo-znaczek.png"
+              src="/assets/logo-with-stamp.png"
               alt="React Native Paradise Logo"
               className="h-20 w-auto md:h-32"
             />

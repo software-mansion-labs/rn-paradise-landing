@@ -70,7 +70,7 @@ export default function TeamMemberCard({
                 aria-label={`${name}'s Twitter`}
               >
                 <img
-                  src="/assets/twitter-black.svg"
+                  src="/assets/socials/twitter-black.svg"
                   alt="Twitter"
                   className="h-6 w-6"
                 />
@@ -85,7 +85,7 @@ export default function TeamMemberCard({
                 aria-label={`${name}'s GitHub`}
               >
                 <img
-                  src="/assets/github-black.svg"
+                  src="/assets/socials/github-black.svg"
                   alt="GitHub"
                   className="h-6 w-6"
                 />
