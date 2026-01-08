@@ -1,20 +1,24 @@
 featureCards:
-  - text: "<b>Week-long, hands-on workshop</b> where you'll learn key elements of building apps in React Native."
+  - text: <b>Week-long, hands-on workshop</b> where you'll learn key elements of
+      building apps in React Native.
     order: 1
-  - text: "<b>Small groups</b> with developers from <ua href='https://swmansion.com'>Software Mansion</ua> who contribute to the ecosystem every day and know the tools inside out."
+  - text: <b>Small groups</b> with developers from <ua
+      href='https://swmansion.com'>Software Mansion</ua> who contribute to the
+      ecosystem every day and know the tools inside out.
     order: 2
-  - text: "Workshop in a <b>seaside villa in Vir, Croatia</b> – a calm, comfortable place to focus, share ideas, and relax after the sessions."
+  - text: Workshop in a <b>seaside villa in Vir, Croatia</b> – a calm, comfortable
+      place to focus, share ideas, and relax after the sessions.
     order: 3
 polaroidGallery:
-  - image: ""
-    caption: "Hands-on workshops with experts"
+  - image: /media/what-can-you-expect-1.webp
+    caption: Hands-on workshops with experts
     order: 1
-  - image: ""
-    caption: "A beautiful & relaxing villa in Croatia"
+  - image: /media/what-can-you-expect-2.webp
+    caption: A beautiful & relaxing villa in Croatia
     order: 2
-  - image: ""
-    caption: "Networking with like-minded developers"
+  - image: /media/what-can-you-expect-3.webp
+    caption: Networking with like-minded developers
     order: 3
-  - image: ""
-    caption: "Unforgettable learning experience"
+  - image: /media/what-can-you-expect-4.webp
+    caption: Unforgettable learning experience
     order: 4
