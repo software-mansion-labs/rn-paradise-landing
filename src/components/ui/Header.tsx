@@ -8,7 +8,7 @@ const navItems = [
   { name: "About", href: "#about" },
   { name: "Workshops", href: "#workshops" },
   { name: "Venue", href: "#venue" },
-  { name: "Pricing", href: "#pricing" },
+  { name: "Instructors", href: "#team" },
   { name: "Previous edition", href: "#previous-edition" },
   { name: "FAQ", href: "#faq" },
 ];
@@ -74,7 +74,7 @@ const Header = React.forwardRef<HTMLElement, HeaderProps>(
 
           <div className="flex items-center gap-5 sm:gap-10">
             <a
-              href="#pricing"
+              href="#reservation"
               className={cn(
                 "font-aeonik text-md font-normal underline underline-offset-2",
                 activeTheme === "dark"
