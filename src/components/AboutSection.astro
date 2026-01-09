@@ -4,10 +4,7 @@ import { getEntry } from "astro:content";
 import PolaroidCard from "@/components/PolaroidCard";
 import { parseToHtml } from "@/utils/textParser";
 
-const whatCanYouExpectData = await getEntry(
-  "whatCanYouExpect",
-  "whatCanYouExpect"
-);
+const aboutData = await getEntry("about", "about");
 
 const featureCardIcons = [
   "assets/hero-icons/ReactNative.svg",
@@ -15,7 +12,7 @@ const featureCardIcons = [
   "assets/hero-icons/House.svg",
 ];
 
-const featureCards = (whatCanYouExpectData?.data.featureCards || [])
+const featureCards = (aboutData?.data.featureCards || [])
   .map((card: any) => ({
     text: card.text || "",
     order: typeof card.order === "number" ? card.order : 999,
@@ -28,7 +25,7 @@ const featureCards = (whatCanYouExpectData?.data.featureCards || [])
 
 const polaroidGalleryRotations = [-10, -0, 12, -5];
 
-const polaroidGallery = (whatCanYouExpectData?.data.polaroidGallery || [])
+const polaroidGallery = (aboutData?.data.polaroidGallery || [])
   .map((item: any) => ({
     image: item.image || "",
     caption: item.caption || "",

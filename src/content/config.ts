@@ -16,7 +16,7 @@ const heroCollection = defineCollection({
   }),
 });
 
-const whatCanYouExpectCollection = defineCollection({
+const aboutCollection = defineCollection({
   type: "data",
   schema: z.object({
     featureCards: z.array(
@@ -108,7 +108,7 @@ const contactCollection = defineCollection({
 export const collections = {
   general: generalCollection,
   hero: heroCollection,
-  whatCanYouExpect: whatCanYouExpectCollection,
+  about: aboutCollection,
   team: teamCollection,
   venue: venueCollection,
   tickets: ticketsCollection,

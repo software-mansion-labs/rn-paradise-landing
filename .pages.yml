@@ -31,10 +31,10 @@ content:
         type: string
         required: true
 
-  - name: whatCanYouExpect
+  - name: about
     label: What Can You Expect Section
     type: file
-    path: src/content/whatCanYouExpect/whatCanYouExpect.yaml
+    path: src/content/about/about.yaml
     fields:
       - name: featureCards
         label: Feature Cards

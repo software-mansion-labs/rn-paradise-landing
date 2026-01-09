@@ -1,7 +1,7 @@
 {
-  "$ref": "#/definitions/whatCanYouExpect",
+  "$ref": "#/definitions/about",
   "definitions": {
-    "whatCanYouExpect": {
+    "about": {
       "type": "object",
       "properties": {
         "featureCards": {
@@ -16,9 +16,7 @@
                 "type": "number"
               }
             },
-            "required": [
-              "text"
-            ],
+            "required": ["text"],
             "additionalProperties": false
           }
         },
@@ -37,10 +35,7 @@
                 "type": "number"
               }
             },
-            "required": [
-              "image",
-              "caption"
-            ],
+            "required": ["image", "caption"],
             "additionalProperties": false
           }
         },
@@ -48,10 +43,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "featureCards",
-        "polaroidGallery"
-      ],
+      "required": ["featureCards", "polaroidGallery"],
       "additionalProperties": false
     }
   },

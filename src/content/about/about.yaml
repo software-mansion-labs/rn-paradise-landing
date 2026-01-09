@@ -6,19 +6,20 @@ featureCards:
       href='https://swmansion.com'>Software Mansion</ua> who contribute to the
       ecosystem every day and know the tools inside out.
     order: 2
-  - text: Workshop in a <b>seaside villa in Vir, Croatia</b> – a calm, comfortable
+  - text:
+      Workshop in a <b>seaside villa in Vir, Croatia</b> – a calm, comfortable
       place to focus, share ideas, and relax after the sessions.
     order: 3
 polaroidGallery:
-  - image: /media/what-can-you-expect-1.webp
+  - image: /media/about-img-1.webp
     caption: Hands-on workshops with experts
     order: 1
-  - image: /media/what-can-you-expect-2.webp
+  - image: /media/about-img-2.webp
     caption: A beautiful & relaxing villa in Croatia
     order: 2
-  - image: /media/what-can-you-expect-3.webp
+  - image: /media/about-img-3.webp
     caption: Networking with like-minded developers
     order: 3
-  - image: /media/what-can-you-expect-4.webp
+  - image: /media/about-img-4.webp
     caption: Unforgettable learning experience
     order: 4
