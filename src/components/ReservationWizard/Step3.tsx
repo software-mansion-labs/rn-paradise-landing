@@ -1,4 +1,4 @@
-import { useReservationStore, dateOptions } from "@/stores/reservationStore";
+import { useReservationStore } from "@/stores/reservationStore";
 import { Button } from "@/components/ui/button";
 import { Info } from "lucide-react";
 
@@ -11,6 +11,7 @@ export function Step3({ onSubmit }: Step3Props) {
     selectedDates,
     rooms,
     selectedRoomId,
+    dateOptions,
     personalDetails,
     accommodationNotes,
     setCurrentStep,

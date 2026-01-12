@@ -199,3 +199,64 @@ content:
         label: Discord URL
         type: string
         required: true
+
+  - name: reservation
+    label: Reservation
+    type: file
+    path: src/content/reservation/reservation.yaml
+    fields:
+      - name: dateOptions
+        label: Date Options
+        type: object
+        list: true
+        fields:
+          - name: id
+            label: ID
+            type: string
+            required: true
+          - name: label
+            label: Label
+            type: string
+            required: true
+          - name: available
+            label: Available
+            type: boolean
+            required: true
+      - name: rooms
+        label: Rooms
+        type: object
+        list: true
+        fields:
+          - name: id
+            label: ID
+            type: string
+            required: true
+          - name: name
+            label: Name
+            type: string
+            required: true
+          - name: descriptions
+            label: Descriptions
+            type: string
+            list: true
+            required: true
+          - name: price
+            label: Price
+            type: number
+          - name: people_count
+            label: People Count
+            type: number
+      - name: dateRoomAvailability
+        label: Date Room Availability
+        type: object
+        list: true
+        fields:
+          - name: dateId
+            label: Date ID
+            type: string
+            required: true
+          - name: availableRoomIds
+            label: Available Room IDs
+            type: string
+            list: true
+            required: true

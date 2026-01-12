@@ -32,37 +32,6 @@ export interface ReservationData {
   accommodationNotes: string;
 }
 
-export const dateOptions: DateOption[] = [
-  { id: "date1", label: "26.04-3.05.2026", available: true },
-  { id: "date2", label: "3.05-10.05.2026", available: true },
-  { id: "date3", label: "10.05-17.05.2026", available: true },
-];
-
-export const dateRoomAvailability: DateRoomAvailability[] = [
-  {
-    dateId: "date1",
-    availableRoomIds: [
-      // "private-bedroom-shared",
-      // "private-bedroom-private-apartment",
-      // "whole-apartment-two-bedrooms",
-      // "individual-offer-group",
-    ],
-  },
-  {
-    dateId: "date2",
-    availableRoomIds: [
-      "private-bedroom-shared",
-      "private-bedroom-private-apartment",
-      "whole-apartment-two-bedrooms",
-      "individual-offer-group",
-    ],
-  },
-  {
-    dateId: "date3",
-    availableRoomIds: ["private-bedroom-shared", "individual-offer-group"],
-  },
-];
-
 interface ReservationState {
   currentStep: number;
   selectedDates: string[];
@@ -70,64 +39,27 @@ interface ReservationState {
   selectedRoomId: string | null;
   personalDetails: PersonalDetails;
   accommodationNotes: string;
+  dateOptions: DateOption[];
+  dateRoomAvailability: DateRoomAvailability[];
   setCurrentStep: (step: number) => void;
   setSelectedDates: (dates: string[]) => void;
   toggleRoom: (roomId: string) => void;
   updatePersonalDetails: (details: Partial<PersonalDetails>) => void;
   setAccommodationNotes: (notes: string) => void;
+  initializeFromCMS: (data: {
+    dateOptions: DateOption[];
+    rooms: Omit<Room, "selected">[];
+    dateRoomAvailability: DateRoomAvailability[];
+  }) => void;
   reset: () => void;
 }
 
-const defaultRooms: Room[] = [
-  {
-    id: "private-bedroom-shared",
-    name: "Private bedroom in a shared apartment ",
-    descriptions: [
-      "A 7-night stay in a private bedroom in a two-bedroom apartment.",
-      "Shared bathroom and fully equipped kitchen (shared with 1 other guest).",
-      "All meals and drinks included (breakfast, lunch, dinner, soft drinks).",
-      "Access to workshops.",
-    ],
+const createRoomsFromCMS = (cmsRooms: Omit<Room, "selected">[]): Room[] => {
+  return cmsRooms.map((room) => ({
+    ...room,
     selected: false,
-    price: 1800,
-    people_count: 1,
-  },
-  {
-    id: "private-bedroom-private-apartment",
-    name: "Private bedroom with a private apartment",
-    descriptions: [
-      "A 7-night stay in a private bedroom in your own apartment.",
-      "Private bathroom and fully equipped kitchen.",
-      "All meals and drinks included (breakfast, lunch, dinner, soft drinks).",
-      "Access to workshops.",
-    ],
-    selected: false,
-    price: 2400,
-    people_count: 1,
-  },
-  {
-    id: "whole-apartment-two-bedrooms",
-    name: "The whole apartment with two bedrooms",
-    descriptions: [
-      "A 7-night stay in a private two-bedroom apartment (for 2 people).",
-      "Two private bedrooms, shared bathroom and fully equipped kitchen.",
-      "All meals and drinks included (breakfast, lunch, dinner, soft drinks).",
-      "Access to workshops.",
-    ],
-    selected: false,
-    price: 4000,
-    people_count: 2,
-  },
-  {
-    id: "individual-offer-group",
-    name: "Individual offer for bigger group reservation",
-    descriptions: [
-      "If you'd like to make a reservation for a group of more than two people, please contact us – we will prepare a personalized offer.",
-    ],
-    selected: false,
-    people_count: 3,
-  },
-];
+  }));
+};
 
 const defaultPersonalDetails: PersonalDetails = {
   name: "",
@@ -137,13 +69,19 @@ const defaultPersonalDetails: PersonalDetails = {
   additionalNotes: "",
 };
 
+let initialRooms: Room[] = [];
+let initialDateOptions: DateOption[] = [];
+let initialDateRoomAvailability: DateRoomAvailability[] = [];
+
 export const useReservationStore = create<ReservationState>()((set) => ({
   currentStep: 0,
   selectedDates: [],
-  rooms: defaultRooms,
+  rooms: initialRooms,
   selectedRoomId: null,
   personalDetails: defaultPersonalDetails,
   accommodationNotes: "",
+  dateOptions: initialDateOptions,
+  dateRoomAvailability: initialDateRoomAvailability,
   setCurrentStep: (step) => set({ currentStep: step }),
   setSelectedDates: (dates) => {
     set((state) => {
@@ -181,13 +119,26 @@ export const useReservationStore = create<ReservationState>()((set) => ({
       personalDetails: { ...state.personalDetails, ...details },
     })),
   setAccommodationNotes: (notes) => set({ accommodationNotes: notes }),
+  initializeFromCMS: (data) => {
+    initialRooms = createRoomsFromCMS(data.rooms);
+    initialDateOptions = data.dateOptions;
+    initialDateRoomAvailability = data.dateRoomAvailability;
+
+    set({
+      rooms: initialRooms,
+      dateOptions: data.dateOptions,
+      dateRoomAvailability: data.dateRoomAvailability,
+    });
+  },
   reset: () =>
     set({
       currentStep: 0,
       selectedDates: [],
-      rooms: defaultRooms,
+      rooms: initialRooms,
       selectedRoomId: null,
       personalDetails: defaultPersonalDetails,
       accommodationNotes: "",
+      dateOptions: initialDateOptions,
+      dateRoomAvailability: initialDateRoomAvailability,
     }),
 }));

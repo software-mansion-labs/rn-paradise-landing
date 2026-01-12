@@ -105,6 +105,34 @@ const contactCollection = defineCollection({
   }),
 });
 
+const reservationCollection = defineCollection({
+  type: "data",
+  schema: z.object({
+    dateOptions: z.array(
+      z.object({
+        id: z.string(),
+        label: z.string(),
+        available: z.boolean(),
+      }),
+    ),
+    rooms: z.array(
+      z.object({
+        id: z.string(),
+        name: z.string(),
+        descriptions: z.array(z.string()),
+        price: z.number().optional(),
+        people_count: z.number().optional(),
+      }),
+    ),
+    dateRoomAvailability: z.array(
+      z.object({
+        dateId: z.string(),
+        availableRoomIds: z.array(z.string()),
+      }),
+    ),
+  }),
+});
+
 export const collections = {
   general: generalCollection,
   hero: heroCollection,
@@ -116,4 +144,5 @@ export const collections = {
   previousEditions: previousEditionsCollection,
   unforgettableExperience: unforgettableExperienceCollection,
   contact: contactCollection,
+  reservation: reservationCollection,
 };

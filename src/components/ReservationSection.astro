@@ -1,6 +1,9 @@
 ---
 import ContentWrapper from "@/components/ContentWrapper";
 import { ReservationWizard } from "@/components/ReservationWizard/ReservationWizard";
+import { getEntry } from "astro:content";
+
+const reservationData = await getEntry("reservation", "reservation");
 ---
 
 <section
@@ -13,6 +16,13 @@ import { ReservationWizard } from "@/components/ReservationWizard/ReservationWiz
     <h2 class="text-primary text-center text-2xl/9 font-medium">
       Reserve your spot
     </h2>
-    <ReservationWizard client:load />
+    {
+      reservationData && (
+        <ReservationWizard
+          client:load
+          reservationData={JSON.stringify(reservationData.data)}
+        />
+      )
+    }
   </ContentWrapper>
 </section>

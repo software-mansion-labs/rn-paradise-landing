@@ -1,0 +1,58 @@
+dateOptions:
+  - id: "date1"
+    label: "26.04-3.05.2026"
+    available: true
+  - id: "date2"
+    label: "3.05-10.05.2026"
+    available: true
+  - id: "date3"
+    label: "10.05-17.05.2026"
+    available: true
+
+rooms:
+  - id: "private-bedroom-shared"
+    name: "Private bedroom in a shared apartment "
+    descriptions:
+      - "A 7-night stay in a private bedroom in a two-bedroom apartment."
+      - "Shared bathroom and fully equipped kitchen (shared with 1 other guest)."
+      - "All meals and drinks included (breakfast, lunch, dinner, soft drinks)."
+      - "Access to workshops."
+    price: 1800
+    people_count: 1
+  - id: "private-bedroom-private-apartment"
+    name: "Private bedroom with a private apartment"
+    descriptions:
+      - "A 7-night stay in a private bedroom in your own apartment."
+      - "Private bathroom and fully equipped kitchen."
+      - "All meals and drinks included (breakfast, lunch, dinner, soft drinks)."
+      - "Access to workshops."
+    price: 2400
+    people_count: 1
+  - id: "whole-apartment-two-bedrooms"
+    name: "The whole apartment with two bedrooms"
+    descriptions:
+      - "A 7-night stay in a private two-bedroom apartment (for 2 people)."
+      - "Two private bedrooms, shared bathroom and fully equipped kitchen."
+      - "All meals and drinks included (breakfast, lunch, dinner, soft drinks)."
+      - "Access to workshops."
+    price: 4000
+    people_count: 2
+  - id: "individual-offer-group"
+    name: "Individual offer for bigger group reservation"
+    descriptions:
+      - "If you'd like to make a reservation for a group of more than two people, please contact us – we will prepare a personalized offer."
+    people_count: 3
+
+dateRoomAvailability:
+  - dateId: "date1"
+    availableRoomIds: []
+  - dateId: "date2"
+    availableRoomIds:
+      - "private-bedroom-shared"
+      - "private-bedroom-private-apartment"
+      - "whole-apartment-two-bedrooms"
+      - "individual-offer-group"
+  - dateId: "date3"
+    availableRoomIds:
+      - "private-bedroom-shared"
+      - "individual-offer-group"

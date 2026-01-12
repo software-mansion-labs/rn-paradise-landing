@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useReservationStore } from "@/stores/reservationStore";
 import { Step1 } from "./Step1";
 import { Step2 } from "./Step2";
@@ -10,7 +10,11 @@ import {
   ReservationAccordionItem,
   ReservationAccordionTrigger,
 } from "./ReservationAccordion";
-import { dateOptions } from "@/stores/reservationStore";
+import type {
+  DateOption,
+  DateRoomAvailability,
+  Room,
+} from "@/stores/reservationStore";
 
 const steps = [
   {
@@ -27,7 +31,11 @@ const steps = [
   },
 ];
 
-export function ReservationWizard() {
+interface ReservationWizardProps {
+  reservationData?: string;
+}
+
+export function ReservationWizard({ reservationData }: ReservationWizardProps) {
   const {
     currentStep,
     setCurrentStep,
@@ -35,8 +43,24 @@ export function ReservationWizard() {
     selectedDates,
     rooms,
     personalDetails,
+    initializeFromCMS,
   } = useReservationStore();
   const [showThankYou, setShowThankYou] = useState(false);
+
+  useEffect(() => {
+    if (reservationData) {
+      try {
+        const data = JSON.parse(reservationData);
+        initializeFromCMS({
+          dateOptions: data.dateOptions,
+          rooms: data.rooms,
+          dateRoomAvailability: data.dateRoomAvailability,
+        });
+      } catch (error) {
+        console.error("Failed to parse reservation data:", error);
+      }
+    }
+  }, [reservationData, initializeFromCMS]);
 
   const handleSubmit = async () => {
     // Here you would typically submit to an API

@@ -1,16 +1,10 @@
-import {
-  useReservationStore,
-  dateOptions,
-  dateRoomAvailability,
-} from "@/stores/reservationStore";
+import { useReservationStore } from "@/stores/reservationStore";
 import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 import { RoomCard } from "./RoomCard";
@@ -20,6 +14,8 @@ export function Step1() {
     selectedDates,
     rooms,
     selectedRoomId,
+    dateOptions,
+    dateRoomAvailability,
     setSelectedDates,
     toggleRoom,
     setCurrentStep,
