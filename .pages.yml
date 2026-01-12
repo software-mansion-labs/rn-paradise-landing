@@ -259,4 +259,3 @@ content:
             label: Available Room IDs
             type: string
             list: true
-            required: true
