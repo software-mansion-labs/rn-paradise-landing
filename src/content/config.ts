@@ -105,6 +105,14 @@ const contactCollection = defineCollection({
   }),
 });
 
+const settingsCollection = defineCollection({
+  type: "data",
+  schema: z.object({
+    contactFormEmail: z.string().email(),
+    reservationFormEmail: z.string().email(),
+  }),
+});
+
 const reservationCollection = defineCollection({
   type: "data",
   schema: z.object({
@@ -149,4 +157,5 @@ export const collections = {
   unforgettableExperience: unforgettableExperienceCollection,
   contact: contactCollection,
   reservation: reservationCollection,
+  settings: settingsCollection,
 };

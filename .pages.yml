@@ -242,3 +242,17 @@ content:
         label: Discord URL
         type: string
         required: true
+
+  - name: settings
+    label: Settings
+    type: file
+    path: src/content/settings/settings.yaml
+    fields:
+      - name: contactFormEmail
+        label: Contact Form Email
+        type: string
+        required: true
+      - name: reservationFormEmail
+        label: Reservation Email
+        type: string
+        required: true

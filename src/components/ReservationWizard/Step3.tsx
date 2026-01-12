@@ -4,9 +4,11 @@ import { Info } from "lucide-react";
 
 interface Step3Props {
   onSubmit: () => void;
+  isSubmitting?: boolean;
+  error?: string | null;
 }
 
-export function Step3({ onSubmit }: Step3Props) {
+export function Step3({ onSubmit, isSubmitting = false, error }: Step3Props) {
   const {
     selectedDates,
     rooms,
@@ -31,15 +33,18 @@ export function Step3({ onSubmit }: Step3Props) {
         reservation once enough participants sign up.
       </p>
 
-      <div className="flex items-center gap-6">
-        <Button onClick={onSubmit} size="xl">
-          Submit request
-        </Button>
-        <div className="flex items-center gap-2">
-          <Info className="color-primary/80 h-5 w-5" />
-          <p className="text-primary/80 text-sm">
-            We'll get back to you within 5 business days.
-          </p>
+      <div className="flex flex-col gap-4">
+        {error && <p className="text-sm text-red-500">{error}</p>}
+        <div className="flex items-center gap-6">
+          <Button onClick={onSubmit} size="xl" disabled={isSubmitting}>
+            {isSubmitting ? "Submitting..." : "Submit request"}
+          </Button>
+          <div className="flex items-center gap-2">
+            <Info className="color-primary/80 h-5 w-5" />
+            <p className="text-primary/80 text-sm">
+              We'll get back to you within 5 business days.
+            </p>
+          </div>
         </div>
       </div>
     </div>

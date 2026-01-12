@@ -41,11 +41,15 @@ export function ReservationWizard({ reservationData }: ReservationWizardProps) {
     setCurrentStep,
     reset,
     selectedDates,
+    selectedRoomId,
     rooms,
     personalDetails,
+    accommodationNotes,
     initializeFromCMS,
   } = useReservationStore();
   const [showThankYou, setShowThankYou] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     if (reservationData) {
@@ -63,10 +67,48 @@ export function ReservationWizard({ reservationData }: ReservationWizardProps) {
   }, [reservationData, initializeFromCMS]);
 
   const handleSubmit = async () => {
-    // Here you would typically submit to an API
-    // For now, we'll just show the thank you dialog
-    setShowThankYou(true);
-    reset();
+    if (!selectedDates[0] || !selectedRoomId) {
+      setSubmitError("Please complete all required fields");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch("/api/send-email/submitReservation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: personalDetails.name,
+          email: personalDetails.email,
+          company: personalDetails.company || undefined,
+          needsInvoice: personalDetails.needsInvoice,
+          additionalNotes: personalDetails.additionalNotes || undefined,
+          selectedDate: selectedDates[0],
+          selectedRoomId: selectedRoomId,
+          accommodationNotes: accommodationNotes || undefined,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setShowThankYou(true);
+        reset();
+      } else {
+        setSubmitError(data.error || "Failed to submit reservation");
+      }
+    } catch (error) {
+      setSubmitError(
+        "An error occurred while submitting your reservation. Please try again.",
+      );
+      console.error("Reservation submission error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -101,7 +143,11 @@ export function ReservationWizard({ reservationData }: ReservationWizardProps) {
                 />
                 <ReservationAccordionContent className="pl-18">
                   {isStep3 ? (
-                    <Step3 onSubmit={handleSubmit} />
+                    <Step3
+                      onSubmit={handleSubmit}
+                      isSubmitting={isSubmitting}
+                      error={submitError}
+                    />
                   ) : step.id === 0 ? (
                     <Step1 />
                   ) : (
