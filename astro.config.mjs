@@ -1,10 +1,15 @@
 // @ts-check
 import { defineConfig, envField } from "astro/config";
 import react from "@astrojs/react";
+import node from "@astrojs/node";
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
+  output: "server",
+  adapter: node({
+    mode: "standalone",
+  }),
   integrations: [react()],
 
   vite: {
@@ -29,17 +34,17 @@ export default defineConfig({
         provider: "local",
         variants: [
           {
-            src: ["./public/fonts/aeonik/aeonik-light.otf"],
+            src: ["./src/fonts/aeonik/aeonik-light.otf"],
             style: "normal",
             weight: 300,
           },
           {
-            src: ["./public/fonts/aeonik/aeonik-regular.otf"],
+            src: ["./src/fonts/aeonik/aeonik-regular.otf"],
             style: "normal",
             weight: 400,
           },
           {
-            src: ["./public/fonts/aeonik/aeonik-medium.otf"],
+            src: ["./src/fonts/aeonik/aeonik-medium.otf"],
             style: "normal",
             weight: 500,
           },
@@ -51,7 +56,7 @@ export default defineConfig({
         provider: "local",
         variants: [
           {
-            src: ["./public/fonts/cookie/cookie-regular.ttf"],
+            src: ["./src/fonts/cookie/cookie-regular.ttf"],
             style: "normal",
             weight: 400,
           },
