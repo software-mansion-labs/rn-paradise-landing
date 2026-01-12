@@ -65,15 +65,6 @@ const venueCollection = defineCollection({
   }),
 });
 
-const ticketsCollection = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),
-    features: z.array(z.string()).optional(),
-    link: z.string().optional(),
-  }),
-});
-
 const faqCollection = defineCollection({
   type: "content",
   schema: z.object({
@@ -151,7 +142,6 @@ export const collections = {
   about: aboutCollection,
   team: teamCollection,
   venue: venueCollection,
-  tickets: ticketsCollection,
   faq: faqCollection,
   previousEditions: previousEditionsCollection,
   unforgettableExperience: unforgettableExperienceCollection,
