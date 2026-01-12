@@ -41,6 +41,8 @@ function ReservationAccordionTrigger({
   ...props
 }: ReservationAccordionTriggerProps) {
   const triggerRef = React.useRef<HTMLButtonElement>(null);
+  const isInitialMount = React.useRef(true);
+  const prevIsActive = React.useRef(false);
   const stepNumber = stepIndex + 1;
   const isActive = stepIndex === currentStep;
   const isCompleted = stepIndex < currentStep;
@@ -48,22 +50,35 @@ function ReservationAccordionTrigger({
   const canNavigate = isCompleted;
 
   React.useEffect(() => {
-    if (!isActive || !triggerRef.current) return;
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      prevIsActive.current = isActive;
+      return;
+    }
 
-    const scrollToTrigger = () => {
-      if (!triggerRef.current) return;
+    if (!isActive || !triggerRef.current) {
+      prevIsActive.current = isActive;
+      return;
+    }
 
-      const headerHeight = 72;
-      const rect = triggerRef.current.getBoundingClientRect();
-      const targetPosition = rect.top + window.scrollY - headerHeight;
+    if (prevIsActive.current === false && isActive === true) {
+      const scrollToTrigger = () => {
+        if (!triggerRef.current) return;
 
-      window.scrollTo({
-        top: Math.max(0, targetPosition),
-        behavior: "smooth",
-      });
-    };
+        const headerHeight = 72;
+        const rect = triggerRef.current.getBoundingClientRect();
+        const targetPosition = rect.top + window.scrollY - headerHeight;
 
-    setTimeout(scrollToTrigger, 250); // wait for accordion to open
+        window.scrollTo({
+          top: Math.max(0, targetPosition),
+          behavior: "smooth",
+        });
+      };
+
+      setTimeout(scrollToTrigger, 250); // wait for accordion to open
+    }
+
+    prevIsActive.current = isActive;
   }, [isActive]);
 
   const renderStepButton = () => {
