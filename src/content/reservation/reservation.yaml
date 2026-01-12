@@ -52,5 +52,5 @@ dateRoomAvailability:
       - individual-offer-group
   - dateId: date3
     availableRoomIds:
-      - individual-offer-group
       - private-bedroom-shared
+      - individual-offer-group
