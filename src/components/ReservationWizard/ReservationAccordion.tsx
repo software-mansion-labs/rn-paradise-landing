@@ -40,11 +40,31 @@ function ReservationAccordionTrigger({
   onStepClick,
   ...props
 }: ReservationAccordionTriggerProps) {
+  const triggerRef = React.useRef<HTMLButtonElement>(null);
   const stepNumber = stepIndex + 1;
   const isActive = stepIndex === currentStep;
   const isCompleted = stepIndex < currentStep;
   const isFuture = stepIndex > currentStep;
   const canNavigate = isCompleted;
+
+  React.useEffect(() => {
+    if (!isActive || !triggerRef.current) return;
+
+    const scrollToTrigger = () => {
+      if (!triggerRef.current) return;
+
+      const headerHeight = 72;
+      const rect = triggerRef.current.getBoundingClientRect();
+      const targetPosition = rect.top + window.scrollY - headerHeight;
+
+      window.scrollTo({
+        top: Math.max(0, targetPosition),
+        behavior: "smooth",
+      });
+    };
+
+    setTimeout(scrollToTrigger, 250); // wait for accordion to open
+  }, [isActive]);
 
   const renderStepButton = () => {
     return (
@@ -92,6 +112,7 @@ function ReservationAccordionTrigger({
   return (
     <AccordionPrimitive.Header className="flex w-full">
       <AccordionPrimitive.Trigger
+        ref={triggerRef}
         data-slot="reservation-accordion-trigger"
         onClick={handleTriggerClick}
         disabled={isFuture}
