@@ -11,9 +11,11 @@ export function RoomCard({ room, onToggle }: RoomCardProps) {
   const isIndividualOffer = !room.price;
 
   return (
-    <div className="bg-reservation-blue-bright flex h-full w-full flex-col items-center justify-between px-14 py-16">
-      <div className="flex flex-1 flex-col gap-6">
-        <span className="text-primary text-lg font-bold">{room.name}</span>
+    <div className="bg-reservation-blue-bright flex h-full w-full flex-col items-center justify-between px-6 py-8 md:px-14 md:py-16">
+      <div className="flex flex-1 flex-col gap-4 md:gap-6">
+        <span className="text-primary text-base font-bold md:text-lg">
+          {room.name}
+        </span>
         <span className="text-primary text-sm">
           <div className="flex items-center justify-center">
             {room.people_count && room.people_count > 1 ? (
@@ -45,7 +47,7 @@ export function RoomCard({ room, onToggle }: RoomCardProps) {
             )}
           </div>
         </span>
-        <ul className="text-primary/80 text-sm">
+        <ul className="text-primary/80 list-inside list-disc text-xs md:text-sm">
           {room.descriptions &&
             room.descriptions.map((description) => (
               <li key={description}>
@@ -59,17 +61,19 @@ export function RoomCard({ room, onToggle }: RoomCardProps) {
         </ul>
       </div>
 
-      <div className="flex w-full flex-col gap-4 pt-4">
+      <div className="flex w-full flex-col gap-3 pt-4 md:gap-4">
         <div className="flex items-center justify-center">
           {isIndividualOffer ? (
-            <span className="text-primary text-md">Individual offer</span>
+            <span className="text-primary md:text-md text-sm">
+              Individual offer
+            </span>
           ) : (
             <div className="flex items-center gap-1">
-              <span className="text-primary text-lg font-bold">
+              <span className="text-primary text-base font-bold md:text-lg">
                 {room.price || 1000}€
               </span>
-              <span className="text-primary text-md">
-                <span className="text-primary text-sm">
+              <span className="text-primary md:text-md text-sm">
+                <span className="text-primary text-xs md:text-sm">
                   /{" "}
                   {room.people_count === 1
                     ? "person"

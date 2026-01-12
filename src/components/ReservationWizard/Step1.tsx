@@ -76,7 +76,7 @@ export function Step1() {
                 {availableRooms.map((room) => (
                   <CarouselItem
                     key={room.id}
-                    className="flex min-w-0 basis-2/5 pl-6"
+                    className="flex min-w-0 basis-3/5 pl-6 md:basis-2/5"
                   >
                     <RoomCard
                       room={room}
