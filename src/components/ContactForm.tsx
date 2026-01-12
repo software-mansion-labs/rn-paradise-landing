@@ -70,9 +70,17 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
       <Captcha ref={captchaRef} siteKey={siteKey} />
       <form
         onSubmit={handleSubmit}
-        className="flex w-full flex-col gap-6 bg-white px-14 py-12 shadow-md md:flex-row md:gap-8"
+        className="relative flex w-full flex-col gap-6 bg-white px-14 py-12 shadow-md md:flex-row md:gap-8"
       >
-        <div className="border-gray-border flex w-full flex-col gap-6 border-r pr-0 md:w-1/2 md:pr-8">
+        <div className="absolute top-8 right-8 md:hidden">
+          <img
+            src="/assets/logo-with-stamp.png"
+            alt="React Native Paradise Logo"
+            className="h-20 w-auto"
+          />
+        </div>
+
+        <div className="border-gray-border flex w-full flex-col gap-6 pr-0 md:w-1/2 md:border-r md:pr-8">
           <div className="flex flex-col gap-2">
             <h2 className="text-primary text-xl/9 font-medium">
               Have more questions? <br /> Contact us here!
@@ -111,11 +119,11 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
         </div>
 
         <div className="flex w-full flex-col gap-8 pl-0 md:w-1/2 md:justify-between md:pl-8">
-          <div className="flex justify-end">
+          <div className="hidden justify-end md:flex">
             <img
               src="/assets/logo-with-stamp.png"
               alt="React Native Paradise Logo"
-              className="h-20 w-auto md:h-32"
+              className="h-32 w-auto"
             />
           </div>
 
