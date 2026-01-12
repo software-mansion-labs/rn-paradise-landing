@@ -32,7 +32,7 @@ content:
         required: true
 
   - name: about
-    label: What Can You Expect Section
+    label: About Section
     type: file
     path: src/content/about/about.yaml
     fields:
@@ -64,6 +64,36 @@ content:
           - name: order
             label: Order
             type: number
+
+  - name: venue
+    label: Venue Information
+    type: file
+    path: src/content/venue/venue.yaml
+    fields:
+      - name: description_paragraph1
+        label: Description Paragraph 1
+        type: text
+        required: true
+      - name: description_paragraph2
+        label: Description Paragraph 2
+        type: text
+        required: true
+      - name: description_paragraph3
+        label: Description Paragraph 3
+        type: text
+        required: true
+      - name: eventLocation
+        label: EventLocation
+        type: string
+        required: true
+      - name: polaroidCardImages
+        label: PolaroidCard Images
+        type: image
+        list: true
+      - name: carouselImages
+        label: Carousel Images
+        type: image
+        list: true
 
   - name: team
     label: Team Members
@@ -102,70 +132,6 @@ content:
             label: GitHub
             type: string
 
-  - name: venue
-    label: Venue Information
-    type: file
-    path: src/content/venue/venue.yaml
-    fields:
-      - name: description_paragraph1
-        label: Description Paragraph 1
-        type: text
-        required: true
-      - name: description_paragraph2
-        label: Description Paragraph 2
-        type: text
-        required: true
-      - name: description_paragraph3
-        label: Description Paragraph 3
-        type: text
-        required: true
-      - name: eventLocation
-        label: EventLocation
-        type: string
-        required: true
-      - name: polaroidCardImages
-        label: PolaroidCard Images
-        type: image
-        list: true
-      - name: carouselImages
-        label: Carousel Images
-        type: image
-        list: true
-
-  - name: tickets
-    label: Ticket Information
-    type: collection
-    path: src/content/tickets
-    fields:
-      - name: title
-        label: Title
-        type: string
-        required: true
-      - name: features
-        label: Features
-        type: string
-        list: true
-      - name: link
-        label: Link
-        type: string
-
-  - name: faq
-    label: FAQ
-    type: collection
-    path: src/content/faq
-    fields:
-      - name: question
-        label: Question
-        type: string
-        required: true
-      - name: answer
-        label: Answer
-        type: text
-        required: true
-      - name: order
-        label: Order
-        type: number
-
   - name: previousEditions
     label: Previous Editions
     type: file
@@ -180,28 +146,8 @@ content:
         type: image
         list: true
 
-  - name: unforgettableExperience
-    label: Unforgettable Experience
-    type: file
-    path: src/content/unforgettableExperience/unforgettableExperience.yaml
-    fields:
-      - name: backgroundVideo
-        label: Background Video
-        type: file
-        categories: [video]
-
-  - name: contact
-    label: Contact Information
-    type: file
-    path: src/content/contact/contact.yaml
-    fields:
-      - name: discordUrl
-        label: Discord URL
-        type: string
-        required: true
-
   - name: reservation
-    label: Reservation
+    label: Reservations
     type: file
     path: src/content/reservation/reservation.yaml
     fields:
@@ -259,3 +205,40 @@ content:
             label: Available Room IDs
             type: string
             list: true
+
+  - name: unforgettableExperience
+    label: Unforgettable Experience
+    type: file
+    path: src/content/unforgettableExperience/unforgettableExperience.yaml
+    fields:
+      - name: backgroundVideo
+        label: Background Video
+        type: file
+        categories: [video]
+
+  - name: faq
+    label: FAQ
+    type: collection
+    path: src/content/faq
+    fields:
+      - name: question
+        label: Question
+        type: string
+        required: true
+      - name: answer
+        label: Answer
+        type: text
+        required: true
+      - name: order
+        label: Order
+        type: number
+
+  - name: contact
+    label: Contact Information
+    type: file
+    path: src/content/contact/contact.yaml
+    fields:
+      - name: discordUrl
+        label: Discord URL
+        type: string
+        required: true
