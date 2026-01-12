@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useReservationStore } from "@/stores/reservationStore";
 import { Step1 } from "./Step1";
 import { Step2 } from "./Step2";
@@ -15,6 +15,8 @@ import type {
   DateRoomAvailability,
   Room,
 } from "@/stores/reservationStore";
+import { Captcha } from "@/utils/recaptcha";
+import type { CaptchaRef } from "@/utils/recaptcha";
 
 const steps = [
   {
@@ -33,9 +35,13 @@ const steps = [
 
 interface ReservationWizardProps {
   reservationData?: string;
+  siteKey?: string;
 }
 
-export function ReservationWizard({ reservationData }: ReservationWizardProps) {
+export function ReservationWizard({
+  reservationData,
+  siteKey = "",
+}: ReservationWizardProps) {
   const {
     currentStep,
     setCurrentStep,
@@ -50,6 +56,7 @@ export function ReservationWizard({ reservationData }: ReservationWizardProps) {
   const [showThankYou, setShowThankYou] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const captchaRef = useRef<CaptchaRef>(null);
 
   useEffect(() => {
     if (reservationData) {
@@ -76,6 +83,11 @@ export function ReservationWizard({ reservationData }: ReservationWizardProps) {
     setSubmitError(null);
 
     try {
+      let recaptchaToken = "";
+      if (captchaRef.current) {
+        recaptchaToken = await captchaRef.current.execute("submit");
+      }
+
       const response = await fetch("/api/send-email/submitReservation", {
         method: "POST",
         headers: {
@@ -90,6 +102,7 @@ export function ReservationWizard({ reservationData }: ReservationWizardProps) {
           selectedDate: selectedDates[0],
           selectedRoomId: selectedRoomId,
           accommodationNotes: accommodationNotes || undefined,
+          recaptchaToken: recaptchaToken || undefined,
         }),
       });
 
@@ -98,6 +111,9 @@ export function ReservationWizard({ reservationData }: ReservationWizardProps) {
       if (data.success) {
         setShowThankYou(true);
         reset();
+        if (captchaRef.current) {
+          captchaRef.current.reset();
+        }
       } else {
         setSubmitError(data.error || "Failed to submit reservation");
       }
@@ -113,6 +129,7 @@ export function ReservationWizard({ reservationData }: ReservationWizardProps) {
 
   return (
     <>
+      <Captcha ref={captchaRef} siteKey={siteKey} />
       <div className="flex w-full flex-col">
         <ReservationAccordion
           type="single"
