@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import type { FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Captcha } from "@/utils/recaptcha";
@@ -15,6 +15,18 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const captchaRef = useRef<CaptchaRef>(null);
+  const messageTextareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    const updateRows = () => {
+      if (messageTextareaRef.current) {
+        messageTextareaRef.current.rows = window.innerWidth >= 1025 ? 13 : 6;
+      }
+    };
+    updateRows();
+    window.addEventListener("resize", updateRows);
+    return () => window.removeEventListener("resize", updateRows);
+  }, []);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -107,10 +119,11 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
               Message <span className="text-primary/80">(required)</span>
             </label>
             <textarea
+              ref={messageTextareaRef}
               id="message"
               name="message"
               required
-              rows={13}
+              rows={6}
               placeholder="Message"
               disabled={formState === "submitting"}
               className="text-primary border-gray-border resize-none border bg-gray-50 px-4 py-3 text-sm placeholder:text-sm placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
