@@ -84,27 +84,63 @@ export function ReservationWizard({
 
     try {
       let recaptchaToken = "";
-      if (captchaRef.current) {
-        recaptchaToken = await captchaRef.current.execute("submit");
+      if (captchaRef.current && siteKey) {
+        let retries = 0;
+        const maxRetries = 10;
+        while (retries < maxRetries) {
+          try {
+            const token = await captchaRef.current.execute("submit");
+            if (token) {
+              recaptchaToken = token;
+              break;
+            }
+          } catch (error) {
+            if (retries < maxRetries - 1) {
+              await new Promise((resolve) => setTimeout(resolve, 200));
+              retries++;
+              continue;
+            }
+            console.warn(
+              "reCAPTCHA not ready after retries, proceeding without token",
+            );
+            break;
+          }
+          if (!recaptchaToken) break;
+        }
       }
 
-      const response = await fetch("/api/send-email/submitReservation", {
+      const submitData = new FormData();
+      submitData.append("name", personalDetails.name);
+      submitData.append("email", personalDetails.email);
+      if (personalDetails.company) {
+        submitData.append("company", personalDetails.company);
+      }
+      submitData.append(
+        "needsInvoice",
+        personalDetails.needsInvoice.toString(),
+      );
+      if (personalDetails.additionalNotes) {
+        submitData.append("additionalNotes", personalDetails.additionalNotes);
+      }
+      submitData.append("selectedDate", selectedDates[0]);
+      submitData.append("selectedRoomId", selectedRoomId);
+      if (accommodationNotes) {
+        submitData.append("accommodationNotes", accommodationNotes);
+      }
+      if (recaptchaToken) {
+        submitData.append("recaptchaToken", recaptchaToken);
+      }
+
+      const response = await fetch("/api/submit-reservation", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: personalDetails.name,
-          email: personalDetails.email,
-          company: personalDetails.company || undefined,
-          needsInvoice: personalDetails.needsInvoice,
-          additionalNotes: personalDetails.additionalNotes || undefined,
-          selectedDate: selectedDates[0],
-          selectedRoomId: selectedRoomId,
-          accommodationNotes: accommodationNotes || undefined,
-          recaptchaToken: recaptchaToken || undefined,
-        }),
+        body: submitData,
       });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Response error:", response.status, errorText);
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
       const data = await response.json();
 

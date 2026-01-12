@@ -26,7 +26,6 @@ export const Captcha = forwardRef<CaptchaRef, CaptchaProps>(
         },
         execute: async (_action: string) => {
           if (!window.grecaptcha || !isReadyRef.current) {
-            console.warn("[Captcha] reCAPTCHA v3 not ready");
             return "";
           }
 

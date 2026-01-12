@@ -21,7 +21,8 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
     setFormState("submitting");
     setErrorMessage("");
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     const email = formData.get("email") as string;
     const name = formData.get("name") as string;
     const company = formData.get("company") as string;
@@ -40,7 +41,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
       submitData.append("message", message);
       if (recaptchaToken) submitData.append("recaptchaToken", recaptchaToken);
 
-      const response = await fetch("/api/send-email/submitForm", {
+      const response = await fetch("/api/submit-contact", {
         method: "POST",
         body: submitData,
       });
@@ -49,7 +50,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
 
       if (data.success) {
         setFormState("success");
-        e.currentTarget.reset();
+        form.reset();
         if (captchaRef.current) {
           captchaRef.current.reset();
         }
