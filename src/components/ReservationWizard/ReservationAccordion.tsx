@@ -48,14 +48,22 @@ function ReservationAccordionTrigger({
 
   const renderStepButton = () => {
     return (
-      <button
+      <div
         onClick={(e) => {
           e.stopPropagation();
           if (canNavigate) {
             onStepClick(stepIndex);
           }
         }}
-        disabled={!canNavigate}
+        role="button"
+        tabIndex={canNavigate ? 0 : -1}
+        onKeyDown={(e) => {
+          if (canNavigate && (e.key === "Enter" || e.key === " ")) {
+            e.preventDefault();
+            e.stopPropagation();
+            onStepClick(stepIndex);
+          }
+        }}
         className={cn(
           "flex shrink-0 items-center justify-center rounded-full border-2 text-sm font-medium transition-colors",
           isCompleted
@@ -68,7 +76,7 @@ function ReservationAccordionTrigger({
         )}
       >
         {stepNumber}
-      </button>
+      </div>
     );
   };
 
