@@ -112,7 +112,11 @@ const reservationCollection = defineCollection({
       z.object({
         id: z.string(),
         label: z.string(),
-        available: z.boolean(),
+        available: z.preprocess((val) => {
+          if (val === false || val === "false" || val === 0) return false;
+          if (val === true || val === "true" || val === 1) return true;
+          return Boolean(val);
+        }, z.boolean()),
       }),
     ),
     rooms: z.array(
@@ -127,7 +131,7 @@ const reservationCollection = defineCollection({
     dateRoomAvailability: z.array(
       z.object({
         dateId: z.string(),
-        availableRoomIds: z.array(z.string()),
+        availableRoomIds: z.array(z.string()).optional().default([]),
       }),
     ),
   }),

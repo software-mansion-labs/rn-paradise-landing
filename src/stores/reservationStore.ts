@@ -126,8 +126,8 @@ export const useReservationStore = create<ReservationState>()((set) => ({
 
     set({
       rooms: initialRooms,
-      dateOptions: data.dateOptions,
-      dateRoomAvailability: data.dateRoomAvailability,
+      dateOptions: initialDateOptions,
+      dateRoomAvailability: initialDateRoomAvailability,
     });
   },
   reset: () =>

@@ -21,8 +21,7 @@
             },
             "required": [
               "id",
-              "label",
-              "available"
+              "label"
             ],
             "additionalProperties": false
           }
@@ -71,12 +70,12 @@
                 "type": "array",
                 "items": {
                   "type": "string"
-                }
+                },
+                "default": []
               }
             },
             "required": [
-              "dateId",
-              "availableRoomIds"
+              "dateId"
             ],
             "additionalProperties": false
           }

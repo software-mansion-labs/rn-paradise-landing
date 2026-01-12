@@ -4,7 +4,7 @@ dateOptions:
     available: true
   - id: date2
     label: 3.05-10.05.2026
-    available: false
+    available: true
   - id: date3
     label: 10.05-17.05.2026
     available: true
