@@ -41,8 +41,6 @@
 
   /* Base */
   --color-white: #ffffff;
-  --color-dark-cold: #0d0f26;
-  --color-dark-warm: #26251f;
 
   /* Slate */
   --color-slate-50: #f8fafc;
@@ -74,6 +72,9 @@
   --color-gray-border: #d9dde8;
 
   /* Colors */
+  --color-dark-cold: #0d0f26;
+  --color-dark-warm: #26251f;
+
   /* --color-primary: var(--color-swm-brand-100); */
   --color-primary: var(--color-dark-warm);
   --color-primary-hover: var(--color-swm-brand-80);
@@ -83,11 +84,13 @@
 
   --color-tertiary: var(--color-swm-brand-40);
 
+  --color-sea-blue: var(--color-brand-sea-blue-20);
   /* --color-yellow: var(--color-brand-yellow-20); */
   --color-yellow: #fcfaf1;
-  --color-sea-blue: var(--color-brand-sea-blue-20);
 
   --color-badge-yellow: #ffe572;
+  --color-reservation-blue: #5eafe6;
+  --color-reservation-blue-bright: #e2f2fd;
 }
 
 @layer base {

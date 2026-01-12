@@ -1,5 +1,6 @@
 ---
 import ContentWrapper from "@/components/ContentWrapper";
+import { ReservationWizard } from "@/components/ReservationWizard/ReservationWizard";
 ---
 
 <section
@@ -12,5 +13,6 @@ import ContentWrapper from "@/components/ContentWrapper";
     <h2 class="text-primary text-center text-2xl/9 font-medium">
       Reserve your spot
     </h2>
+    <ReservationWizard client:load />
   </ContentWrapper>
 </section>
