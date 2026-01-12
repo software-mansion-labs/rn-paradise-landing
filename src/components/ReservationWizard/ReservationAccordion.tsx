@@ -99,7 +99,11 @@ function ReservationAccordionTrigger({
           {title}
         </h3>
         {isCompleted && (
-          <img src="/assets/Edit.svg" alt="Edit" className="h-4 w-4 shrink-0" />
+          <img
+            src="/assets/reservation-icons/Edit.svg"
+            alt="Edit"
+            className="h-4 w-4 shrink-0"
+          />
         )}
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
