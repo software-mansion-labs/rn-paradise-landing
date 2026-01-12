@@ -10,12 +10,15 @@ export function Step3({ onSubmit }: Step3Props) {
   const {
     selectedDates,
     rooms,
+    selectedRoomId,
     personalDetails,
     accommodationNotes,
     setCurrentStep,
   } = useReservationStore();
 
-  const selectedRooms = rooms.filter((r) => r.selected);
+  const selectedRoom = selectedRoomId
+    ? rooms.find((r) => r.id === selectedRoomId)
+    : null;
   const selectedDateLabels = selectedDates
     .map((dateId) => dateOptions.find((d) => d.id === dateId)?.label)
     .filter(Boolean) as string[];

@@ -15,6 +15,11 @@ export interface Room {
   selected: boolean;
 }
 
+export interface DateRoomAvailability {
+  dateId: string;
+  availableRoomIds: string[];
+}
+
 export interface PersonalDetails {
   name: string;
   email: string;
@@ -33,10 +38,36 @@ export const dateOptions: DateOption[] = [
   { id: "date3", label: "10.05-17.05.2026", available: true },
 ];
 
+export const dateRoomAvailability: DateRoomAvailability[] = [
+  {
+    dateId: "date1",
+    availableRoomIds: [
+      // "private-bedroom-shared",
+      // "private-bedroom-private-apartment",
+      // "whole-apartment-two-bedrooms",
+      // "individual-offer-group",
+    ],
+  },
+  {
+    dateId: "date2",
+    availableRoomIds: [
+      "private-bedroom-shared",
+      "private-bedroom-private-apartment",
+      "whole-apartment-two-bedrooms",
+      "individual-offer-group",
+    ],
+  },
+  {
+    dateId: "date3",
+    availableRoomIds: ["private-bedroom-shared", "individual-offer-group"],
+  },
+];
+
 interface ReservationState {
   currentStep: number;
   selectedDates: string[];
   rooms: Room[];
+  selectedRoomId: string | null;
   personalDetails: PersonalDetails;
   accommodationNotes: string;
   setCurrentStep: (step: number) => void;
@@ -110,21 +141,39 @@ export const useReservationStore = create<ReservationState>()((set) => ({
   currentStep: 0,
   selectedDates: [],
   rooms: defaultRooms,
+  selectedRoomId: null,
   personalDetails: defaultPersonalDetails,
   accommodationNotes: "",
   setCurrentStep: (step) => set({ currentStep: step }),
-  setSelectedDates: (dates) => set({ selectedDates: dates }),
+  setSelectedDates: (dates) => {
+    set((state) => {
+      const newSelectedDate = dates[0];
+      const previousDate = state.selectedDates[0];
+      const dateChanged = newSelectedDate !== previousDate;
+
+      if (dateChanged && state.selectedRoomId) {
+        return {
+          selectedDates: dates,
+          selectedRoomId: null,
+          rooms: state.rooms.map((room) => ({
+            ...room,
+            selected: false,
+          })),
+        };
+      }
+      return { selectedDates: dates };
+    });
+  },
   toggleRoom: (roomId) =>
     set((state) => {
-      const clickedRoom = state.rooms.find((r) => r.id === roomId);
-      const isCurrentlySelected = clickedRoom?.selected ?? false;
+      const isCurrentlySelected = state.selectedRoomId === roomId;
 
       return {
-        rooms: state.rooms.map((room) =>
-          room.id === roomId
-            ? { ...room, selected: !isCurrentlySelected }
-            : { ...room, selected: false },
-        ),
+        selectedRoomId: isCurrentlySelected ? null : roomId,
+        rooms: state.rooms.map((room) => ({
+          ...room,
+          selected: room.id === roomId ? !isCurrentlySelected : false,
+        })),
       };
     }),
   updatePersonalDetails: (details) =>
@@ -137,6 +186,7 @@ export const useReservationStore = create<ReservationState>()((set) => ({
       currentStep: 0,
       selectedDates: [],
       rooms: defaultRooms,
+      selectedRoomId: null,
       personalDetails: defaultPersonalDetails,
       accommodationNotes: "",
     }),

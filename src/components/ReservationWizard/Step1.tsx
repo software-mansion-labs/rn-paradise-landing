@@ -1,4 +1,8 @@
-import { useReservationStore, dateOptions } from "@/stores/reservationStore";
+import {
+  useReservationStore,
+  dateOptions,
+  dateRoomAvailability,
+} from "@/stores/reservationStore";
 import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
@@ -15,6 +19,7 @@ export function Step1() {
   const {
     selectedDates,
     rooms,
+    selectedRoomId,
     setSelectedDates,
     toggleRoom,
     setCurrentStep,
@@ -22,8 +27,16 @@ export function Step1() {
     setAccommodationNotes,
   } = useReservationStore();
 
+  const selectedDate = selectedDates[0];
+  const availability = selectedDate
+    ? dateRoomAvailability.find((a) => a.dateId === selectedDate)
+    : null;
+  const availableRooms = availability
+    ? rooms.filter((room) => availability.availableRoomIds.includes(room.id))
+    : [];
+
   const handleNext = () => {
-    if (selectedDates.length > 0 && rooms.some((r) => r.selected)) {
+    if (selectedDates.length > 0 && selectedRoomId) {
       setCurrentStep(1);
     }
   };
@@ -52,27 +65,38 @@ export function Step1() {
         ))}
       </ToggleGroup>
 
-      <div className="flex flex-col gap-4">
-        <h4 className="text-primary text-sm">Available rooms:</h4>
-        <Carousel
-          opts={{
-            align: "start",
-            slidesToScroll: 1,
-          }}
-          className="w-full"
-        >
-          <CarouselContent className="-ml-6 items-stretch">
-            {rooms.map((room) => (
-              <CarouselItem
-                key={room.id}
-                className="flex min-w-0 basis-2/5 pl-6"
-              >
-                <RoomCard room={room} onToggle={() => toggleRoom(room.id)} />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-      </div>
+      {selectedDate && (
+        <div className="flex flex-col gap-4">
+          <h4 className="text-primary text-sm">Available rooms:</h4>
+          {availableRooms.length > 0 ? (
+            <Carousel
+              opts={{
+                align: "start",
+                slidesToScroll: 1,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-6 items-stretch">
+                {availableRooms.map((room) => (
+                  <CarouselItem
+                    key={room.id}
+                    className="flex min-w-0 basis-2/5 pl-6"
+                  >
+                    <RoomCard
+                      room={room}
+                      onToggle={() => toggleRoom(room.id)}
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+          ) : (
+            <p className="text-primary/80 text-sm">
+              No rooms available for this date.
+            </p>
+          )}
+        </div>
+      )}
 
       <div className="flex flex-col gap-4">
         <div className="text-primary text-sm leading-[150%]">
@@ -102,9 +126,7 @@ export function Step1() {
       <div className="flex justify-start pt-4">
         <Button
           onClick={handleNext}
-          disabled={
-            selectedDates.length === 0 || !rooms.some((r) => r.selected)
-          }
+          disabled={selectedDates.length === 0 || !selectedRoomId}
           size="lg"
         >
           Next step →
