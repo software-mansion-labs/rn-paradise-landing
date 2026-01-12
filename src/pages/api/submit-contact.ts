@@ -51,19 +51,11 @@ function formatContactFormEmail(
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    // Log the Content-Type header for debugging
-    const contentType = request.headers.get("content-type");
-    console.log("Received Content-Type:", contentType);
-
     let formData: FormData;
     try {
       formData = await request.formData();
     } catch (error) {
       console.error("Failed to parse form data:", error);
-      console.error(
-        "Request headers:",
-        Object.fromEntries(request.headers.entries()),
-      );
       return new Response(
         JSON.stringify({
           success: false,
@@ -80,7 +72,6 @@ export const POST: APIRoute = async ({ request }) => {
     const message = formData.get("message") as string;
     const recaptchaToken = formData.get("recaptchaToken") as string | null;
 
-    // Validate required fields
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return new Response(
         JSON.stringify({ success: false, error: "Invalid email address" }),
@@ -95,21 +86,30 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Verify reCAPTCHA if token provided
-    if (recaptchaToken) {
-      const verification = await verifyRecaptcha(recaptchaToken);
-      if (!verification.valid || verification.score < RECAPTCHA_MIN_SCORE) {
-        return new Response(
-          JSON.stringify({
-            success: false,
-            error: "Failed reCAPTCHA verification",
-          }),
-          { status: 400, headers: { "Content-Type": "application/json" } },
-        );
-      }
+    // reCAPTCHA token is required
+    if (!recaptchaToken) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "reCAPTCHA verification is required",
+        }),
+        { status: 400, headers: { "Content-Type": "application/json" } },
+      );
     }
 
-    // Initialize SendGrid
+    // verify reCAPTCHA
+    const verification = await verifyRecaptcha(recaptchaToken);
+    if (!verification.valid || verification.score < RECAPTCHA_MIN_SCORE) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Failed reCAPTCHA verification",
+        }),
+        { status: 400, headers: { "Content-Type": "application/json" } },
+      );
+    }
+
+    // initialize SendGrid
     const apiKey = getSecret("SENDGRID_API_KEY");
     if (!apiKey) {
       console.error("SENDGRID_API_KEY is not configured");
@@ -123,7 +123,6 @@ export const POST: APIRoute = async ({ request }) => {
     }
     sendGrid.setApiKey(apiKey);
 
-    // Get settings
     let settings;
     try {
       settings = await getEntry("settings", "settings");

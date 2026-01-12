@@ -8,6 +8,7 @@ export interface CaptchaRef {
   reset: () => void;
   getValue: () => string;
   execute: (action: string) => Promise<string>;
+  isReady: () => boolean;
 }
 
 export const Captcha = forwardRef<CaptchaRef, CaptchaProps>(
@@ -24,13 +25,31 @@ export const Captcha = forwardRef<CaptchaRef, CaptchaProps>(
         getValue: () => {
           return tokenRef.current;
         },
+        isReady: () => {
+          if (!window.grecaptcha || !window.grecaptcha.enterprise) {
+            return false;
+          }
+
+          const hasEnterpriseExecute =
+            typeof window.grecaptcha.enterprise.execute === "function";
+
+          if (hasEnterpriseExecute && !isReadyRef.current) {
+            isReadyRef.current = true;
+          }
+
+          return hasEnterpriseExecute;
+        },
         execute: async (_action: string) => {
-          if (!window.grecaptcha || !isReadyRef.current) {
+          if (
+            !window.grecaptcha ||
+            !window.grecaptcha.enterprise ||
+            typeof window.grecaptcha.enterprise.execute !== "function"
+          ) {
             return "";
           }
 
           try {
-            const token = await window.grecaptcha.execute(siteKey, {
+            const token = await window.grecaptcha.enterprise.execute(siteKey, {
               action: _action,
             });
             tokenRef.current = token;
@@ -45,22 +64,47 @@ export const Captcha = forwardRef<CaptchaRef, CaptchaProps>(
     );
 
     useEffect(() => {
+      if (!siteKey || siteKey.trim() === "") {
+        return;
+      }
+
       const waitForRecaptcha = () => {
-        if (
-          window.grecaptcha &&
-          typeof window.grecaptcha.ready === "function"
-        ) {
-          window.grecaptcha.ready(() => {
+        if (window.grecaptcha && window.grecaptcha.enterprise) {
+          const hasEnterpriseExecute =
+            typeof window.grecaptcha.enterprise.execute === "function";
+
+          if (hasEnterpriseExecute) {
             isReadyRef.current = true;
-          });
+
+            if (typeof window.grecaptcha.enterprise.ready === "function") {
+              try {
+                window.grecaptcha.enterprise.ready(() => {
+                  isReadyRef.current = true;
+                });
+              } catch (e) {}
+            }
+          } else if (typeof window.grecaptcha.enterprise.ready === "function") {
+            try {
+              window.grecaptcha.enterprise.ready(() => {
+                isReadyRef.current = true;
+              });
+            } catch (e) {
+              setTimeout(waitForRecaptcha, 100);
+            }
+          } else {
+            setTimeout(waitForRecaptcha, 100);
+          }
         } else {
           setTimeout(waitForRecaptcha, 100);
         }
       };
 
-      if (document.getElementById("grecaptcha-script") === null) {
+      const scriptId = "grecaptcha-script";
+      const existingScript = document.getElementById(scriptId);
+
+      if (!existingScript) {
         const script = document.createElement("script");
-        script.id = "grecaptcha-script";
+        script.id = scriptId;
         script.async = true;
         script.defer = true;
         script.src = `https://www.google.com/recaptcha/enterprise.js?render=${siteKey}`;
@@ -70,7 +114,7 @@ export const Captcha = forwardRef<CaptchaRef, CaptchaProps>(
         };
 
         script.onerror = () => {
-          console.error("Failed to load reCAPTCHA script");
+          console.error("[Captcha] Failed to load reCAPTCHA script");
         };
 
         document.body.appendChild(script);
@@ -80,7 +124,6 @@ export const Captcha = forwardRef<CaptchaRef, CaptchaProps>(
 
       return () => {
         tokenRef.current = "";
-        isReadyRef.current = false;
       };
     }, [siteKey]);
 

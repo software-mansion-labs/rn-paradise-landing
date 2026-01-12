@@ -10,11 +10,6 @@ import {
   ReservationAccordionItem,
   ReservationAccordionTrigger,
 } from "./ReservationAccordion";
-import type {
-  DateOption,
-  DateRoomAvailability,
-  Room,
-} from "@/stores/reservationStore";
 import { Captcha } from "@/utils/recaptcha";
 import type { CaptchaRef } from "@/utils/recaptcha";
 
@@ -83,8 +78,34 @@ export function ReservationWizard({
     setSubmitError(null);
 
     try {
+      if (!siteKey) {
+        setSubmitError(
+          "reCAPTCHA is not configured. Please contact the administrator.",
+        );
+        setIsSubmitting(false);
+        return;
+      }
+
       let recaptchaToken = "";
-      if (captchaRef.current && siteKey) {
+      if (captchaRef.current) {
+        let readyRetries = 0;
+        const maxReadyRetries = 30;
+        while (
+          readyRetries < maxReadyRetries &&
+          !captchaRef.current.isReady()
+        ) {
+          await new Promise((resolve) => setTimeout(resolve, 200));
+          readyRetries++;
+        }
+
+        if (!captchaRef.current.isReady()) {
+          setSubmitError(
+            "reCAPTCHA is not ready. Please wait a moment and try again.",
+          );
+          setIsSubmitting(false);
+          return;
+        }
+
         let retries = 0;
         const maxRetries = 10;
         while (retries < maxRetries) {
@@ -95,18 +116,30 @@ export function ReservationWizard({
               break;
             }
           } catch (error) {
-            if (retries < maxRetries - 1) {
-              await new Promise((resolve) => setTimeout(resolve, 200));
-              retries++;
-              continue;
-            }
-            console.warn(
-              "reCAPTCHA not ready after retries, proceeding without token",
-            );
+            // continue retrying
+          }
+
+          if (retries < maxRetries - 1) {
+            await new Promise((resolve) => setTimeout(resolve, 200));
+            retries++;
+          } else {
             break;
           }
-          if (!recaptchaToken) break;
         }
+      } else {
+        setSubmitError(
+          "reCAPTCHA is not initialized. Please refresh the page and try again.",
+        );
+        setIsSubmitting(false);
+        return;
+      }
+
+      if (!recaptchaToken) {
+        setSubmitError(
+          "reCAPTCHA verification failed. Please refresh the page and try again.",
+        );
+        setIsSubmitting(false);
+        return;
       }
 
       const submitData = new FormData();
@@ -127,9 +160,7 @@ export function ReservationWizard({
       if (accommodationNotes) {
         submitData.append("accommodationNotes", accommodationNotes);
       }
-      if (recaptchaToken) {
-        submitData.append("recaptchaToken", recaptchaToken);
-      }
+      submitData.append("recaptchaToken", recaptchaToken);
 
       const response = await fetch("/api/submit-reservation", {
         method: "POST",

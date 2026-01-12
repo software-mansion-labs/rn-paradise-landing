@@ -79,7 +79,6 @@ export const POST: APIRoute = async ({ request }) => {
       | null;
     const recaptchaToken = formData.get("recaptchaToken") as string | null;
 
-    // Validate required fields
     if (!name || name.length < 2) {
       return new Response(
         JSON.stringify({
@@ -107,21 +106,28 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Verify reCAPTCHA if token provided
-    if (recaptchaToken) {
-      const verification = await verifyRecaptcha(recaptchaToken);
-      if (!verification.valid || verification.score < RECAPTCHA_MIN_SCORE) {
-        return new Response(
-          JSON.stringify({
-            success: false,
-            error: "Failed reCAPTCHA verification",
-          }),
-          { status: 400, headers: { "Content-Type": "application/json" } },
-        );
-      }
+    if (!recaptchaToken) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "reCAPTCHA verification is required",
+        }),
+        { status: 400, headers: { "Content-Type": "application/json" } },
+      );
     }
 
-    // Initialize SendGrid
+    const verification = await verifyRecaptcha(recaptchaToken);
+    if (!verification.valid || verification.score < RECAPTCHA_MIN_SCORE) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Failed reCAPTCHA verification",
+        }),
+        { status: 400, headers: { "Content-Type": "application/json" } },
+      );
+    }
+
+    // initialize SendGrid
     const apiKey = getSecret("SENDGRID_API_KEY");
     if (!apiKey) {
       console.error("SENDGRID_API_KEY is not configured");
@@ -135,7 +141,6 @@ export const POST: APIRoute = async ({ request }) => {
     }
     sendGrid.setApiKey(apiKey);
 
-    // Get settings and reservation data
     let settings, reservation;
     try {
       [settings, reservation] = await Promise.all([
@@ -153,7 +158,7 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Find selected date and room details
+    // find selected date and room details
     const dateOption = reservation.data.dateOptions.find(
       (d: { id: string }) => d.id === selectedDate,
     );

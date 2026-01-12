@@ -43,7 +43,59 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
     try {
       let recaptchaToken = "";
       if (captchaRef.current) {
-        recaptchaToken = await captchaRef.current.execute("submit");
+        // wait for reCAPTCHA to be ready
+        let readyRetries = 0;
+        const maxReadyRetries = 30;
+        while (
+          readyRetries < maxReadyRetries &&
+          !captchaRef.current.isReady()
+        ) {
+          await new Promise((resolve) => setTimeout(resolve, 200));
+          readyRetries++;
+        }
+
+        if (!captchaRef.current.isReady()) {
+          setFormState("error");
+          setErrorMessage(
+            "reCAPTCHA is not ready. Please wait a moment and try again.",
+          );
+          return;
+        }
+
+        let retries = 0;
+        const maxRetries = 10;
+        while (retries < maxRetries) {
+          try {
+            const token = await captchaRef.current.execute("submit");
+            if (token) {
+              recaptchaToken = token;
+              break;
+            }
+          } catch (error) {
+            // continue retrying
+          }
+
+          if (retries < maxRetries - 1) {
+            await new Promise((resolve) => setTimeout(resolve, 200));
+            retries++;
+          } else {
+            break;
+          }
+        }
+      } else {
+        setFormState("error");
+        setErrorMessage(
+          "reCAPTCHA is not initialized. Please refresh the page and try again.",
+        );
+        return;
+      }
+
+      if (!recaptchaToken) {
+        setFormState("error");
+        setErrorMessage(
+          "reCAPTCHA verification failed. Please refresh the page and try again.",
+        );
+        return;
       }
 
       const submitData = new FormData();
@@ -51,7 +103,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
       if (name) submitData.append("name", name);
       if (company) submitData.append("company", company);
       submitData.append("message", message);
-      if (recaptchaToken) submitData.append("recaptchaToken", recaptchaToken);
+      submitData.append("recaptchaToken", recaptchaToken);
 
       const response = await fetch("/api/submit-contact", {
         method: "POST",
