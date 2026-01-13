@@ -54,7 +54,10 @@ export function Step1() {
             key={date.id}
             value={date.id}
             disabled={!date.available}
-            className={cn(!date.available && "cursor-not-allowed opacity-50")}
+            className={cn(
+              "cursor-pointer",
+              !date.available && "cursor-not-allowed opacity-50",
+            )}
           >
             {date.label}
           </ToggleGroupItem>

@@ -24,7 +24,7 @@ export function Accordion({ data }: RoadmapAccordionProps) {
         return (
           <AccordionItem value={`item-${i.toFixed()}`} key={item.question}>
             <AccordionTrigger>
-              <p className="text-primary text-left text-sm font-bold">
+              <p className="text-primary cursor-pointer text-left text-sm font-bold">
                 {item.question}
               </p>
             </AccordionTrigger>

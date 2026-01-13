@@ -134,6 +134,7 @@ function ReservationAccordionTrigger({
         data-disabled={isFuture}
         className={cn(
           "focus-visible:border-ring focus-visible:ring-ring/50 flex w-full items-center gap-4 rounded-md py-4 text-left text-sm font-bold transition-all outline-none hover:no-underline focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 sm:gap-8",
+          isCompleted && "cursor-pointer",
           className,
         )}
         {...props}
