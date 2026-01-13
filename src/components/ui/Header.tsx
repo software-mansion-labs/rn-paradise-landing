@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useImperativeHandle } from "react";
+import React, { useRef, useImperativeHandle } from "react";
 import { cn } from "@/lib/utils";
 export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {}
 
@@ -15,9 +15,6 @@ const navItems = [
 
 const Header = React.forwardRef<HTMLElement, HeaderProps>(
   ({ className, ...props }, ref) => {
-    const [isScrolled, setIsScrolled] = useState(true);
-    const [activeTheme, setActiveTheme] = useState("light");
-
     const localHeaderRef = useRef<HTMLElement>(null);
     useImperativeHandle(ref, () => localHeaderRef.current!);
 
@@ -25,15 +22,7 @@ const Header = React.forwardRef<HTMLElement, HeaderProps>(
       <header
         ref={localHeaderRef}
         className={cn(
-          "sticky top-0 z-50 w-full transition-all duration-300 ease-in-out",
-          activeTheme === "dark"
-            ? "bg-primary text-white"
-            : "text-primary bg-white",
-          isScrolled
-            ? activeTheme === "dark"
-              ? "border-b border-white/40"
-              : "border-b border-black/10"
-            : "border-b border-transparent",
+          "text-primary sticky top-0 z-50 w-full border-b border-black/10 bg-white transition-all duration-300 ease-in-out",
           className,
         )}
         {...props}
@@ -54,10 +43,7 @@ const Header = React.forwardRef<HTMLElement, HeaderProps>(
                 href={item.href}
                 className={cn(
                   "font-aeonik text-md justify-center font-normal",
-                  "transition-all hover:scale-105",
-                  activeTheme === "dark"
-                    ? "hover:text-slate-300"
-                    : "hover:text-primary/70",
+                  "hover:text-primary/70 transition-all hover:scale-105",
                   "last:hidden",
                   "lg:last:block",
                 )}
@@ -75,12 +61,7 @@ const Header = React.forwardRef<HTMLElement, HeaderProps>(
           <div className="flex items-center gap-5 sm:gap-10">
             <a
               href="#reservation"
-              className={cn(
-                "font-aeonik text-md font-normal underline underline-offset-2",
-                activeTheme === "dark"
-                  ? "hover:text-slate-300"
-                  : "hover:text-primary/70",
-              )}
+              className="font-aeonik text-md hover:text-primary/70 font-normal underline underline-offset-2"
             >
               Book now
             </a>
