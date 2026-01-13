@@ -225,7 +225,7 @@ export function ReservationWizard({
                   currentStep={currentStep}
                   onStepClick={setCurrentStep}
                 />
-                <ReservationAccordionContent className="pl-18">
+                <ReservationAccordionContent className="sm:pl-18">
                   {isStep3 ? (
                     <Step3
                       onSubmit={handleSubmit}

@@ -56,7 +56,9 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
           <div className="mx-auto flex w-full max-w-[1360px] items-center justify-between py-12 md:py-20">
             <div className="flex w-full items-center justify-between gap-8 text-white max-md:flex-col max-md:items-center max-md:gap-10">
               <div className="flex flex-col items-start gap-2">
-                <h2 className="text-md font-bold">Software Mansion S.A.</h2>
+                <h2 className="text-md font-bold md:text-[22px]">
+                  Software Mansion S.A.
+                </h2>
                 <h3 className="text-sm font-normal">
                   ul. Zabłocie 43b
                   <br />
@@ -78,7 +80,7 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
                     >
                       <img
                         src={icon}
-                        className="h-3 w-3 md:h-6 md:w-6"
+                        className="h-4 w-4 md:h-6 md:w-6"
                         alt={`${icon} icon`}
                         width="16"
                         height="16"

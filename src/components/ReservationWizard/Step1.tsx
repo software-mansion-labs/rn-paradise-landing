@@ -39,7 +39,7 @@ export function Step1() {
 
   return (
     <div className="flex w-full flex-col gap-6">
-      <p className="text-primary text-sm">
+      <p className="text-primary text-xs">
         Not all dates are guaranteed – select all that work for you:
       </p>
 
@@ -76,7 +76,7 @@ export function Step1() {
                 {availableRooms.map((room) => (
                   <CarouselItem
                     key={room.id}
-                    className="flex min-w-0 basis-3/5 pl-6 md:basis-2/5"
+                    className="flex min-w-0 basis-4/5 pl-6 sm:basis-3/5 md:basis-2/5"
                   >
                     <RoomCard
                       room={room}
@@ -87,7 +87,7 @@ export function Step1() {
               </CarouselContent>
             </Carousel>
           ) : (
-            <p className="text-primary/80 text-sm">
+            <p className="text-primary/80 text-xs">
               No rooms available for this date.
             </p>
           )}
@@ -95,7 +95,7 @@ export function Step1() {
       )}
 
       <div className="flex flex-col gap-4">
-        <div className="text-primary text-sm leading-[150%]">
+        <div className="text-primary text-xs leading-[150%]">
           <p>We also offer additional accommodation options for couples:</p>
           <ol className="list-inside list-decimal pl-4">
             <li>
@@ -115,7 +115,7 @@ export function Step1() {
           onChange={(e) => setAccommodationNotes(e.target.value)}
           placeholder="Write something..."
           rows={2}
-          className="text-primary border-primary placeholder:text-primary/50 resize-none rounded-sm border px-4 py-3 text-sm placeholder:text-sm"
+          className="text-primary border-primary placeholder:text-primary/50 resize-none rounded-sm border px-4 py-3 text-xs placeholder:text-xs focus:outline-none"
         />
       </div>
 

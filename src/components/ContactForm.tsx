@@ -136,20 +136,20 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
         onSubmit={handleSubmit}
         className="relative flex w-full flex-col gap-6 bg-white px-14 py-12 shadow-md md:flex-row md:gap-8"
       >
-        <div className="absolute top-8 right-8 md:hidden">
+        <div className="absolute top-5 right-5 sm:top-8 sm:right-8 md:hidden">
           <img
             src="/assets/logo-with-stamp.png"
             alt="React Native Paradise Logo"
-            className="h-20 w-auto"
+            className="h-15 w-auto sm:h-20"
           />
         </div>
 
         <div className="border-gray-border flex w-full flex-col gap-6 pr-0 md:w-1/2 md:border-r md:pr-8">
           <div className="flex flex-col gap-2">
-            <h2 className="text-primary text-xl/9 font-medium">
+            <h2 className="text-primary text-lg font-bold">
               Have more questions? <br /> Contact us here!
             </h2>
-            <p className="text-primary text-sm font-normal">
+            <p className="text-primary text-xs">
               Or join our{" "}
               <a
                 href={discordUrl}
@@ -164,10 +164,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label
-              htmlFor="message"
-              className="text-primary text-sm font-medium"
-            >
+            <label htmlFor="message" className="text-primary text-xs font-bold">
               Message <span className="text-primary/80">(required)</span>
             </label>
             <textarea
@@ -178,7 +175,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
               rows={6}
               placeholder="Message"
               disabled={formState === "submitting"}
-              className="text-primary border-gray-border resize-none border bg-gray-50 px-4 py-3 text-sm placeholder:text-sm placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
+              className="text-primary border-gray-border resize-none border bg-gray-50 px-4 py-3 text-xs placeholder:text-xs placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
             />
           </div>
         </div>
@@ -194,10 +191,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
 
           <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-2">
-              <label
-                htmlFor="email"
-                className="text-primary text-sm font-medium"
-              >
+              <label htmlFor="email" className="text-primary text-xs font-bold">
                 Email <span className="text-primary/80">(required)</span>
               </label>
               <input
@@ -207,15 +201,12 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
                 required
                 placeholder="Email"
                 disabled={formState === "submitting"}
-                className="text-primary border-gray-border border bg-gray-50 px-4 py-3 text-sm placeholder:text-sm placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
+                className="text-primary border-gray-border border bg-gray-50 px-4 py-3 text-xs placeholder:text-xs placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label
-                htmlFor="name"
-                className="text-primary text-sm font-medium"
-              >
+              <label htmlFor="name" className="text-primary text-xs font-bold">
                 Your name
               </label>
               <input
@@ -224,14 +215,14 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
                 name="name"
                 placeholder="Name"
                 disabled={formState === "submitting"}
-                className="text-primary border-gray-border border bg-gray-50 px-4 py-3 text-sm placeholder:text-sm placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
+                className="text-primary border-gray-border border bg-gray-50 px-4 py-3 text-xs placeholder:text-xs placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
               />
             </div>
 
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="company"
-                className="text-primary text-sm font-medium"
+                className="text-primary text-xs font-bold"
               >
                 Company name
               </label>
@@ -241,7 +232,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
                 name="company"
                 placeholder="Company name"
                 disabled={formState === "submitting"}
-                className="text-primary border-gray-border border bg-gray-50 px-4 py-3 text-sm placeholder:text-sm placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
+                className="text-primary border-gray-border border bg-gray-50 px-4 py-3 text-xs placeholder:text-xs placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
               />
             </div>
           </div>

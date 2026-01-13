@@ -37,15 +37,15 @@ const polaroidGallery = (aboutData?.data.polaroidGallery || [])
 
 <section
   id="about"
-  class="relative -mt-32 flex w-full scroll-m-5 flex-col items-center justify-center overflow-visible bg-transparent"
+  class="relative -mt-32 flex w-full scroll-m-5 flex-col items-center justify-center overflow-hidden bg-transparent"
 >
   <div
-    class="relative z-10 w-full rounded-t-[64px] bg-[#F6F2E5] pt-18 pb-12 sm:pt-24 sm:pb-18 md:pt-28 md:pb-32 lg:pt-32 lg:pb-40"
+    class="bg-beige-1 relative z-10 w-full rounded-t-[64px] pt-18 pb-12 sm:pt-24 sm:pb-18 md:pt-28 md:pb-32 lg:pt-32 lg:pb-40"
   >
     <ContentWrapper
       className="flex w-full flex-col items-center justify-center"
     >
-      <h2 class="text-primary mb-20 text-center text-2xl/9 font-medium">
+      <h2 class="text-primary mb-20 text-center text-lg font-bold">
         What can you expect?
       </h2>
 
@@ -67,7 +67,7 @@ const polaroidGallery = (aboutData?.data.polaroidGallery || [])
       </div>
 
       {/* Polaroid Gallery */}
-      <div class="relative flex w-full items-center justify-center">
+      <div class="relative flex w-full items-center justify-center px-20">
         <div
           class="relative mx-auto flex max-w-[1200px] items-center justify-center"
         >
@@ -79,7 +79,7 @@ const polaroidGallery = (aboutData?.data.polaroidGallery || [])
               const scale = 0.66;
               return (
                 <div
-                  class="relative -mx-20 -my-10"
+                  class="relative -mx-10 -my-10 md:-mx-20"
                   style={`transform: rotate(${polaroidGalleryRotations[index]}deg) translateY(${translateY}px) scale(${scale}); z-index: ${zIndex}; transform-origin: center center;`}
                 >
                   <PolaroidCard

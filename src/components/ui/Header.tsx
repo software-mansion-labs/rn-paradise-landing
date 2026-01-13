@@ -42,7 +42,7 @@ const Header = React.forwardRef<HTMLElement, HeaderProps>(
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "font-aeonik text-md justify-center font-normal",
+                  "font-aeonik justify-center text-sm font-normal",
                   "hover:text-primary/70 transition-all hover:scale-105",
                   "last:hidden",
                   "lg:last:block",
@@ -61,7 +61,7 @@ const Header = React.forwardRef<HTMLElement, HeaderProps>(
           <div className="flex items-center gap-5 sm:gap-10">
             <a
               href="#reservation"
-              className="font-aeonik text-md hover:text-primary/70 font-normal underline underline-offset-2"
+              className="hover:text-primary/70 text-sm underline underline-offset-2"
             >
               Book now
             </a>

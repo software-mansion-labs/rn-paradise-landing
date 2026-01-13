@@ -1,32 +1,27 @@
 @theme {
-  --breakpoint-sm: 600px;
+  --breakpoint-sm: 769px;
   --breakpoint-md: 1025px;
-  --breakpoint-lg: 1550px;
+  --breakpoint-lg: 1440px;
   --breakpoint-xl: initial;
   --breakpoint-2xl: initial;
 
   --font-primary: var(--font-aeonik), "sans-serif";
   --font-cookie: "Cookie", cursive;
 
-  --text-2xs: 14px;
+  --text-2xs: 12px;
   --text-2xs--line-height: 18px;
   --text-xs: 14px;
-  --text-xs--line-height: 20px;
-  --text-sm: 14px;
-  --text-sm--line-height: 22px;
-  --text-md: 16px;
-  --text-md--line-height: 24px;
-  --text-lg: 16px;
-  --text-lg--line-height: 26px;
-  --text-xl: 18px;
-  --text-xl--line-height: 30px;
-  --text-2xl: 28px;
-  --text-2xl--line-height: 34px;
-  --text-3xl: 34px;
-  --text-3xl--line-height: 40px;
+  --text-xs--line-height: 21px;
+  --text-sm: 16px;
+  --text-sm--line-height: 24px;
+  --text-md: 20px;
+  --text-md--line-height: 26px;
+  --text-lg: 24px;
+  --text-lg--line-height: 31px;
+  --text-xl: 50px;
+  --text-xl--line-height: 65px;
 
   --font-weight-normal: 400;
-  --font-weight-medium: 400;
   --font-weight-bold: 500;
 
   /* Brand Colors */
@@ -75,20 +70,18 @@
   --color-dark-cold: #0d0f26;
   --color-dark-warm: #26251f;
 
-  /* --color-primary: var(--color-swm-brand-100); */
   --color-primary: var(--color-dark-warm);
-  --color-primary-hover: var(--color-swm-brand-80);
-  /* --color-secondary: var(--color-swm-brand-60); */
   --color-secondary: var(--color-swm-brand-100);
-  --color-secondary-hover: var(--color-swm-brand-80);
-
-  --color-tertiary: var(--color-swm-brand-40);
-
-  --color-sea-blue: var(--color-brand-sea-blue-20);
-  /* --color-yellow: var(--color-brand-yellow-20); */
-  --color-yellow: #fcfaf1;
+  /* --color-tertiary: var(--color-swm-brand-40); */
 
   --color-badge-yellow: #ffe572;
+  --color-beige-light: #fffbef;
+  --color-beige-1: #f6f2e5;
+  --color-beige-2: #fcfaf1;
+  --color-beige-3: #fffaf0;
+  --color-beige-4: #fff4c0;
+
+  --color-sea-blue: var(--color-brand-sea-blue-20);
   --color-reservation-blue: #5eafe6;
   --color-reservation-blue-bright: #e2f2fd;
 }
@@ -97,63 +90,51 @@
   @variant sm {
     :root {
       --text-2xs: 14px;
-      --text-2xs--line-height: 18px;
-      --text-xs: 14px;
-      --text-xs--line-height: 20px;
-      --text-sm: 14px;
-      --text-sm--line-height: 22px;
-      --text-md: 16px;
-      --text-md--line-height: 24px;
-      --text-lg: 16px;
-      --text-lg--line-height: 26px;
-      --text-xl: 18px;
-      --text-xl--line-height: 30px;
-      --text-2xl: 28px;
-      --text-2xl--line-height: 34px;
-      --text-3xl: 34px;
-      --text-3xl--line-height: 40px;
+      --text-2xs--line-height: 21px;
+      --text-xs: 16px;
+      --text-xs--line-height: 24px;
+      --text-sm: 18px;
+      --text-sm--line-height: 27px;
+      --text-md: 20px;
+      --text-md--line-height: 26px;
+      --text-lg: 28px;
+      --text-lg--line-height: 36.5px;
+      --text-xl: 62px;
+      --text-xl--line-height: 80.5px;
     }
   }
 
   @variant md {
     :root {
       --text-2xs: 14px;
-      --text-2xs--line-height: 18px;
-      --text-xs: 14px;
-      --text-xs--line-height: 20px;
-      --text-sm: 16px;
-      --text-sm--line-height: 24px;
-      --text-md: 18px;
-      --text-md--line-height: 26px;
-      --text-lg: 20px;
-      --text-lg--line-height: 30px;
-      --text-xl: 26px;
-      --text-xl--line-height: 36px;
-      --text-2xl: 40px;
-      --text-2xl--line-height: 50px;
-      --text-3xl: 52px;
-      --text-3xl--line-height: 62px;
+      --text-2xs--line-height: 21px;
+      --text-xs: 16px;
+      --text-xs--line-height: 24px;
+      --text-sm: 18px;
+      --text-sm--line-height: 27px;
+      --text-md: 24px;
+      --text-md--line-height: 31px;
+      --text-lg: 32px;
+      --text-lg--line-height: 41.5px;
+      --text-xl: 72px;
+      --text-xl--line-height: 93.5px;
     }
   }
 
   @variant lg {
     :root {
       --text-2xs: 14px;
-      --text-2xs--line-height: 18px;
+      --text-2xs--line-height: 21px;
       --text-xs: 16px;
       --text-xs--line-height: 24px;
       --text-sm: 18px;
-      --text-sm--line-height: 26px;
-      --text-md: 20px;
-      --text-md--line-height: 28px;
-      --text-lg: 24px;
-      --text-lg--line-height: 36px;
-      --text-xl: 36px;
-      --text-xl--line-height: 50px;
-      --text-2xl: 52px;
-      --text-2xl--line-height: 64px;
-      --text-3xl: 64px;
-      --text-3xl--line-height: 74px;
+      --text-sm--line-height: 27px;
+      --text-md: 24px;
+      --text-md--line-height: 31px;
+      --text-lg: 32px;
+      --text-lg--line-height: 41.5px;
+      --text-xl: 72px;
+      --text-xl--line-height: 93.5px;
     }
   }
   code {

@@ -41,12 +41,10 @@ const featureCardIcons = [
       </p>
 
       <div class="relative">
-        <h1
-          class="text-primary relative z-2 text-center text-4xl font-medium sm:text-5xl md:text-6xl lg:text-7xl"
-        >
-          <span class="block text-white">React Native</span>
+        <h1 class="text-primary relative z-2 text-center text-xl">
+          <span class="text-beige-light block">React Native</span>
           <span
-            class="text-primary font-cookie block -translate-x-4 -translate-y-7 text-[104px] font-normal whitespace-nowrap italic"
+            class="text-primary font-cookie block -translate-y-5 text-[72px] whitespace-nowrap sm:-translate-x-1 sm:-translate-y-7 sm:text-[84px] md:translate-x-1 md:-translate-y-8 md:text-[104px] lg:translate-x-0"
             >Paradise</span
           >
         </h1>
@@ -54,7 +52,7 @@ const featureCardIcons = [
           editionNumber && (
             <EditionBadge
               editionNumber={editionNumber}
-              className="bottom-7 -right-11 z-1"
+              className="bottom-6 -right-8 sm:bottom-7 md:-right-11 md:bottom-9 z-1"
               variant="default"
               size="sm"
             />
@@ -76,7 +74,7 @@ const featureCardIcons = [
           <div class="flex flex-col items-center gap-2.5 sm:flex-row sm:gap-4">
             {
               eventDate && (
-                <div class="text-primary/80 flex items-center gap-2 text-sm">
+                <div class="text-primary/80 flex items-center gap-2 text-xs">
                   <img
                     src={"/assets/hero-icons/Calendar.svg"}
                     alt={"calendar"}
@@ -88,7 +86,7 @@ const featureCardIcons = [
             }
             {
               eventLocation && (
-                <div class="text-primary/80 flex items-center gap-2 text-sm">
+                <div class="text-primary/80 flex items-center gap-2 text-xs">
                   <img
                     src={"/assets/hero-icons/MapPin.svg"}
                     alt={"map pin"}

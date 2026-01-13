@@ -100,7 +100,7 @@ function ReservationAccordionTrigger({
           }
         }}
         className={cn(
-          "flex shrink-0 items-center justify-center rounded-full border-2 text-sm font-medium transition-colors",
+          "flex shrink-0 items-center justify-center rounded-full border-2 text-sm font-bold transition-colors",
           isCompleted
             ? "border-primary bg-primary text-white"
             : isActive
@@ -133,15 +133,13 @@ function ReservationAccordionTrigger({
         disabled={isFuture}
         data-disabled={isFuture}
         className={cn(
-          "focus-visible:border-ring focus-visible:ring-ring/50 flex w-full items-center gap-8 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:no-underline focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50",
+          "focus-visible:border-ring focus-visible:ring-ring/50 flex w-full items-center gap-4 rounded-md py-4 text-left text-sm font-bold transition-all outline-none hover:no-underline focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 sm:gap-8",
           className,
         )}
         {...props}
       >
         {renderStepButton()}
-        <h3 className="text-primary text-md flex-1 py-2 font-bold whitespace-nowrap">
-          {title}
-        </h3>
+        <h3 className="text-primary flex-1 py-2 text-sm font-bold">{title}</h3>
         {isCompleted && (
           <img
             src="/assets/reservation-icons/Edit.svg"

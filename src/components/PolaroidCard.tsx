@@ -42,7 +42,7 @@ export default function PolaroidCard({
         />
       )}
       {caption && isMain && (
-        <p className="text-primary text-2xs absolute bottom-[4%] left-1/2 min-w-[220px] -translate-x-1/2 px-4 text-center font-medium whitespace-nowrap sm:text-sm md:bottom-[5%]">
+        <p className="text-primary text-2xs absolute bottom-[4%] left-1/2 min-w-[220px] -translate-x-1/2 px-4 text-center whitespace-nowrap md:bottom-[5%]">
           {caption}
         </p>
       )}

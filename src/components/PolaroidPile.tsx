@@ -144,7 +144,6 @@ export default function PolaroidPile({
               <EditionBadge
                 editionNumber={editionNumber}
                 className="absolute top-[-7%] left-[-14%] z-50"
-                size="md"
                 variant="secondary"
               />
             )}

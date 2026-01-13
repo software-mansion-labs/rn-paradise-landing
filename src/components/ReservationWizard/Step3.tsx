@@ -28,20 +28,25 @@ export function Step3({ onSubmit, isSubmitting = false, error }: Step3Props) {
 
   return (
     <div className="flex w-full flex-col gap-6">
-      <p className="text-primary text-sm leading-[150%]">
+      <p className="text-primary text-xs leading-[150%]">
         We'll send you payment and event details – we'll confirm your
         reservation once enough participants sign up.
       </p>
 
       <div className="flex flex-col gap-4">
         {error && <p className="text-sm text-red-500">{error}</p>}
-        <div className="flex items-center gap-6">
-          <Button onClick={onSubmit} size="xl" disabled={isSubmitting}>
+        <div className="flex flex-col items-center gap-6 sm:flex-row">
+          <Button
+            onClick={onSubmit}
+            size="xl"
+            disabled={isSubmitting}
+            className="max-sm:order-2"
+          >
             {isSubmitting ? "Submitting..." : "Submit request"}
           </Button>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 max-sm:order-1">
             <Info className="color-primary/80 h-5 w-5" />
-            <p className="text-primary/80 text-sm">
+            <p className="text-primary/80 text-2xs">
               We'll get back to you within 5 business days.
             </p>
           </div>

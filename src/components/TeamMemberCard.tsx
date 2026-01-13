@@ -43,7 +43,7 @@ export default function TeamMemberCard({
                 backgroundColor: "var(--color-brand-sea-blue-20)",
               }}
             >
-              <p className="text-primary text-center text-sm leading-relaxed">
+              <p className="text-primary text-center text-xs leading-relaxed">
                 {bio}
               </p>
             </div>
@@ -54,8 +54,8 @@ export default function TeamMemberCard({
       {/* Text content */}
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
-          <h3 className="text-primary text-center text-xl">{name}</h3>
-          <p className="text-primary/80 text-center text-sm">
+          <h3 className="text-primary text-md text-center">{name}</h3>
+          <p className="text-primary/80 text-2xs text-center">
             {role}, <br /> {company || "Software Mansion"}
           </p>
         </div>

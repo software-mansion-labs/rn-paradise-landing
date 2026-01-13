@@ -24,14 +24,12 @@ export function Accordion({ data }: RoadmapAccordionProps) {
         return (
           <AccordionItem value={`item-${i.toFixed()}`} key={item.question}>
             <AccordionTrigger>
-              <p className="text-primary text-left text-xl font-medium">
+              <p className="text-primary text-left text-sm font-bold">
                 {item.question}
               </p>
             </AccordionTrigger>
             <AccordionContent>
-              <p className="text-primary text-md text-left font-medium">
-                {item.answer}
-              </p>
+              <p className="text-primary text-left text-xs">{item.answer}</p>
             </AccordionContent>
           </AccordionItem>
         );

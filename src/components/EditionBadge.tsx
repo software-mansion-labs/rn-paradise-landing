@@ -23,40 +23,17 @@ const getOrdinalIndicator = (num: number): string => {
 interface EditionBadgeProps {
   editionNumber: number;
   variant?: "default" | "secondary";
-  size?: "sm" | "md" | "lg";
   className?: string;
 }
 
 export default function EditionBadge({
   editionNumber,
   variant = "default",
-  size = "md",
   className,
 }: EditionBadgeProps) {
   const variantClasses = {
-    default: "bg-primary text-white",
+    default: "bg-primary text-beige-light",
     secondary: "bg-badge-yellow text-primary",
-  };
-
-  const sizeClasses = {
-    sm: "h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24",
-    md: "h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28",
-    lg: "h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32",
-  };
-
-  const textSizeClasses = {
-    sm: {
-      number: "text-md leading-none sm:text-lg md:text-xl",
-      label: "text-2xs leading-none sm:text-xs",
-    },
-    md: {
-      number: "text-xl leading-none",
-      label: "text-xs leading-none",
-    },
-    lg: {
-      number: "text-2xl leading-none sm:text-3xl md:text-4xl",
-      label: "text-sm leading-none sm:text-base",
-    },
   };
 
   if (!editionNumber) return null;
@@ -65,16 +42,15 @@ export default function EditionBadge({
     <div
       className={cn(
         variantClasses[variant],
-        "absolute flex rotate-[10deg] items-center justify-center rounded-full shadow-md",
-        sizeClasses[size],
+        "absolute flex h-16 w-16 rotate-[10deg] items-center justify-center rounded-full shadow-md sm:h-19 sm:w-19 md:h-22 md:w-22",
         className,
       )}
     >
       <div className="flex flex-col items-center justify-center gap-0">
-        <span className={cn(textSizeClasses[size].number)}>
+        <span className="text-md sm:text-md leading-none">
           {getOrdinalIndicator(editionNumber)}
         </span>
-        <span className={cn(textSizeClasses[size].label)}>edition</span>
+        <span className="text-2xs leading-none sm:text-xs">edition</span>
       </div>
     </div>
   );

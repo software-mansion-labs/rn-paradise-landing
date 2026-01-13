@@ -56,7 +56,7 @@ export function Step2() {
   return (
     <div className="flex w-full flex-col gap-6">
       <div className="flex flex-col gap-4">
-        <h4 className="text-primary text-lg font-medium">Contact person:</h4>
+        <h4 className="text-primary text-lg font-bold">Contact person:</h4>
 
         <div className="gap- flex flex-col gap-4">
           <div className="flex flex-col gap-3">
@@ -73,7 +73,7 @@ export function Step2() {
                   onBlur={(e) => validateField("name", e.target.value)}
                   placeholder="Name and surname"
                   required
-                  className={`text-primary border-primary placeholder:text-primary/50 w-full rounded-sm border px-4 py-3 text-sm placeholder:text-sm ${
+                  className={`text-primary border-primary placeholder:text-primary/50 w-full rounded-sm border px-4 py-3 text-sm placeholder:text-sm focus:outline-none ${
                     errors.name ? "border-red-500" : ""
                   }`}
                 />
@@ -97,7 +97,7 @@ export function Step2() {
                     onBlur={(e) => validateField("email", e.target.value)}
                     placeholder="Email"
                     required
-                    className={`text-primary border-primary placeholder:text-primary/50 w-full rounded-sm border px-4 py-3 text-sm placeholder:text-sm ${
+                    className={`text-primary border-primary placeholder:text-primary/50 w-full rounded-sm border px-4 py-3 text-sm placeholder:text-sm focus:outline-none${
                       errors.email ? "border-red-500" : ""
                     }`}
                   />
@@ -118,7 +118,7 @@ export function Step2() {
                     updatePersonalDetails({ company: e.target.value })
                   }
                   placeholder="Company name"
-                  className="text-primary border-primary placeholder:text-primary/50 w-full rounded-sm border px-4 py-3 text-sm placeholder:text-sm"
+                  className="text-primary border-primary placeholder:text-primary/50 w-full rounded-sm border px-4 py-3 text-sm placeholder:text-sm focus:outline-none"
                 />
                 <p className="invisible text-xs">placeholder</p>
               </div>
@@ -133,11 +133,11 @@ export function Step2() {
               onChange={(e) =>
                 updatePersonalDetails({ needsInvoice: e.target.checked })
               }
-              className="border-primary text-primary focus:ring-primary h-4 w-4"
+              className="border-primary text-primary focus:outline-primary h-4 w-4"
             />
             <label
               htmlFor="needs-invoice"
-              className="text-primary cursor-pointer text-sm font-medium"
+              className="text-primary cursor-pointer text-sm font-bold"
             >
               I need an invoice
             </label>
@@ -147,7 +147,7 @@ export function Step2() {
         <div className="flex flex-col gap-2">
           <label
             htmlFor="additional-notes"
-            className="text-primary text-sm font-medium"
+            className="text-primary text-sm font-bold"
           >
             Additional notes:
           </label>
@@ -159,7 +159,7 @@ export function Step2() {
             }
             placeholder="Write something..."
             rows={4}
-            className="text-primary border-primary placeholder:text-primary/50 resize-none rounded-sm border px-4 py-3 text-sm placeholder:text-sm focus:ring-offset-2"
+            className="text-primary border-primary placeholder:text-primary/50 resize-none rounded-sm border px-4 py-3 text-sm placeholder:text-sm focus:outline-none"
           />
         </div>
       </div>
