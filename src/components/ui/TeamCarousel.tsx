@@ -34,7 +34,7 @@ export default function TeamCarousel({ members }: TeamCarouselProps) {
     >
       <CarouselContent className="-ml-4">
         {members.map((member, index) => (
-          <CarouselItem key={index} className="basis-1/3 pl-4">
+          <CarouselItem key={index} className="basis-1/2 pl-4 sm:basis-1/3">
             <TeamMemberCard
               name={member.name}
               role={member.role}
@@ -46,8 +46,8 @@ export default function TeamCarousel({ members }: TeamCarouselProps) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="top-[200px]" />
-      <CarouselNext className="top-[200px]" />
+      <CarouselPrevious className="top-[130px] max-sm:hidden md:top-[200px]" />
+      <CarouselNext className="top-[130px] max-sm:hidden md:top-[200px]" />
     </Carousel>
   );
 }
