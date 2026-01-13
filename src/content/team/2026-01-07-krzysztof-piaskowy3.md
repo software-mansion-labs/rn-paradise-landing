@@ -6,7 +6,7 @@ bio: Krzysztof is a React Native open-source developer at Software Mansion. He
   ecosystem like Hermes, react-native-wgpu, and react-native-gesture-handler.
   His colleagues often joke that he is the Godfather of Reanimated. Personally,
   he is a robotics lover and passionate about embedded programming.
-image: /media/krzysztof-piaskowy.png
+image: /media/krzysztof-piaskowy.webp
 order: 3
 social:
   twitter: https://x.com/piaskowyk

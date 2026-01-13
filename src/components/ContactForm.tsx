@@ -138,7 +138,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
       >
         <div className="absolute top-5 right-5 sm:top-8 sm:right-8 md:hidden">
           <img
-            src="/assets/logo-with-stamp.png"
+            src="/assets/logo-with-stamp.webp"
             alt="React Native Paradise Logo"
             className="h-15 w-auto sm:h-20"
           />
@@ -183,7 +183,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
         <div className="flex w-full flex-col gap-8 pl-0 md:w-1/2 md:justify-between md:pl-8">
           <div className="hidden justify-end md:flex">
             <img
-              src="/assets/logo-with-stamp.png"
+              src="/assets/logo-with-stamp.webp"
               alt="React Native Paradise Logo"
               className="h-32 w-auto"
             />
