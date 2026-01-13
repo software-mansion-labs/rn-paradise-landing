@@ -10,17 +10,16 @@ const backgroundVideo = unforgettableExperience?.data.backgroundVideo;
 ---
 
 <section
-  class="relative flex w-full flex-col items-center justify-center overflow-hidden bg-black"
-  style="min-height: 100vh;"
+  class="relative flex h-[60vh] max-h-[800px] w-full flex-col items-center justify-center overflow-hidden bg-black"
   aria-label="Hero section with background video and event description"
 >
-  <div class="absolute inset-0 z-0 h-full w-full">
+  <div class="absolute inset-0 z-0 h-full w-full overflow-hidden">
     <video
       autoplay
       loop
       muted
       playsinline
-      class="h-full w-full object-cover"
+      class="h-full w-full object-cover object-center"
       aria-hidden="true"
     >
       <source src={backgroundVideo} type="video/mp4" />
@@ -30,7 +29,7 @@ const backgroundVideo = unforgettableExperience?.data.backgroundVideo;
   <div class="absolute inset-0 z-[1] bg-black/60"></div>
 
   <ContentWrapper
-    className="relative z-20 flex min-h-screen w-full flex-col items-center justify-center px-6"
+    className="relative z-20 flex h-full w-full flex-col items-center justify-center px-6"
   >
     <div
       class="text-beige-3 flex max-w-3xl flex-col items-center justify-center gap-6 text-center"
