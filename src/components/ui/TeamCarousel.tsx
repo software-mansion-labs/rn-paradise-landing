@@ -30,19 +30,26 @@ export default function TeamCarousel({ members }: TeamCarouselProps) {
       opts={{
         loop: true,
         align: "start",
+        duration: 35,
+        dragFree: false,
       }}
     >
       <CarouselContent className="-ml-4">
         {members.map((member, index) => (
-          <CarouselItem key={index} className="basis-1/2 pl-4 sm:basis-1/3">
-            <TeamMemberCard
-              name={member.name}
-              role={member.role}
-              company={member.company}
-              image={member.image}
-              bio={member.bio}
-              social={member.social}
-            />
+          <CarouselItem
+            key={index}
+            className="animate-in fade-in basis-1/2 px-6 py-8 duration-700 sm:basis-1/3"
+          >
+            <div className="overflow-visible">
+              <TeamMemberCard
+                name={member.name}
+                role={member.role}
+                company={member.company}
+                image={member.image}
+                bio={member.bio}
+                social={member.social}
+              />
+            </div>
           </CarouselItem>
         ))}
       </CarouselContent>

@@ -22,12 +22,15 @@ export default function TeamMemberCard({
     <div className="flex max-w-80 flex-col gap-4">
       {/* Image flip container */}
       <div
-        className="group relative max-h-100 w-full max-w-80"
+        className="group relative max-h-100 w-full max-w-80 overflow-visible p-2"
         style={{ aspectRatio: "2/3", perspective: "1000px" }}
       >
-        <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+        <div
+          className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]"
+          style={{ transformOrigin: "center center" }}
+        >
           {/* Front face - image */}
-          <div className="absolute inset-0 overflow-hidden [backface-visibility:hidden]">
+          <div className="absolute inset-0 [backface-visibility:hidden]">
             <img
               src={image}
               alt={name}
