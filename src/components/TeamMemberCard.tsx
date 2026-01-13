@@ -72,7 +72,7 @@ export default function TeamMemberCard({
                 <img
                   src="/assets/socials/twitter-black.svg"
                   alt="Twitter"
-                  className="h-6 w-6"
+                  className="h-6 w-6 hover:opacity-80"
                 />
               </a>
             )}
@@ -87,7 +87,7 @@ export default function TeamMemberCard({
                 <img
                   src="/assets/socials/github-black.svg"
                   alt="GitHub"
-                  className="h-6 w-6"
+                  className="h-6 w-6 hover:opacity-80"
                 />
               </a>
             )}
