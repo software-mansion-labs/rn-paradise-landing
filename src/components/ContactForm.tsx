@@ -165,7 +165,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
       <form
         onSubmit={handleSubmit}
         noValidate
-        className="relative flex w-full flex-col gap-6 bg-white px-14 py-12 shadow-md md:flex-row md:gap-8"
+        className="relative flex w-full flex-col gap-6 bg-white px-8 py-6 shadow-md md:flex-row md:gap-8 md:px-14 md:py-12"
       >
         <div className="absolute top-5 right-5 sm:top-8 sm:right-8 md:hidden">
           <img
