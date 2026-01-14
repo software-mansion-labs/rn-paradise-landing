@@ -14,6 +14,10 @@ type FormState = "idle" | "submitting" | "success" | "error";
 export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [fieldErrors, setFieldErrors] = useState<{
+    email?: string;
+    message?: string;
+  }>({});
   const captchaRef = useRef<CaptchaRef>(null);
   const messageTextareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -30,8 +34,8 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormState("submitting");
     setErrorMessage("");
+    setFieldErrors({});
 
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -39,6 +43,27 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
     const name = formData.get("name") as string;
     const company = formData.get("company") as string;
     const message = formData.get("message") as string;
+
+    // Validate fields
+    const errors: { email?: string; message?: string } = {};
+    if (!email || email.trim().length === 0) {
+      errors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "Please enter a valid email address";
+    }
+    if (!message || message.trim().length < 10) {
+      errors.message =
+        "Message is required and must be at least 10 characters long.";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setFormState("error");
+      setErrorMessage("Please fix the errors in the form");
+      return;
+    }
+
+    setFormState("submitting");
 
     try {
       let recaptchaToken = "";
@@ -114,6 +139,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
 
       if (data.success) {
         setFormState("success");
+        setFieldErrors({});
         form.reset();
         if (captchaRef.current) {
           captchaRef.current.reset();
@@ -134,6 +160,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
       <Captcha ref={captchaRef} siteKey={siteKey} />
       <form
         onSubmit={handleSubmit}
+        noValidate
         className="relative flex w-full flex-col gap-6 bg-white px-14 py-12 shadow-md md:flex-row md:gap-8"
       >
         <div className="absolute top-5 right-5 sm:top-8 sm:right-8 md:hidden">
@@ -171,12 +198,32 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
               ref={messageTextareaRef}
               id="message"
               name="message"
-              required
               rows={6}
               placeholder="Message"
               disabled={formState === "submitting"}
-              className="text-primary border-gray-border resize-none border bg-gray-50 px-4 py-3 text-xs placeholder:text-xs placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
+              onChange={() => {
+                if (fieldErrors.message) {
+                  setFieldErrors((prev) => ({ ...prev, message: undefined }));
+                }
+              }}
+              onBlur={(e) => {
+                const value = e.target.value.trim();
+                if (!value) {
+                  setFieldErrors((prev) => ({
+                    ...prev,
+                    message: "Message is required",
+                  }));
+                }
+              }}
+              className={`text-primary border-gray-border resize-none border bg-gray-50 px-4 py-3 text-xs placeholder:text-xs placeholder:text-gray-300 focus:outline-none disabled:opacity-50 ${
+                fieldErrors.message ? "border-red-500" : ""
+              }`}
             />
+            {fieldErrors.message && (
+              <p className="text-2xs pl-1 text-red-500">
+                {fieldErrors.message}
+              </p>
+            )}
           </div>
         </div>
 
@@ -198,11 +245,36 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
                 type="email"
                 id="email"
                 name="email"
-                required
                 placeholder="Email"
                 disabled={formState === "submitting"}
-                className="text-primary border-gray-border border bg-gray-50 px-4 py-3 text-xs placeholder:text-xs placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
+                onChange={() => {
+                  if (fieldErrors.email) {
+                    setFieldErrors((prev) => ({ ...prev, email: undefined }));
+                  }
+                }}
+                onBlur={(e) => {
+                  const value = e.target.value.trim();
+                  if (!value) {
+                    setFieldErrors((prev) => ({
+                      ...prev,
+                      email: "Email is required",
+                    }));
+                  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                    setFieldErrors((prev) => ({
+                      ...prev,
+                      email: "Please enter a valid email address",
+                    }));
+                  }
+                }}
+                className={`text-primary border-gray-border border bg-gray-50 px-4 py-3 text-xs placeholder:text-xs placeholder:text-gray-300 focus:outline-none disabled:opacity-50 ${
+                  fieldErrors.email ? "border-red-500" : ""
+                }`}
               />
+              {fieldErrors.email && (
+                <p className="text-2xs pl-1 text-red-500">
+                  {fieldErrors.email}
+                </p>
+              )}
             </div>
 
             <div className="flex flex-col gap-2">

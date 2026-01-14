@@ -79,7 +79,7 @@ export function Step2() {
                 />
               </div>
               {errors.name && (
-                <p className="text-xs text-red-500">{errors.name}</p>
+                <p className="text-2xs text-red-500">{errors.name}</p>
               )}
             </div>
 
@@ -99,13 +99,13 @@ export function Step2() {
                     onBlur={(e) => validateField("email", e.target.value)}
                     placeholder="Email"
                     required
-                    className={`text-primary border-primary placeholder:text-primary/50 w-full rounded-sm border px-4 py-3 text-sm placeholder:text-sm focus:outline-none${
+                    className={`text-primary border-primary placeholder:text-primary/50 w-full rounded-sm border px-4 py-3 text-sm placeholder:text-sm focus:outline-none ${
                       errors.email ? "border-red-500" : ""
                     }`}
                   />
                 </div>
                 {errors.email && (
-                  <p className="text-xs text-red-500">{errors.email}</p>
+                  <p className="text-2xs text-red-500">{errors.email}</p>
                 )}
                 {!errors.email && (
                   <p className="invisible text-xs">placeholder</p>
