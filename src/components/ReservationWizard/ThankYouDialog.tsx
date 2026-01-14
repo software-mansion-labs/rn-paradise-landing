@@ -21,7 +21,7 @@ export function ThankYouDialog({ open, onOpenChange }: ThankYouDialogProps) {
           <X className="h-4 w-4" />
         </DialogClose>
         <DialogHeader>
-          <DialogTitle className="text-center text-xl leading-[110%]">
+          <DialogTitle className="text-center text-lg leading-[110%]">
             Thank you for your request!
           </DialogTitle>
           <DialogDescription className="pt-2 text-center leading-[150%]">
