@@ -30,16 +30,11 @@ export default function TeamCarousel({ members }: TeamCarouselProps) {
       opts={{
         loop: true,
         align: "start",
-        duration: 35,
-        dragFree: false,
       }}
     >
       <CarouselContent className="-ml-4">
         {members.map((member, index) => (
-          <CarouselItem
-            key={index}
-            className="animate-in fade-in basis-1/2 px-6 py-8 duration-700 sm:basis-1/3"
-          >
+          <CarouselItem key={index} className="basis-1/2 py-8 sm:basis-1/3">
             <div className="overflow-visible">
               <TeamMemberCard
                 name={member.name}
@@ -53,8 +48,8 @@ export default function TeamCarousel({ members }: TeamCarouselProps) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="top-[130px] max-sm:hidden md:top-[200px]" />
-      <CarouselNext className="top-[130px] max-sm:hidden md:top-[200px]" />
+      <CarouselPrevious className="top-[130px] max-sm:hidden md:top-[230px]" />
+      <CarouselNext className="top-[130px] max-sm:hidden md:top-[230px]" />
     </Carousel>
   );
 }

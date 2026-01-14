@@ -10,6 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-white hover:bg-primary/80 rounded-md",
+        outline: "",
         secondary:
           "bg-badge-yellow text-primary hover:bg-badge-yellow/90 rounded-full",
         reservationNotSelected:

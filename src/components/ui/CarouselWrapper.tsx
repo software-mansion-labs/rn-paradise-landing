@@ -16,12 +16,14 @@ interface CarouselProps {
 function ImageItem({ image, index }: { image: string; index: number }) {
   return (
     <CarouselItem className="basis-1/1 sm:basis-3/5 md:basis-2/6 lg:basis-1/4">
-      <div className="group relative w-full aspect-[4/5] overflow-hidden transition-[clip-path] duration-500 ease-in-out md:[clip-path:inset(20%_0%_0%_0%)] md:hover:[clip-path:inset(0%_0%_0%_0%)]">
-        <img
-          src={image}
-          alt={`Image ${index + 1}`}
-          className="h-full w-full cursor-pointer object-cover transition-transform duration-500 ease-in-out md:group-hover:scale-105"
-        />
+      <div className="relative h-[26rem] w-full">
+        <div className="group absolute bottom-0 h-[20rem] w-full transition-[height] duration-[650ms] ease-[cubic-bezier(.785,.135,.15,.86)] md:hover:h-[26rem]">
+          <img
+            src={image}
+            alt={`Image ${index + 1}`}
+            className="absolute bottom-0 h-[24rem] w-full cursor-pointer object-cover object-bottom transition-transform duration-[650ms] ease-[cubic-bezier(.785,.135,.15,.86)] md:group-hover:scale-105"
+          />
+        </div>
       </div>
     </CarouselItem>
   );
