@@ -11,7 +11,7 @@ export function RoomCard({ room, onToggle }: RoomCardProps) {
   const isIndividualOffer = !room.price;
 
   return (
-    <div className="bg-reservation-blue-bright flex h-full w-full flex-col items-center justify-between px-6 py-8 md:px-14 md:py-16">
+    <div className="bg-reservation-blue-bright flex h-full w-full cursor-pointer flex-col items-center justify-between px-6 py-8 select-none md:px-14 md:py-16">
       <div className="flex flex-1 flex-col gap-4 md:gap-6">
         <span className="text-primary text-md text-center font-bold">
           {room.name}
