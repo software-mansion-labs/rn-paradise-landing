@@ -85,7 +85,9 @@ export function Step2() {
 
             <div className="flex w-full gap-3">
               <div className="relative flex w-full flex-col gap-1">
-                <div className="relative [&:has(input:placeholder-shown)::after]:pointer-events-none [&:has(input:placeholder-shown)::after]:absolute [&:has(input:placeholder-shown)::after]:top-1/2 [&:has(input:placeholder-shown)::after]:left-[5.5ch] [&:has(input:placeholder-shown)::after]:-translate-y-1/2 [&:has(input:placeholder-shown)::after]:text-sm [&:has(input:placeholder-shown)::after]:text-red-500 [&:has(input:placeholder-shown)::after]:content-['*']">
+                <div
+                  className={`relative [&:has(input:placeholder-shown)::after]:pointer-events-none [&:has(input:placeholder-shown)::after]:absolute [&:has(input:placeholder-shown)::after]:top-1/2 [&:has(input:placeholder-shown)::after]:left-[5.5ch] [&:has(input:placeholder-shown)::after]:-translate-y-1/2 [&:has(input:placeholder-shown)::after]:text-sm [&:has(input:placeholder-shown)::after]:text-red-500 [&:has(input:placeholder-shown)::after]:content-['*']`}
+                >
                   <input
                     type="email"
                     id="email"

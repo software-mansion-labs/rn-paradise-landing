@@ -22,7 +22,7 @@ export default function TeamMemberCard({
     <div className="flex max-w-80 flex-col gap-4">
       {/* Image flip container */}
       <div
-        className="group relative max-h-100 w-full max-w-80 overflow-visible p-2"
+        className="group relative max-h-100 w-full max-w-80 overflow-visible"
         style={{ aspectRatio: "2/3", perspective: "1000px" }}
       >
         <div
