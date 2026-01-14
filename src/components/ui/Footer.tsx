@@ -69,7 +69,7 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
               </div>
 
               <div className="flex flex-col items-center gap-8 md:gap-14">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-2 md:gap-1">
                   {socials.map(({ icon, href }) => (
                     <a
                       key={href}
@@ -80,10 +80,10 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
                     >
                       <img
                         src={icon}
-                        className="h-4 w-4 md:h-6 md:w-6"
+                        className="h-6 w-6"
                         alt={`${icon} icon`}
-                        width="16"
-                        height="16"
+                        width="24"
+                        height="24"
                       />
                     </a>
                   ))}
