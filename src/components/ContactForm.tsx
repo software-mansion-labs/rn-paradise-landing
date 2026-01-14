@@ -17,6 +17,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
   const [fieldErrors, setFieldErrors] = useState<{
     email?: string;
     message?: string;
+    name?: string;
   }>({});
   const captchaRef = useRef<CaptchaRef>(null);
   const messageTextareaRef = useRef<HTMLTextAreaElement>(null);
@@ -44,12 +45,15 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
     const company = formData.get("company") as string;
     const message = formData.get("message") as string;
 
-    // Validate fields
-    const errors: { email?: string; message?: string } = {};
+    // validate fields
+    const errors: { email?: string; message?: string; name?: string } = {};
     if (!email || email.trim().length === 0) {
       errors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       errors.email = "Please enter a valid email address";
+    }
+    if (!name || name.trim().length === 0) {
+      errors.name = "Name is required";
     }
     if (!message || message.trim().length < 10) {
       errors.message =
@@ -208,10 +212,11 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
               }}
               onBlur={(e) => {
                 const value = e.target.value.trim();
-                if (!value) {
+                if (!value || value.length < 10) {
                   setFieldErrors((prev) => ({
                     ...prev,
-                    message: "Message is required",
+                    message:
+                      "Message is required and must be at least 10 characters long.",
                   }));
                 }
               }}
@@ -279,7 +284,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
 
             <div className="flex flex-col gap-2">
               <label htmlFor="name" className="text-primary text-xs font-bold">
-                Your name
+                Your name <span className="text-primary/80">(required)</span>
               </label>
               <input
                 type="text"
@@ -287,8 +292,27 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
                 name="name"
                 placeholder="Name"
                 disabled={formState === "submitting"}
-                className="text-primary border-gray-border border bg-gray-50 px-4 py-3 text-xs placeholder:text-xs placeholder:text-gray-300 focus:outline-none disabled:opacity-50"
+                onChange={() => {
+                  if (fieldErrors.name) {
+                    setFieldErrors((prev) => ({ ...prev, name: undefined }));
+                  }
+                }}
+                onBlur={(e) => {
+                  const value = e.target.value.trim();
+                  if (!value) {
+                    setFieldErrors((prev) => ({
+                      ...prev,
+                      name: "Name is required",
+                    }));
+                  }
+                }}
+                className={`text-primary border-gray-border border bg-gray-50 px-4 py-3 text-xs placeholder:text-xs placeholder:text-gray-300 focus:outline-none disabled:opacity-50 ${
+                  fieldErrors.name ? "border-red-500" : ""
+                }`}
               />
+              {fieldErrors.name && (
+                <p className="text-2xs pl-1 text-red-500">{fieldErrors.name}</p>
+              )}
             </div>
 
             <div className="flex flex-col gap-2">

@@ -79,6 +79,13 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
+    if (!name || name.trim().length === 0) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Name is required" }),
+        { status: 400, headers: { "Content-Type": "application/json" } },
+      );
+    }
+
     if (!message || message.trim().length === 0) {
       return new Response(
         JSON.stringify({ success: false, error: "Message is required" }),
