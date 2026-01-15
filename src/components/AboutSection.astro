@@ -78,19 +78,22 @@ const polaroidGallery = (aboutData?.data.polaroidGallery || [])
 
               return (
                 <div
-                  class="relative -mx-20 -my-15 [--scale:0.6] sm:-mx-15 sm:-my-15 md:-mx-20 md:w-auto md:[--scale:0.66]"
-                  style={`transform: rotate(${polaroidGalleryRotations[index]}deg) translateY(${translateY}px) scale(var(--scale)); z-index: ${zIndex}; transform-origin: center center;`}
+                  class="relative -mx-20 -my-15 sm:-mx-15 sm:-my-15 md:-mx-20 md:w-auto"
+                  style={`transform: rotate(${polaroidGalleryRotations[index]}deg) translateY(${translateY}px); z-index: ${zIndex}; transform-origin: center center;`}
                 >
-                  <PolaroidCard
-                    image={
-                      polaroid.image ||
-                      "/media/previous-section-carousel-2.webp"
-                    }
-                    caption={polaroid.caption}
-                    isMain={true}
-                    zIndex={zIndex}
-                    client:load
-                  />
+                  <div class="scale-[0.6] [--card-scale:0.6] md:scale-[0.66] md:[--card-scale:0.66]">
+                    <PolaroidCard
+                      image={
+                        polaroid.image ||
+                        "/media/previous-section-carousel-2.webp"
+                      }
+                      caption={polaroid.caption}
+                      isMain={true}
+                      zIndex={zIndex}
+                      textScale={{ medium: 1.515 }}
+                      client:load
+                    />
+                  </div>
                 </div>
               );
             })

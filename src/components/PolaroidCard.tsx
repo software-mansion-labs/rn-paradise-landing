@@ -6,6 +6,7 @@ interface PolaroidCardProps {
   className?: string;
   isMain?: boolean;
   zIndex?: number;
+  textScale?: { medium: number };
 }
 
 export default function PolaroidCard({
@@ -14,6 +15,7 @@ export default function PolaroidCard({
   className,
   isMain = false,
   zIndex = 50,
+  textScale,
 }: PolaroidCardProps) {
   return (
     <div
@@ -42,7 +44,14 @@ export default function PolaroidCard({
         />
       )}
       {caption && isMain && (
-        <p className="text-primary text-2xs absolute bottom-[4%] left-1/2 min-w-[220px] -translate-x-1/2 px-4 text-center whitespace-nowrap md:bottom-[5%]">
+        <p
+          className={cn(
+            "text-primary text-2xs absolute bottom-[4%] left-1/2 min-w-[220px] px-4 text-center whitespace-nowrap md:bottom-[5%]",
+            "[transform:translateX(-50%)]",
+            textScale &&
+              `md:[transform:translateX(-50%)_scale(${textScale.medium})]`,
+          )}
+        >
           {caption}
         </p>
       )}
