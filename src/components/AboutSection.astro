@@ -67,20 +67,19 @@ const polaroidGallery = (aboutData?.data.polaroidGallery || [])
       </div>
 
       {/* Polaroid Gallery */}
-      <div class="relative flex w-full items-center justify-center px-20">
+      <div class="relative flex w-full items-center justify-center px-2">
         <div
-          class="relative mx-auto flex max-w-[1200px] items-center justify-center"
+          class="relative mx-auto flex max-w-[1200px] flex-wrap items-center justify-center md:flex-nowrap"
         >
           {
             polaroidGallery.map((polaroid: any, index: number) => {
               const translateY = index % 2 === 0 ? -10 : 10;
               const zIndex = polaroidGallery.length - index;
 
-              const scale = 0.66;
               return (
                 <div
-                  class="relative -mx-10 -my-10 md:-mx-20"
-                  style={`transform: rotate(${polaroidGalleryRotations[index]}deg) translateY(${translateY}px) scale(${scale}); z-index: ${zIndex}; transform-origin: center center;`}
+                  class="relative -mx-20 -my-15 [--scale:0.6] sm:-mx-15 sm:-my-15 md:-mx-20 md:w-auto md:[--scale:0.66]"
+                  style={`transform: rotate(${polaroidGalleryRotations[index]}deg) translateY(${translateY}px) scale(var(--scale)); z-index: ${zIndex}; transform-origin: center center;`}
                 >
                   <PolaroidCard
                     image={
