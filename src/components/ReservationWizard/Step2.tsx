@@ -2,6 +2,8 @@ import { useState } from "react";
 import { z } from "zod";
 import { useReservationStore } from "@/stores/reservationStore";
 import { Button } from "@/components/ui/button";
+import { Info } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const personalDetailsSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -166,7 +168,7 @@ export function Step2() {
         </div>
       </div>
 
-      <div className="flex justify-start pt-4">
+      <div className="flex flex-col items-center gap-6 pt-4 sm:flex-row sm:justify-start">
         <Button
           onClick={handleNext}
           disabled={
@@ -179,6 +181,22 @@ export function Step2() {
         >
           Next step →
         </Button>
+        <div
+          className={cn(
+            "flex items-center gap-2 transition-opacity duration-300 max-sm:order-1",
+            personalDetails.name &&
+              personalDetails.email &&
+              !errors.name &&
+              !errors.email
+              ? "pointer-events-none opacity-0"
+              : "opacity-100",
+          )}
+        >
+          <Info className="color-primary/80 h-5 w-5" />
+          <p className="text-primary/80 text-2xs">
+            Before you proceed, please fill in all required fields.
+          </p>
+        </div>
       </div>
     </div>
   );

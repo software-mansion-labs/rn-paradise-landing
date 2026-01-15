@@ -41,7 +41,7 @@ export function ReservationWizard({
     currentStep,
     setCurrentStep,
     reset,
-    selectedDates,
+    selectedDate,
     selectedRoomId,
     rooms,
     personalDetails,
@@ -69,7 +69,7 @@ export function ReservationWizard({
   }, [reservationData, initializeFromCMS]);
 
   const handleSubmit = async () => {
-    if (!selectedDates[0] || !selectedRoomId) {
+    if (!selectedDate || !selectedRoomId) {
       setSubmitError("Please complete all required fields");
       return;
     }
@@ -155,7 +155,7 @@ export function ReservationWizard({
       if (personalDetails.additionalNotes) {
         submitData.append("additionalNotes", personalDetails.additionalNotes);
       }
-      submitData.append("selectedDate", selectedDates[0]);
+      submitData.append("selectedDate", selectedDate);
       submitData.append("selectedRoomId", selectedRoomId);
       if (accommodationNotes) {
         submitData.append("accommodationNotes", accommodationNotes);

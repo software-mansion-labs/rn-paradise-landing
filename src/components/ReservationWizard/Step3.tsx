@@ -1,4 +1,3 @@
-import { useReservationStore } from "@/stores/reservationStore";
 import { Button } from "@/components/ui/button";
 import { Info } from "lucide-react";
 
@@ -9,23 +8,6 @@ interface Step3Props {
 }
 
 export function Step3({ onSubmit, isSubmitting = false, error }: Step3Props) {
-  const {
-    selectedDates,
-    rooms,
-    selectedRoomId,
-    dateOptions,
-    personalDetails,
-    accommodationNotes,
-    setCurrentStep,
-  } = useReservationStore();
-
-  const selectedRoom = selectedRoomId
-    ? rooms.find((r) => r.id === selectedRoomId)
-    : null;
-  const selectedDateLabels = selectedDates
-    .map((dateId) => dateOptions.find((d) => d.id === dateId)?.label)
-    .filter(Boolean) as string[];
-
   return (
     <div className="flex w-full flex-col gap-6">
       <p className="text-primary text-xs leading-[150%]">

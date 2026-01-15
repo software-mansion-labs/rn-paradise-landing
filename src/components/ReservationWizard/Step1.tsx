@@ -8,22 +8,22 @@ import {
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 import { RoomCard } from "./RoomCard";
+import { Info } from "lucide-react";
 
 export function Step1() {
   const {
-    selectedDates,
+    selectedDate,
     rooms,
     selectedRoomId,
     dateOptions,
     dateRoomAvailability,
-    setSelectedDates,
+    setSelectedDate,
     toggleRoom,
     setCurrentStep,
     accommodationNotes,
     setAccommodationNotes,
   } = useReservationStore();
 
-  const selectedDate = selectedDates[0];
   const availability = selectedDate
     ? dateRoomAvailability.find((a) => a.dateId === selectedDate)
     : null;
@@ -32,7 +32,7 @@ export function Step1() {
     : [];
 
   const handleNext = () => {
-    if (selectedDates.length > 0 && selectedRoomId) {
+    if (selectedDate && selectedRoomId) {
       setCurrentStep(1);
     }
   };
@@ -45,8 +45,8 @@ export function Step1() {
 
       <ToggleGroup
         type="single"
-        value={selectedDates[0] || ""}
-        onValueChange={(value) => setSelectedDates(value ? [value] : [])}
+        value={selectedDate || ""}
+        onValueChange={(value) => setSelectedDate(value || null)}
         className="flex flex-wrap gap-2"
       >
         {dateOptions.map((date) => (
@@ -122,14 +122,27 @@ export function Step1() {
         />
       </div>
 
-      <div className="flex justify-start pt-4">
+      <div className="flex flex-col items-center gap-6 pt-4 sm:flex-row">
         <Button
           onClick={handleNext}
-          disabled={selectedDates.length === 0 || !selectedRoomId}
+          disabled={!selectedDate || !selectedRoomId}
           size="lg"
         >
           Next step →
         </Button>
+        <div
+          className={cn(
+            "flex items-center gap-2 transition-opacity duration-300 max-sm:order-1",
+            selectedDate && selectedRoomId
+              ? "pointer-events-none opacity-0"
+              : "opacity-100",
+          )}
+        >
+          <Info className="color-primary/80 h-5 w-5" />
+          <p className="text-primary/80 text-2xs">
+            Before you proceed, please select a date and a room.
+          </p>
+        </div>
       </div>
     </div>
   );

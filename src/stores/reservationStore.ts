@@ -34,7 +34,7 @@ export interface ReservationData {
 
 interface ReservationState {
   currentStep: number;
-  selectedDates: string[];
+  selectedDate: string | null;
   rooms: Room[];
   selectedRoomId: string | null;
   personalDetails: PersonalDetails;
@@ -42,7 +42,7 @@ interface ReservationState {
   dateOptions: DateOption[];
   dateRoomAvailability: DateRoomAvailability[];
   setCurrentStep: (step: number) => void;
-  setSelectedDates: (dates: string[]) => void;
+  setSelectedDate: (date: string | null) => void;
   toggleRoom: (roomId: string) => void;
   updatePersonalDetails: (details: Partial<PersonalDetails>) => void;
   setAccommodationNotes: (notes: string) => void;
@@ -75,7 +75,7 @@ let initialDateRoomAvailability: DateRoomAvailability[] = [];
 
 export const useReservationStore = create<ReservationState>()((set) => ({
   currentStep: 0,
-  selectedDates: [],
+  selectedDate: null,
   rooms: initialRooms,
   selectedRoomId: null,
   personalDetails: defaultPersonalDetails,
@@ -83,15 +83,13 @@ export const useReservationStore = create<ReservationState>()((set) => ({
   dateOptions: initialDateOptions,
   dateRoomAvailability: initialDateRoomAvailability,
   setCurrentStep: (step) => set({ currentStep: step }),
-  setSelectedDates: (dates) => {
+  setSelectedDate: (date) => {
     set((state) => {
-      const newSelectedDate = dates[0];
-      const previousDate = state.selectedDates[0];
-      const dateChanged = newSelectedDate !== previousDate;
+      const dateChanged = date !== state.selectedDate;
 
       if (dateChanged && state.selectedRoomId) {
         return {
-          selectedDates: dates,
+          selectedDate: date,
           selectedRoomId: null,
           rooms: state.rooms.map((room) => ({
             ...room,
@@ -99,7 +97,7 @@ export const useReservationStore = create<ReservationState>()((set) => ({
           })),
         };
       }
-      return { selectedDates: dates };
+      return { selectedDate: date };
     });
   },
   toggleRoom: (roomId) =>
@@ -133,7 +131,7 @@ export const useReservationStore = create<ReservationState>()((set) => ({
   reset: () =>
     set({
       currentStep: 0,
-      selectedDates: [],
+      selectedDate: null,
       rooms: initialRooms,
       selectedRoomId: null,
       personalDetails: defaultPersonalDetails,
