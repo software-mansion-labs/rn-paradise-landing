@@ -42,12 +42,14 @@ function TeamMemberCard({
           {/* Back face - bio */}
           {bio && (
             <div
-              className="absolute inset-0 flex [transform:rotateY(180deg)] items-center justify-center overflow-y-auto p-6 [backface-visibility:hidden]"
+              className="absolute inset-0 flex [transform:rotateY(180deg)] items-center justify-center overflow-y-auto px-6 py-3 [backface-visibility:hidden] sm:items-start md:items-center md:py-6"
               style={{
                 backgroundColor: "var(--color-brand-sea-blue-20)",
               }}
             >
-              <p className="text-primary text-center text-xs">{bio}</p>
+              <p className="text-primary sm:text-2xs text-center text-sm md:text-xs">
+                {bio}
+              </p>
             </div>
           )}
         </div>
