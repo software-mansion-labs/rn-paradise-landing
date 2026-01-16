@@ -177,7 +177,7 @@ export default function ContactForm({ siteKey, discordUrl }: ContactFormProps) {
 
         <div className="border-gray-border flex w-full flex-col gap-6 pr-0 md:w-1/2 md:border-r md:pr-8">
           <div className="flex flex-col gap-2">
-            <h2 className="text-primary text-lg font-bold">
+            <h2 className="text-primary text-lg font-bold max-sm:w-[75%]">
               Have more questions? <br /> Contact us here!
             </h2>
             <p className="text-primary text-xs">
