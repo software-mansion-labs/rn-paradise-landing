@@ -63,7 +63,7 @@ export default function PolaroidPile({
   return (
     <div className={cn("relative mx-auto overflow-visible", className)}>
       <div
-        className="relative h-[350px] w-70 sm:h-[375px] sm:w-75 md:h-[575px] md:w-115"
+        className="relative h-[300px] w-70 sm:h-[325px] sm:w-75 md:h-[505px] md:w-115"
         style={{
           transform: `scale(${size})`,
           transformOrigin: "center",
