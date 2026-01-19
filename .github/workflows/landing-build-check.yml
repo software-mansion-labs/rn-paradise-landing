@@ -1,0 +1,31 @@
+name: RN Paradise landing page build check
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/landing-build-check.yml"
+      - "src/**"
+      - "public/**"
+      - "astro.config.mjs"
+      - "package.json"
+  merge_group:
+    branches:
+      - main
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  rn-paradise-landing-build-check:
+    if: github.repository == 'software-mansion-labs/rn-paradise-landing'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+      - name: Install node dependencies
+        run: npm install
+      - name: Build landing page
+        run: npm run build

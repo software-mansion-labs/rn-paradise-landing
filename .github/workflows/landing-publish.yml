@@ -1,0 +1,45 @@
+name: RN Paradise landing page publish
+on:
+  push:
+    paths:
+      - ".github/workflows/landing-publish.yml"
+      - "src/**"
+      - "public/**"
+      - "astro.config.mjs"
+      - "package.json"
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  rn-paradise-landing-publish:
+    if: github.repository == 'software-mansion-labs/rn-paradise-landing'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+      - name: Install node dependencies
+        run: npm install
+      - name: Build landing page
+        run: npm run build
+        env:
+          PUBLIC_ENABLE_ANALYTICS: ${{ secrets.PUBLIC_ENABLE_ANALYTICS || 'false' }}
+          PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.PUBLIC_RECAPTCHA_SITE_KEY || '' }}
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
