@@ -65,7 +65,7 @@ export function Step1() {
       </ToggleGroup>
 
       {selectedDate && (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 overflow-visible">
           <h4 className="text-primary text-sm">Available rooms:</h4>
           {availableRooms.length > 0 ? (
             <Carousel
@@ -73,7 +73,7 @@ export function Step1() {
                 align: "start",
                 slidesToScroll: 1,
               }}
-              className="w-full"
+              className="w-full overflow-visible"
             >
               <CarouselContent className="-ml-6 items-stretch">
                 {availableRooms.map((room) => (

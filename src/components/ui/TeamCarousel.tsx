@@ -131,7 +131,7 @@ export default function TeamCarousel({ members }: TeamCarouselProps) {
         },
       }}
     >
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-visible sm:overflow-hidden">
         <CarouselContent>
           {members.map((member, index) => (
             <CarouselItem
