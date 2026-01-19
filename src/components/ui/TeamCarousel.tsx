@@ -31,7 +31,7 @@ function TeamMemberCard({
       {/* Image flip container */}
       <div className="group relative overflow-visible">
         <div
-          className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]"
+          className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] sm:group-hover:[transform:rotateY(180deg)]"
           style={{ transformOrigin: "center center" }}
         >
           {/* Front face - image */}
@@ -126,6 +126,9 @@ export default function TeamCarousel({ members }: TeamCarouselProps) {
         align: "end",
         loop: true,
         containScroll: false,
+        breakpoints: {
+          "(max-width: 768px)": { align: "start" },
+        },
       }}
     >
       <div className="relative overflow-hidden">
@@ -133,7 +136,7 @@ export default function TeamCarousel({ members }: TeamCarouselProps) {
           {members.map((member, index) => (
             <CarouselItem
               key={index}
-              className="flex basis-full justify-center py-8 sm:basis-[calc((100%-1rem)/3)]"
+              className="flex basis-4/5 justify-center py-8 sm:basis-[calc((100%-1rem)/3)]"
             >
               <TeamMemberCard {...member} />
             </CarouselItem>
