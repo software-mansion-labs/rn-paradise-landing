@@ -24,6 +24,11 @@ export default defineConfig({
         access: "public",
         context: "server",
       }),
+      PUBLIC_ENABLE_ANALYTICS: envField.boolean({
+        access: "public",
+        context: "server",
+        default: false,
+      }),
     },
   },
   experimental: {
