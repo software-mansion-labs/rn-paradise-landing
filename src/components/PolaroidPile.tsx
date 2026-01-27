@@ -15,6 +15,7 @@ interface PolaroidPileProps {
   size?: number;
   rotationDirection?: "left" | "right";
   editionNumber?: number;
+  disableDrag?: boolean;
 }
 
 const THROW_DISTANCE = 100;
@@ -27,6 +28,7 @@ export default function PolaroidPile({
   size = 1.15,
   rotationDirection = "left",
   editionNumber,
+  disableDrag = false,
 }: PolaroidPileProps) {
   const [cardStack, setCardStack] = useState<Card[]>(() =>
     images
@@ -91,6 +93,7 @@ export default function PolaroidPile({
               onThrowComplete={handleThrowComplete}
               showEdition={isTop}
               editionNumber={editionNumber}
+              disableDrag={disableDrag}
             />
           );
         })}
@@ -110,6 +113,7 @@ interface PolaroidCardEntityProps {
   onThrowComplete: (cardId: string) => void;
   showEdition?: boolean;
   editionNumber?: number;
+  disableDrag?: boolean;
 }
 
 function PolaroidCardEntity({
@@ -123,6 +127,7 @@ function PolaroidCardEntity({
   onThrowComplete,
   showEdition,
   editionNumber,
+  disableDrag = false,
 }: PolaroidCardEntityProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -185,7 +190,7 @@ function PolaroidCardEntity({
 
   // dragg effect for top card
   const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
-    if (!isTop) return;
+    if (!isTop || disableDrag) return;
     e.preventDefault();
 
     const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
@@ -284,12 +289,12 @@ function PolaroidCardEntity({
       ref={cardRef}
       className={cn(
         "absolute inset-0 will-change-transform",
-        isTop && "cursor-grab active:cursor-grabbing",
+        isTop && !disableDrag && "cursor-grab active:cursor-grabbing",
         !isTop && "pointer-events-none",
         isDragging && "cursor-grabbing",
       )}
-      onMouseDown={handleDragStart}
-      onTouchStart={handleDragStart}
+      onMouseDown={disableDrag ? undefined : handleDragStart}
+      onTouchStart={disableDrag ? undefined : handleDragStart}
       style={{
         zIndex: isTop ? 100 : zIndex,
         transform: isThrown
