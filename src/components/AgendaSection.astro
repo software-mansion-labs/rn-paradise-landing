@@ -1,0 +1,36 @@
+---
+import ContentWrapper from "@/components/ContentWrapper";
+import { AgendaAccordion } from "@/components/ui/AgendaAccordion";
+import { getEntry } from "astro:content";
+
+const generalData = await getEntry("general", "general");
+const editionYear = generalData?.data.editionYear || "";
+
+let agendaData: { title: string; description: string }[] = [];
+let startDay = 1;
+
+try {
+  const agendaEntry = await getEntry("agenda", "agenda");
+  if (agendaEntry) {
+    agendaData = agendaEntry.data.events || [];
+    startDay = agendaEntry.data.startDay || 1;
+  }
+} catch (error) {
+  console.warn("Agenda content not found");
+}
+---
+
+<section
+  id="agenda"
+  class="relative flex w-full scroll-m-5 flex-col items-center justify-center overflow-hidden bg-white py-18 sm:py-24 md:py-28 lg:py-36"
+>
+  <ContentWrapper
+    className="flex w-full flex-col items-center justify-center gap-10 sm:gap-14 md:gap-16"
+  >
+    <h2 class="text-primary text-center text-lg font-bold">
+      Agenda {editionYear}
+    </h2>
+
+    <AgendaAccordion data={agendaData} startDay={startDay} client:idle />
+  </ContentWrapper>
+</section>

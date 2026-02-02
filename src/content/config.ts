@@ -65,6 +65,19 @@ const venueCollection = defineCollection({
   }),
 });
 
+const agendaCollection = defineCollection({
+  type: "data",
+  schema: z.object({
+    startDay: z.number().min(0).max(6),
+    events: z.array(
+      z.object({
+        title: z.string(),
+        description: z.string(),
+      }),
+    ),
+  }),
+});
+
 const faqCollection = defineCollection({
   type: "content",
   schema: z.object({
@@ -142,6 +155,7 @@ export const collections = {
   about: aboutCollection,
   team: teamCollection,
   venue: venueCollection,
+  agenda: agendaCollection,
   faq: faqCollection,
   previousEditions: previousEditionsCollection,
   unforgettableExperience: unforgettableExperienceCollection,

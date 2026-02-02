@@ -95,6 +95,30 @@ content:
         type: image
         list: true
 
+  - name: agenda
+    label: Agenda
+    type: file
+    path: src/content/agenda/agenda.yaml
+    fields:
+      - name: startDay
+        label: Start Day
+        type: number
+        required: true
+        help: "1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday, 7 = Sunday"
+      - name: events
+        label: Events
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: description
+            label: Description
+            type: text
+            required: true
+
   - name: team
     label: Team Members
     type: collection
