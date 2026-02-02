@@ -2,6 +2,8 @@ import type { APIRoute } from "astro";
 import { getSecret } from "astro:env/server";
 import { getEntry } from "astro:content";
 import sendGrid from "@sendgrid/mail";
+import { render } from "@react-email/render";
+import { ReservationEmail } from "@/emails/ReservationEmail";
 
 export const prerender = false;
 
@@ -36,31 +38,6 @@ async function verifyRecaptcha(token: string): Promise<{
     valid: verifyData?.tokenProperties?.valid ?? false,
     score: verifyData?.riskAnalysis?.score ?? 0,
   };
-}
-
-function formatReservationEmail(
-  name: string,
-  email: string,
-  selectedDate: string,
-  selectedRoom: { name: string; price?: number } | undefined,
-  company?: string,
-  needsInvoice?: boolean,
-  additionalNotes?: string,
-  accommodationNotes?: string,
-): string {
-  const companyText = company ? `Company: ${company}\n` : "";
-  const invoiceText = needsInvoice ? "Yes, invoice needed\n" : "";
-  const additionalNotesText = additionalNotes
-    ? `Additional Notes: ${additionalNotes}\n`
-    : "";
-  const accommodationNotesText = accommodationNotes
-    ? `Accommodation Notes: ${accommodationNotes}\n`
-    : "";
-  const roomPriceText = selectedRoom?.price
-    ? `${selectedRoom.price}€`
-    : "Individual offer";
-
-  return `Reservation Request\n\nContact Information:\nName: ${name}\nEmail: ${email}\n${companyText}${invoiceText}${additionalNotesText}\nSelected Date: ${selectedDate || "N/A"}\nSelected Room: ${selectedRoom?.name || "N/A"}\nRoom Price: ${roomPriceText}\n${accommodationNotesText}`;
 }
 
 export const POST: APIRoute = async ({ request }) => {
@@ -158,6 +135,16 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
+    if (!settings || !reservation) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Failed to load reservation data",
+        }),
+        { status: 500, headers: { "Content-Type": "application/json" } },
+      );
+    }
+
     // find selected date and room details
     const dateOption = reservation.data.dateOptions.find(
       (d: { id: string }) => d.id === selectedDate,
@@ -166,17 +153,7 @@ export const POST: APIRoute = async ({ request }) => {
       (r: { id: string }) => r.id === selectedRoomId,
     );
 
-    const subject = `Reservation Request from ${name}`;
-    const emailBody = formatReservationEmail(
-      name,
-      email,
-      dateOption?.label || selectedDate,
-      room ? { name: room.name, price: room.price } : undefined,
-      company || undefined,
-      needsInvoice,
-      additionalNotes || undefined,
-      accommodationNotes || undefined,
-    );
+    const subject = `RN Paradise ⛱️ - Reservation Request from ${name}`;
 
     if (!settings.data.reservationFormEmail) {
       return new Response(
@@ -188,12 +165,25 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
+    const emailHtml = await render(
+      ReservationEmail({
+        name,
+        email,
+        selectedDate: dateOption?.label || selectedDate,
+        selectedRoom: room ? { name: room.name, price: room.price } : undefined,
+        company: company || undefined,
+        needsInvoice,
+        additionalNotes: additionalNotes || undefined,
+        accommodationNotes: accommodationNotes || undefined,
+      }),
+    );
+
     const msg = {
       to: settings.data.reservationFormEmail,
       from: settings.data.reservationFormEmail,
       replyTo: email,
       subject,
-      text: emailBody,
+      html: emailHtml,
     };
 
     try {

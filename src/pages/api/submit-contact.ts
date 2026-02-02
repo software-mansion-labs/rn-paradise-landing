@@ -2,6 +2,8 @@ import type { APIRoute } from "astro";
 import { getSecret } from "astro:env/server";
 import { getEntry } from "astro:content";
 import sendGrid from "@sendgrid/mail";
+import { render } from "@react-email/render";
+import { ContactEmail } from "@/emails/ContactEmail";
 
 export const prerender = false;
 
@@ -36,17 +38,6 @@ async function verifyRecaptcha(token: string): Promise<{
     valid: verifyData?.tokenProperties?.valid ?? false,
     score: verifyData?.riskAnalysis?.score ?? 0,
   };
-}
-
-function formatContactFormEmail(
-  email: string,
-  message: string,
-  name?: string,
-  company?: string,
-): string {
-  const nameText = name ? `Name: ${name}\n` : "";
-  const companyText = company ? `Company: ${company}\n` : "";
-  return `${nameText}${companyText}Email: ${email}\n\nMessage:\n${message}`;
 }
 
 export const POST: APIRoute = async ({ request }) => {
@@ -144,6 +135,16 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
+    if (!settings) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Failed to load settings",
+        }),
+        { status: 500, headers: { "Content-Type": "application/json" } },
+      );
+    }
+
     if (!settings.data.contactFormEmail) {
       return new Response(
         JSON.stringify({
@@ -154,12 +155,15 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    const subject = `Contact Form Submission from ${email.split("@")[0]}`;
-    const emailBody = formatContactFormEmail(
-      email,
-      message,
-      name || undefined,
-      company || undefined,
+    const subject = `RN Paradise ⛱️ - Contact Form Submission from ${name || email.split("@")[0]}`;
+
+    const emailHtml = await render(
+      ContactEmail({
+        email,
+        message,
+        name: name || undefined,
+        company: company || undefined,
+      }),
     );
 
     const msg = {
@@ -167,7 +171,7 @@ export const POST: APIRoute = async ({ request }) => {
       from: settings.data.contactFormEmail,
       replyTo: email,
       subject,
-      text: emailBody,
+      html: emailHtml,
     };
 
     try {
