@@ -1,6 +1,6 @@
 ---
 import ContentWrapper from "@/components/ContentWrapper";
-import { Accordion } from "@/components/ui/AccordionWrapper";
+import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { getCollection } from "astro:content";
 
 let faqData: { question: string; answer: string }[] = [];
@@ -29,6 +29,6 @@ try {
   >
     <h2 class="text-primary text-center text-lg font-bold">FAQ</h2>
 
-    <Accordion data={faqData} client:idle />
+    <FaqAccordion data={faqData} client:idle />
   </ContentWrapper>
 </section>

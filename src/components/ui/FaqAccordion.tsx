@@ -5,14 +5,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-interface RoadmapAccordionProps {
+interface FaqAccordionProps {
   data: {
     question: string;
     answer: string;
   }[];
 }
 
-export function Accordion({ data }: RoadmapAccordionProps) {
+export function FaqAccordion({ data }: FaqAccordionProps) {
   return (
     <BaseAccordion
       type="single"
