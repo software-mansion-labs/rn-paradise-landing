@@ -6,8 +6,8 @@
       "properties": {
         "startDay": {
           "type": "number",
-          "minimum": 1,
-          "maximum": 7
+          "minimum": 0,
+          "maximum": 6
         },
         "events": {
           "type": "array",
@@ -21,7 +21,10 @@
                 "type": "string"
               }
             },
-            "required": ["title", "description"],
+            "required": [
+              "title",
+              "description"
+            ],
             "additionalProperties": false
           }
         },
@@ -29,7 +32,10 @@
           "type": "string"
         }
       },
-      "required": ["startDay", "events"],
+      "required": [
+        "startDay",
+        "events"
+      ],
       "additionalProperties": false
     }
   },
