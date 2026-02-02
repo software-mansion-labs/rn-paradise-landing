@@ -89,7 +89,7 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
                   ))}
                 </div>
                 <p className="text-sm font-normal">
-                  &copy; Software Mansion 2025.
+                  &copy; Software Mansion {new Date().getFullYear()}.
                 </p>
               </div>
 
