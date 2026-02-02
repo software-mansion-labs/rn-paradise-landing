@@ -95,7 +95,7 @@ const previousEditionsCollection = defineCollection({
   }),
 });
 
-const unforgettableExperienceCollection = defineCollection({
+const videoSectionCollection = defineCollection({
   type: "data",
   schema: z.object({
     backgroundVideo: z.string(),
@@ -158,7 +158,7 @@ export const collections = {
   agenda: agendaCollection,
   faq: faqCollection,
   previousEditions: previousEditionsCollection,
-  unforgettableExperience: unforgettableExperienceCollection,
+  videoSection: videoSectionCollection,
   contact: contactCollection,
   reservation: reservationCollection,
   settings: settingsCollection,

@@ -2,11 +2,9 @@
 import ContentWrapper from "@/components/ContentWrapper";
 import { getCollection } from "astro:content";
 
-const unforgettableExperienceEntries = await getCollection(
-  "unforgettableExperience"
-);
-const unforgettableExperience = unforgettableExperienceEntries[0];
-const backgroundVideo = unforgettableExperience?.data.backgroundVideo;
+const videoSectionEntries = await getCollection("videoSection");
+const videoSection = videoSectionEntries[0];
+const backgroundVideo = videoSection?.data.backgroundVideo;
 ---
 
 <section

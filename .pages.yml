@@ -230,10 +230,10 @@ content:
             type: string
             list: true
 
-  - name: unforgettableExperience
-    label: Unforgettable Experience
+  - name: videoSection
+    label: Video Section
     type: file
-    path: src/content/unforgettableExperience/unforgettableExperience.yaml
+    path: src/content/videoSection/videoSection.yaml
     fields:
       - name: backgroundVideo
         label: Background Video
