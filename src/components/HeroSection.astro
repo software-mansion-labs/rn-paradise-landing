@@ -23,6 +23,43 @@ const featureCardIcons = [
   class="relative flex w-full scroll-m-5 flex-col items-center justify-center overflow-visible pb-32"
 >
   {/* Background */}
+  <style>
+    @media (max-width: 258px) {
+      .hero-bg {
+        background-position: center calc(50% + 20px) !important;
+      }
+    }
+    @media (min-width: 769px) {
+      .hero-bg {
+        background-position: center calc(50% - 170px) !important;
+      }
+    }
+    @media (min-width: 1025px) {
+      .hero-bg {
+        background-position: center calc(50% - 300px) !important;
+      }
+    }
+    @media (min-width: 1440px) {
+      .hero-bg {
+        background-position: center calc(50% - 300px) !important;
+      }
+    }
+    @media (min-width: 1640px) {
+      .hero-bg {
+        background-position: center calc(50% - 500px) !important;
+      }
+    }
+    @media (min-width: 1920px) {
+      .hero-bg {
+        background-position: center calc(50% - 600px) !important;
+      }
+    }
+    @media (min-width: 2200px) {
+      .hero-bg {
+        background-position: center calc(50% - 700px) !important;
+      }
+    }
+  </style>
   <div
     class="hero-bg absolute inset-0"
     style="background-image: url('/assets/hero-bg.webp'); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; height: calc(100% + 128px);"
@@ -54,7 +91,6 @@ const featureCardIcons = [
               editionNumber={editionNumber}
               className="bottom-6 -right-8 sm:bottom-7 md:-right-11 md:bottom-9 z-1"
               variant="default"
-              size="sm"
             />
           )
         }
