@@ -1,18 +1,31 @@
 startDay: 6
 events:
-  - title: "Check-in and welcome dinner."
-    description: "TBA"
-  - title: "A free day with a volcano trekking trip in Teide National Park."
+  - title: Check-in and welcome dinner.
+    description: TBA
+  - title: A free day with a volcano trekking trip in Teide National Park.
     description: "123"
-  - title: "Let's start the workshops!"
-    description: "You'll explore Expo Router for efficient navigation and authentication patterns, replicating real-world app structures. Dive into Expo Application Services (EAS) to streamline builds, set up advanced error tracking with Sentry, learn how to manage environment variables and secrets securely, and implement seamless Over-The-Air (OTA) updates. Plus, you'll explore the Expo's brand-new features. Whether you're enhancing your abilities or discovering the newest Expo innovations, these sessions will provide you with practical tools to create improved React Native applications."
-  - title: "The following day will offer an in-depth exploration of the world of native platforms. You will learn how to create your own native views and modules usin..."
-    description: "TBA"
-  - title: "On this day we will focus on the performance of your applications! You can expect to debug your code with brand-new utils such as React Native dev tool..."
-    description: "TBA"
-  - title: "On the final day of our workshop, well explore the ecosystem of Software Mansion libraries, with a particular focus on react-native-reanimated. You'll disc..."
-    description: "TBA"
-  - title: "Consulting Day - use this day to consult our experts on challenges you encountered during the workshops or while building your apps. Ask them for"
-    description: "TBA"
-  - title: "Check-out"
-    description: "TBA"
+  - title: Let's start the workshops!
+    description: You'll explore Expo Router for efficient navigation and
+      authentication patterns, replicating real-world app structures. Dive into
+      Expo Application Services (EAS) to streamline builds, set up advanced
+      error tracking with Sentry, learn how to manage environment variables and
+      secrets securely, and implement seamless Over-The-Air (OTA) updates. Plus,
+      you'll explore the Expo's brand-new features. Whether you're enhancing
+      your abilities or discovering the newest Expo innovations, these sessions
+      will provide you with practical tools to create improved React Native
+      applications.
+  - title: The following day will offer an in-depth exploration of the world of
+      native platforms. You will learn how to create your own native views and
+      modules usin...
+    description: TBA
+  - title: On this day we will focus on the performance of your applications! You
+      can expect to debug your code with brand-new utils such as React Native
+      dev tool...
+    description: TBA
+  - title: On the final day of our workshop, well explore the ecosystem of Software
+      Mansion libraries, with a particular focus on react-native-reanimated.
+      You'll disc...
+    description: TBA
+  - title: Consulting Day - use this day to consult our experts on challenges you
+      encountered during the workshops or while building your apps. Ask them for
+    description: TBA
