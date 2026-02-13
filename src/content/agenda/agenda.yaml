@@ -1,9 +1,7 @@
 startDay: 6
 events:
-  - title: Check-in and welcome dinner.
-    description: TBA
-  - title: A free day with a volcano trekking trip in Teide National Park.
-    description: "123"
+  - title: Check-in
+    description: ABC
   - title: Let's start the workshops!
     description: You'll explore Expo Router for efficient navigation and
       authentication patterns, replicating real-world app structures. Dive into
